@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.sleep_app;
 
 import org.junit.Test;
 
