@@ -2,9 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="sleepyBlue">#2C3E5A</color>
+    <color name="sleepyBlueLighter">#3457ac</color>
+    <color name="sleepyBlue">#2C3E65</color>
+    <color name="sleepyBlueDarkest">#0B1222</color>
+    <color name="sleepyBlueDarker">#0E1931</color>
+    <color name="sleepyBlueDark">#1A2A44</color>
+    <color name="sleepyBlueSeeThrough">#2C3E65FF</color>
+    <color name="sleepyPurple">#594768</color>
+    <color name="sleepyPurpleDark">#3E3350</color>
+    <color name="sleepyPurpleSeeThrough">#59476880</color>
+
     <color name="light_blue_400">#FF29B6F6</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

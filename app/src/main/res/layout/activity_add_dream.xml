@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddDreamActivity">
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:text="mhm"/>
+
+    <EditText
+        android:id="@+id/editTextLucidity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Lucidity"
+        android:inputType="number"
+        android:text="4"/>
+
+    <EditText
+        android:id="@+id/editTextClarity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Clarity"
+        android:inputType="number"
+        android:text="4"/>
+
+    <EditText
+        android:id="@+id/editTextFeeling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Feeling"
+        android:text="mhm"/>
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:text="mhm"/>
+
+    <Button
+        android:id="@+id/buttonAddDream"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Dream" />
+
+</LinearLayout>
+
+
+

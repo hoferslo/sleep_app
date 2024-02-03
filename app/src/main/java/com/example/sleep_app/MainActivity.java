@@ -10,6 +10,7 @@ import com.example.sleep_app.mainActivityFragments.DreamsFragment;
 import com.example.sleep_app.mainActivityFragments.OverviewFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -28,27 +29,33 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        replaceFragment(binding.viewFlipper, 0, new DreamsFragment());
         replaceFragment(binding.viewFlipper, 1, new OverviewFragment());
+        replaceFragment(binding.viewFlipper, 0, new DreamsFragment());
         replaceFragment(binding.viewFlipper, 2, new Fragment());
 
         showOverview();
 
-        binding.btnFragmentA.setOnClickListener(v -> showFragmentA());
+        binding.btnFragmentA.setOnClickListener(v -> showDreams());
 
         binding.btnFragmentB.setOnClickListener(v -> showOverview());
 
         binding.btnFragmentC.setOnClickListener(v -> showFragmentC());
+
+        binding.btnAddDream.setOnClickListener(v -> startActivity(new Intent(this, AddDreamActivity.class)));
     }
 
-    public void showFragmentA() {
+
+
+
+    public void showDreams() {
         binding.viewFlipper.setDisplayedChild(0); // 0 corresponds to the index of FragmentA
         setViewHeight(binding.btnFragmentA, 80);
         setViewHeight(binding.btnFragmentB, 64);
         setViewHeight(binding.btnFragmentC, 64);
-        roundUpperEdges(binding.btnFragmentA, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
+        roundUpperEdges(binding.btnFragmentA, new float[]{20, 20, 20, 20, 0, 0, 0, 0}); // todo turn this into a drawable (maybe not)
         roundUpperEdges(binding.btnFragmentB, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
+        showHideButtons(View.VISIBLE, View.VISIBLE, View.GONE);
     }
 
     public void showOverview() {
@@ -59,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         roundUpperEdges(binding.btnFragmentA, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentB, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
+        showHideButtons(View.GONE, View.VISIBLE, View.GONE);
     }
 
     public void showFragmentC() {
@@ -69,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         roundUpperEdges(binding.btnFragmentA, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentB, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
+        showHideButtons(View.GONE, View.VISIBLE, View.VISIBLE);
     }
 
     private void replaceFragment(ViewFlipper viewFlipper, int index, Fragment fragment) {
@@ -101,10 +110,17 @@ public class MainActivity extends AppCompatActivity {
         // Create a drawable with rounded corners
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setColor(getResources().getColor(R.color.sleepyBlue)); // Set your desired color
+        gradientDrawable.setColor(getResources().getColor(R.color.sleepyBlueDarkest)); // Set your desired color
         gradientDrawable.setCornerRadii(edges); // Adjust the radii as needed
 
         // Set the drawable as the background of the view
         view.setBackground(gradientDrawable);
+    }
+
+    private void showHideButtons(int button1, int button2, int button3){
+        binding.btnFilter.setVisibility(button1);
+        binding.btnAddDream.setVisibility(button2);
+        binding.btnPlaceholder.setVisibility(button3);
+
     }
 }

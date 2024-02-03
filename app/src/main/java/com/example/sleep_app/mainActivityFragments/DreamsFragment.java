@@ -1,66 +1,90 @@
 package com.example.sleep_app.mainActivityFragments;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
+import com.example.sleep_app.Dream;
 import com.example.sleep_app.R;
+import com.example.sleep_app.databinding.FragmentDreamsBinding;
+import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DreamsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class DreamsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FragmentDreamsBinding binding;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public DreamsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DreamsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DreamsFragment newInstance(String param1, String param2) {
-        DreamsFragment fragment = new DreamsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dreams, container, false);
+        binding = FragmentDreamsBinding.inflate(inflater, container, false);
+
+        getDreams();
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDreams();
+    }
+
+
+    private void getDreams(){
+        DreamsAccess dreamsAccess = new DreamsAccess(requireContext());
+        dreamsAccess.open();
+        List<Dream> dreamList = dreamsAccess.getDreams();
+        dreamsAccess.close();
+        ArrayList<Dream> dreamArrayList = new ArrayList<>(dreamList);
+        ArrayAdapter<Dream> adapter = new CustomAdapter(requireContext(), R.layout.item_dream_layout, dreamArrayList);
+        binding.scrollLv.setAdapter(adapter);
+        binding.scrollLv.setDivider(null);
+    }
+
+    private static class CustomAdapter extends ArrayAdapter<Dream> {
+        private final LayoutInflater inflater;
+        private final int resource;
+        private final ArrayList<Dream> objects;
+
+        public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Dream> objects) {
+            super(context, resource, objects);
+            this.inflater = LayoutInflater.from(context);
+            this.resource = resource;
+            this.objects = objects;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+            // Inflate your custom layout for each item
+            if (convertView == null) {
+                convertView = inflater.inflate(resource, parent, false);
+            }
+
+            // Customize the view based on the data (if needed)
+            TextView textView = convertView.findViewById(R.id.dreamTitleTv);
+            textView.setText(objects.get(position).getTitle());
+            return convertView;
+        }
     }
 }
