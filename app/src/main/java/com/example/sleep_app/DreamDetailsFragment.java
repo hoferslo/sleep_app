@@ -100,8 +100,7 @@ public class DreamDetailsFragment extends DialogFragment {
 
                 @Override
                 public void onDialogNegativeClick() {
-                    // User clicked "Cancel"
-                    // Handle the cancellation logic here
+
                 }
             });
             deleteDreamDialog.show(getParentFragmentManager(), "deleteDreamDialog");
@@ -128,8 +127,6 @@ public class DreamDetailsFragment extends DialogFragment {
     }
 
     private OnDialogDismissListener onDialogDismissListener;
-
-    // ... other methods ...
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
