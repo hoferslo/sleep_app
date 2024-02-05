@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/sleepyBlue"
-    tools:context=".AddDreamActivity"
+    tools:context=".EditDreamActivity"
     android:padding="16dp">
 
     <EditText
@@ -128,11 +128,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <LinearLayout
-            android:id="@+id/buttonAddDream"
+            android:id="@+id/buttonEditDream"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="Add Dream"
             android:padding="16dp"
@@ -146,13 +145,13 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="Add dream"/>
+                android:text="Edit dream"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/buttonClose"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:padding="16dp"
             android:layout_marginStart="4dp"

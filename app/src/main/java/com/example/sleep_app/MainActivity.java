@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.sleep_app.databinding.ActivityMainBinding;
 import com.example.sleep_app.mainActivityFragments.DreamsFragment;
 import com.example.sleep_app.mainActivityFragments.OverviewFragment;
+import com.example.sleep_app.mainActivityFragments.TipsFragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +17,10 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity {
-
 
     ActivityMainBinding binding;
     @Override
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         replaceFragment(binding.viewFlipper, 1, new OverviewFragment());
         replaceFragment(binding.viewFlipper, 0, new DreamsFragment());
-        replaceFragment(binding.viewFlipper, 2, new Fragment());
+        replaceFragment(binding.viewFlipper, 2, new TipsFragment());
 
         showOverview();
 
@@ -39,12 +40,35 @@ public class MainActivity extends AppCompatActivity {
 
         binding.btnFragmentB.setOnClickListener(v -> showOverview());
 
-        binding.btnFragmentC.setOnClickListener(v -> showFragmentC());
+        binding.btnFragmentC.setOnClickListener(v -> showTips());
 
         binding.btnAddDream.setOnClickListener(v -> startActivity(new Intent(this, AddDreamActivity.class)));
+
+        binding.btnFilter.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Work in progress", Toast.LENGTH_SHORT).show());
+
+        binding.btnPlaceholder.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Work in progress", Toast.LENGTH_SHORT).show());
     }
 
-
+    private void notifyFragmentVisible(int index) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment;
+        switch (index) {
+            case 0:
+                fragment = fragmentManager.findFragmentById(R.id.container); // Replace with the actual ID
+                break;
+            case 1:
+                fragment = fragmentManager.findFragmentById(R.id.container1); // Replace with the actual ID
+                break;
+            case 2:
+                fragment = fragmentManager.findFragmentById(R.id.container2); // Replace with the actual ID
+                break;
+            default:
+                return;
+        }
+        if (fragment != null) {
+            fragment.onResume();
+        }
+    }
 
 
     public void showDreams() {
@@ -56,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         roundUpperEdges(binding.btnFragmentB, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         showHideButtons(View.VISIBLE, View.VISIBLE, View.GONE);
+        notifyFragmentVisible(0);
     }
 
     public void showOverview() {
@@ -67,9 +92,10 @@ public class MainActivity extends AppCompatActivity {
         roundUpperEdges(binding.btnFragmentB, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         showHideButtons(View.GONE, View.VISIBLE, View.GONE);
+        notifyFragmentVisible(1);
     }
 
-    public void showFragmentC() {
+    public void showTips() {
         binding.viewFlipper.setDisplayedChild(2); // 2 corresponds to the index of FragmentC
         setViewHeight(binding.btnFragmentA, 64);
         setViewHeight(binding.btnFragmentB, 64);
@@ -78,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         roundUpperEdges(binding.btnFragmentB, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
         showHideButtons(View.GONE, View.VISIBLE, View.VISIBLE);
+        notifyFragmentVisible(2);
     }
 
     private void replaceFragment(ViewFlipper viewFlipper, int index, Fragment fragment) {

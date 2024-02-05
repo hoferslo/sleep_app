@@ -10,14 +10,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
-        android:background="@drawable/rounded_background"
+        android:background="@drawable/square_line_background"
         android:orientation="vertical">
     <LinearLayout
         android:id="@+id/titleLl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@drawable/rounded_background">
+        android:background="@drawable/square_line_background">
         <TextView
             android:id="@+id/titleTv"
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
             android:textColor="@color/white" />
     </LinearLayout>
     <FrameLayout
-        android:id="@+id/DescriptionLl"
+        android:id="@+id/DescriptionFl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp">
@@ -36,7 +36,7 @@
         <com.scwang.wave.MultiWaveHeader
             android:id="@+id/waveHeader"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
+            android:layout_height="128dp"
             android:scaleY="-1"
             app:mwhVelocity="1"
             app:mwhProgress="0"

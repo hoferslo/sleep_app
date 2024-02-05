@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/sleepyBlueDarker"
+    tools:context=".DreamDetailsFragment"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TextViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp"
+            />
+        <TextView
+            android:id="@+id/TextViewFeeling"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_background"/>
+        <TextView
+            android:id="@+id/TextViewLucidity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_background"/>
+        <TextView
+            android:id="@+id/TextViewClarity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_background"/>
+
+        <TextView
+            android:id="@+id/TextViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_background"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/buttonDeleteDream"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="Add Dream"
+            android:padding="16dp"
+            android:layout_marginEnd="4dp"
+
+            android:gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_button_background">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Delete"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonEditDream"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:padding="16dp"
+            android:layout_marginEnd="4dp"
+
+            android:gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_button_background">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Edit"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonClose"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:padding="16dp"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_button_background">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Close"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

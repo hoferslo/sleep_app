@@ -8,22 +8,25 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
-        android:background="@drawable/rounded_background"
+        android:background="@drawable/square_line_background"
         android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/dreamTitleLl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:padding="8dp"
-        android:background="@drawable/rounded_background">
+        android:background="@drawable/square_line_background">
         <TextView
             android:id="@+id/dreamTitleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:text="Title!"
             android:textColor="@color/white" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,15 +36,29 @@
             android:id="@+id/dreamLucidityLl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:gravity="center"
+            android:paddingHorizontal="8dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="4dp"
 
             android:layout_weight="0.5">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Lucidity: "
+                android:textColor="@color/white" />
             <TextView
                 android:id="@+id/dreamLucidityTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Title!"
+                android:textColor="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="/100"
                 android:textColor="@color/white" />
         </LinearLayout>
         <LinearLayout
@@ -50,34 +67,53 @@
             android:background="@drawable/square_line_background_bottom_left"/>
 
         <LinearLayout
-            android:id="@+id/dreamFeelLl"
+            android:id="@+id/dreamClarityLl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:paddingHorizontal="8dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="4dp"
+            android:gravity="center"
             android:layout_weight="0.5"
             android:orientation="horizontal">
+
+
             <TextView
-                android:id="@+id/dreamFeelTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Clarity: "
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/dreamClarityTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="Title!"
                 android:textColor="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="/100"
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/dreamDescriptionLl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp" android:gravity="center">
+         android:gravity="center"
+        android:padding="16dp">
 
             <TextView
                 android:id="@+id/dreamDescriptionTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5/10"
-                android:textSize="32sp"
+                android:textSize="16sp"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>

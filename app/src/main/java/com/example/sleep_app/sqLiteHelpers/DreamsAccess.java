@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.sleep_app.Dream;
 import java.time.LocalDateTime;
@@ -32,7 +33,18 @@ public class DreamsAccess extends BaseAccess {
         values.put(Dream.Attribute.description.toString(), dream.getDescription());
         values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToString(dream.getDateCreated()));
 
-        return db.insert(DatabaseTableEnum.DREAMS.getTableName(), null, values);
+
+        long insertedRowId = db.insert(DatabaseTableEnum.DREAMS.getTableName(), null, values);
+
+        if (insertedRowId != -1) {
+            // Log success
+            Log.d("DreamDatabase", "Dream saved successfully. Row ID: " + insertedRowId);
+        } else {
+            // Log failure
+            Log.e("DreamDatabase", "Failed to save dream to the database");
+        }
+
+        return insertedRowId;
     }
 
     public boolean deleteDream(long dreamId) {
@@ -86,17 +98,17 @@ public class DreamsAccess extends BaseAccess {
         return dreamList;
     }
 
-    public boolean editDream(long dreamId, String title, int lucidity, int clarity, String feeling, String description, LocalDateTime date_created) {
+    public boolean editDream(Dream dream) {
         ContentValues values = new ContentValues();
-        values.put(Dream.Attribute.title.toString(), title);
-        values.put(Dream.Attribute.lucidity.toString(), lucidity);
-        values.put(Dream.Attribute.clarity.toString(), clarity);
-        values.put(Dream.Attribute.feeling.toString(), feeling);
-        values.put(Dream.Attribute.description.toString(), description);
-        values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToString(date_created));
+        values.put(Dream.Attribute.title.toString(), dream.getTitle());
+        values.put(Dream.Attribute.lucidity.toString(), dream.getLucidity());
+        values.put(Dream.Attribute.clarity.toString(), dream.getClarity());
+        values.put(Dream.Attribute.feeling.toString(), dream.getFeeling());
+        values.put(Dream.Attribute.description.toString(), dream.getDescription());
+        values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToString(dream.getDateCreated()));
 
         String whereClause = Dream.Attribute._id + " = ?";
-        String[] whereArgs = { String.valueOf(dreamId) };
+        String[] whereArgs = { String.valueOf(dream.getId()) };
 
         int rowsUpdated = getDatabase().update(DatabaseTableEnum.DREAMS.getTableName(), values, whereClause, whereArgs);
 
