@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        replaceFragment(binding.viewFlipper, 1, new OverviewFragment());
         replaceFragment(binding.viewFlipper, 0, new DreamsFragment());
+        replaceFragment(binding.viewFlipper, 1, new OverviewFragment());
         replaceFragment(binding.viewFlipper, 2, new TipsFragment());
 
         showOverview();
@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment;
         switch (index) {
             case 0:
-                fragment = fragmentManager.findFragmentById(R.id.container); // Replace with the actual ID
+                fragment = fragmentManager.findFragmentById(R.id.DreamsFragment); // Replace with the actual ID
                 break;
             case 1:
-                fragment = fragmentManager.findFragmentById(R.id.container1); // Replace with the actual ID
+                fragment = fragmentManager.findFragmentById(R.id.OverviewFragment); // Replace with the actual ID
                 break;
             case 2:
-                fragment = fragmentManager.findFragmentById(R.id.container2); // Replace with the actual ID
+                fragment = fragmentManager.findFragmentById(R.id.TipsFragment); // Replace with the actual ID
                 break;
             default:
                 return;
