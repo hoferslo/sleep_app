@@ -8,7 +8,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
-        android:background="@drawable/square_line_background"
+        android:padding="8dp"
+        android:background="@drawable/rounded_background_darker"
         android:orientation="vertical">
 
     <LinearLayout
@@ -17,7 +18,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"
-        android:background="@drawable/square_line_background">
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_background">
         <TextView
             android:id="@+id/dreamTitleTv"
             android:layout_width="wrap_content"
@@ -31,17 +33,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/square_line_background_bottom_left">
+        android:layout_marginBottom="8dp">
         <LinearLayout
             android:id="@+id/dreamLucidityLl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingHorizontal="8dp"
-            android:paddingBottom="8dp"
-            android:paddingTop="4dp"
-
-            android:layout_weight="0.5">
+            android:padding="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/rounded_background">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,21 +62,18 @@
                 android:text="/100"
                 android:textColor="@color/white" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/square_line_background_bottom_left"/>
+
 
         <LinearLayout
             android:id="@+id/dreamClarityLl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:paddingBottom="8dp"
-            android:paddingTop="4dp"
+            android:padding="8dp"
             android:gravity="center"
             android:layout_weight="0.5"
-            android:orientation="horizontal">
+            android:layout_marginStart="4dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_background">
 
 
             <TextView
@@ -105,7 +103,8 @@
         android:id="@+id/dreamDescriptionLl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         android:gravity="center"
+        android:gravity="center"
+        android:background="@drawable/rounded_background"
         android:padding="16dp">
 
             <TextView

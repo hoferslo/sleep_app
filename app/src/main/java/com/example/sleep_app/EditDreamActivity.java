@@ -8,21 +8,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sleep_app.databinding.ActivityEditDreamBinding;
+import com.example.sleep_app.databinding.ActivityAddDreamBinding;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
 
 public class EditDreamActivity extends AppCompatActivity {
 
-    ActivityEditDreamBinding binding;
+    ActivityAddDreamBinding binding;
     private Dream dream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityEditDreamBinding.inflate(getLayoutInflater());
+        binding = ActivityAddDreamBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
+        binding.buttonAddDreamTv.setText("Save dream");
         dream = getIntent().getParcelableExtra("EXTRA_DREAM");
 
         assert dream != null;
@@ -77,7 +77,7 @@ public class EditDreamActivity extends AppCompatActivity {
         binding.buttonClose.setOnClickListener(v -> finish());
 
         // Set up click listener for the button
-        binding.buttonEditDream.setOnClickListener(v -> {
+        binding.buttonAddDream.setOnClickListener(v -> {
             // Retrieve user input
             dream.setTitle(binding.editTextTitle.getText().toString());
             dream.setLucidity(Integer.parseInt(binding.seekBarLucidityTv.getText().toString()));

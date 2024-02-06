@@ -2,17 +2,17 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="oval">
-            <solid android:color="@color/sleepyBlueDarker"/> <!-- Background color when pressed -->
+            <solid android:color="@color/sleepyBlueDark"/> <!-- Background color when pressed -->
         </shape>
     </item>
     <item android:state_focused="true">
         <shape android:shape="oval">
-            <solid android:color="@color/sleepyBlueDarker"/> <!-- Background color when focused -->
+            <solid android:color="@color/sleepyBlueDark"/> <!-- Background color when focused -->
         </shape>
     </item>
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/sleepyBlueDarkest"/> <!-- Default background color -->
+            <solid android:color="@color/sleepyBlueDarker"/> <!-- Default background color -->
         </shape>
     </item>
 </selector>
