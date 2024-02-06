@@ -3,7 +3,7 @@
     <!-- Background with border -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/sleepyBlueDark"/> <!-- Background color -->
+            <solid android:color="@color/sleepyBlue"/> <!-- Background color -->
             <corners android:radius="6dp"/> <!-- Adjust the radius as needed -->
         </shape>
     </item>
@@ -12,7 +12,7 @@
     <item android:right="0dp" android:left="0dp" android:top="0dp" android:bottom="0dp">
         <shape android:shape="rectangle">
 
-            <stroke android:width="4dp" android:color="@color/sleepyBlueDarker"/> <!-- Border color and width -->
+            <stroke android:width="4dp" android:color="@color/sleepyBlueDark"/> <!-- Border color and width -->
             <corners android:radius="4dp"/> <!-- Adjust the radius to match the background radius -->
         </shape>
     </item>

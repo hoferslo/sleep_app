@@ -156,7 +156,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:padding="8dp"
-                android:background="@color/sleepyBlueDark">
+                android:background="@color/sleepyBlueDarkest">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:padding="8dp"
-                android:background="@color/sleepyBlueDark">
+                android:background="@color/sleepyBlueDarkest">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:padding="8dp"
-                android:background="@color/sleepyBlueDark">
+                android:background="@color/sleepyBlueDarkest">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

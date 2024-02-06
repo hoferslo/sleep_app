@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/sleepyBlueDarkest"
+    android:background="@color/sleepyBlueAlmostBlack"
     tools:context=".AddDreamActivity"
     android:padding="16dp">
 
@@ -140,7 +140,7 @@
 
             android:gravity="center"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background_darker">
+            android:background="@drawable/rounded_background_darkest">
             <TextView
                 android:id="@+id/buttonAddDreamTv"
                 android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
             android:layout_marginStart="4dp"
             android:gravity="center"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background_darker">
+            android:background="@drawable/rounded_background_darkest">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

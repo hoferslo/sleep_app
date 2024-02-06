@@ -12,7 +12,7 @@
     </item>
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/sleepyBlueDarker"/> <!-- Default background color -->
+            <solid android:color="@color/sleepyBlueDarkest"/> <!-- Default background color -->
         </shape>
     </item>
 </selector>
