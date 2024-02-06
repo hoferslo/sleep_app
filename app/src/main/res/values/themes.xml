@@ -7,7 +7,7 @@
 
     <style name="Theme.Sleep_app" parent="Base.Theme.Sleep_app" />
     <style name="ThemeOverlay.Sleep_app.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenBackgroundColor">@color/sleepyBlueDarkest</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 </resources>
