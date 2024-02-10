@@ -14,13 +14,19 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.sleep_app.Dream;
-import com.example.sleep_app.DreamDetailsFragment;
+import com.example.sleep_app.fragments.DreamDetailsFragment;
 import com.example.sleep_app.R;
 import com.example.sleep_app.databinding.FragmentDreamsBinding;
+import com.example.sleep_app.sqLiteHelpers.BaseAccess;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
+import com.example.sleep_app.sqLiteHelpers.DreamsHelper;
 
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnDialogDismissListener {
@@ -101,6 +107,23 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
 
             TextView descriptionTextView = convertView.findViewById(R.id.dreamDescriptionTv);
             descriptionTextView.setText(objects.get(position).getDescription());
+
+            // Calculate the period between the given date and time and the current date and time
+            Period period = Period.between(objects.get(position).getDateCreated().toLocalDate(), LocalDateTime.now().toLocalDate());
+
+            // Get the number of days and months from the period
+            int daysAgo = period.getDays();
+            int monthsAgo = period.getMonths();
+            TextView yearTextView = convertView.findViewById(R.id.dreamDateYearTv);
+            if (monthsAgo>0){
+                yearTextView.setText(daysAgo + " days, " + monthsAgo + " months ago");
+            } else {
+                yearTextView.setText(daysAgo + " days ago");
+            }
+
+            DateTimeFormatter customDateFormatter = DateTimeFormatter.ofPattern("EEEE, d MMMM, yyyy", Locale.ENGLISH);
+            TextView dayTextView = convertView.findViewById(R.id.dreamDateDayTv);
+            dayTextView.setText(objects.get(position).getDateCreated().format(customDateFormatter));
 
             convertView.setOnClickListener(v -> {
                 scrollProgress = binding.scrollLv.getFirstVisiblePosition();

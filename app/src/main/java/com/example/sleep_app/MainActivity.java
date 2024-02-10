@@ -1,10 +1,12 @@
 package com.example.sleep_app;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.sleep_app.activities.AddDreamActivity;
 import com.example.sleep_app.databinding.ActivityMainBinding;
 import com.example.sleep_app.mainActivityFragments.DreamsFragment;
 import com.example.sleep_app.mainActivityFragments.OverviewFragment;
@@ -23,6 +25,9 @@ import android.widget.ViewFlipper;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    TipsFragment tipsFragment;
+    OverviewFragment overViewFragment;
+    DreamsFragment dreamsFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +35,12 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        replaceFragment(binding.viewFlipper, 0, new DreamsFragment());
-        replaceFragment(binding.viewFlipper, 1, new OverviewFragment());
-        replaceFragment(binding.viewFlipper, 2, new TipsFragment());
+        tipsFragment = new TipsFragment();
+        overViewFragment = new OverviewFragment();
+        dreamsFragment = new DreamsFragment();
+        replaceFragment(binding.viewFlipper, 0, dreamsFragment);
+        replaceFragment(binding.viewFlipper, 1, overViewFragment);
+        replaceFragment(binding.viewFlipper, 2, tipsFragment);
 
         showOverview();
 
@@ -44,9 +52,30 @@ public class MainActivity extends AppCompatActivity {
 
         binding.btnAddDream.setOnClickListener(v -> startActivity(new Intent(this, AddDreamActivity.class)));
 
-        binding.btnFilter.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Work in progress", Toast.LENGTH_SHORT).show());
+        binding.btnFilter.setOnClickListener(v -> Toast.makeText(this, "Work in progress", Toast.LENGTH_SHORT).show());
 
-        binding.btnPlaceholder.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Work in progress", Toast.LENGTH_SHORT).show());
+        binding.btnSearch.setOnClickListener(v -> tipsFragment.openLink());
+
+        binding.btnBack.setOnClickListener(v -> {
+            goBackWhenOnTipsAndInfo();
+        });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                goBackWhenOnTipsAndInfo();
+            }
+        };
+
+        getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
+    private void goBackWhenOnTipsAndInfo(){
+        boolean quit = true;
+        if (binding.viewFlipper.getDisplayedChild() == 2){ //handler for back press in tipsFragment
+            quit = tipsFragment.onBackPressed();
+        }
+        if (quit) finish();
     }
 
     private void notifyFragmentVisible(int index) {
@@ -79,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         roundUpperEdges(binding.btnFragmentA, new float[]{20, 20, 20, 20, 0, 0, 0, 0}); // todo turn this into a drawable (maybe not)
         roundUpperEdges(binding.btnFragmentB, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
-        showHideButtons(View.VISIBLE, View.VISIBLE, View.GONE);
+        showHideButtons(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
         notifyFragmentVisible(0);
     }
 
@@ -91,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         roundUpperEdges(binding.btnFragmentA, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentB, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
-        showHideButtons(View.GONE, View.VISIBLE, View.GONE);
+        showHideButtons(View.GONE, View.VISIBLE, View.GONE, View.GONE);
         notifyFragmentVisible(1);
     }
 
@@ -103,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         roundUpperEdges(binding.btnFragmentA, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentB, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
-        showHideButtons(View.GONE, View.VISIBLE, View.VISIBLE);
+        showHideButtons(View.GONE, View.VISIBLE, View.VISIBLE, View.VISIBLE);
         notifyFragmentVisible(2);
     }
 
@@ -144,10 +173,13 @@ public class MainActivity extends AppCompatActivity {
         view.setBackground(gradientDrawable);
     }
 
-    private void showHideButtons(int button1, int button2, int button3){
+    private void showHideButtons(int button1, int button2, int button3, int button4){
         binding.btnFilter.setVisibility(button1);
         binding.btnAddDream.setVisibility(button2);
-        binding.btnPlaceholder.setVisibility(button3);
+        binding.btnSearch.setVisibility(button3);
+        binding.btnBack.setVisibility(button4);
 
     }
+
+
 }

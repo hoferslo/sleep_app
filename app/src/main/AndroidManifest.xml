@@ -16,10 +16,10 @@
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
         <activity
-            android:name=".AddDreamActivity"
+            android:name=".activities.AddDreamActivity"
             android:exported="false" />
         <activity
-            android:name=".EditDreamActivity"
+            android:name=".activities.EditDreamActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

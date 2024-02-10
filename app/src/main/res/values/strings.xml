@@ -4,4 +4,167 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="technique_title">Example Title</string>
+    <string name="technique_description">Example Description</string>
+
+    <string name="technique_WBTB_title">Wake Back to Bed lucid dreaming technique (WBTB)</string>
+    <string name="technique_WBTB_url">https://www.shapedream.co/lucid-dreaming/wake-back-to-bed</string>
+    <string name="technique_WBTB_description">
+        Embrace Wake-Back-to-Bed, affectionately known as WBTB, as a reliable gateway to lucid dreaming. This technique involves setting an alarm to gently rouse you between sleep cycles. Stay awake for a rejuvenating 20 minutes or more, fully immersing yourself in conscious awareness. Return to slumber with a fervent desire to unravel the mysteries of a lucid dream.\n\n
+        Tailor the WBTB alarm to your personal rhythm. Set it 2 hours before your typical wake-up time, or rely on a sleep tracker or dream analysis tool to pinpoint the zenith of dreamtime. If you lack a sleep tracker and usually rise at 7 am, aim for a 5 am WBTB alarm.\n\n
+        During your awakened state, engage in activities for at least 20 minutes. Whether it\'s chores, perusing your dream journal, scrutinizing dreamsigns, or meditation, use this time to deepen your connection with consciousness. Drift into sleep with a solemn commitment to recognize the dream unfolding before you. For seasoned practitioners, this is an opportune moment to set intentions for specific dream feats—soar through the skies, meditate, reshape the dream realm, or pose profound queries.\n\n
+        To enact WBTB successfully, adhere to these steps:\n
+        - Schedule an alarm to stir you between sleep cycles (2 hours before your customary awakening)\n
+        - Stay awake for a rejuvenating 20+ minutes to attain full consciousness\n
+        - Re-enter the realm of dreams with a resolute intent to realize that you\'re dreaming\n\n
+        WBTB harmonizes seamlessly with a tapestry of lucid dreaming techniques, embracing dreamworld familiarity, state tests, MILD, and more. Allow for a patient and persistent approach, as it may take a few attempts for the alarm to synchronize with your unique sleep patterns—WBTB, like other techniques, rewards dedication.
+    </string>
+
+    <string name="technique_MILD_title">Mnemonic Induction of Lucid Dreaming (MILD)</string>
+    <string name="technique_MILD_url">https://www.mindfulluciddreaming.com/post/mnemonic-induction-of-lucid-dreaming-mild</string>
+    <string name="technique_MILD_description">
+        MILD, or Mnemonic Induction of Lucid Dreams, finds its ideal practice during the nocturnal hours—when you stir from dreams and stand at the threshold of sleep once again. Upon awakening from a dream, employ the art of intention-setting encapsulated in the three Rs: rescript, rehearse, and remind. Iterate through these steps until you hold the unwavering confidence to carry forth your intention of recognizing your dream state upon your return to slumber.\n\n\n
+        1. RESCRIPT. As you emerge from a dream, contemplate how you would reweave its tapestry to introduce lucidity. Identify a moment in the dream where you discern a dreamsign and declare, “This is a dream.” Proceed to rescript the remaining narrative as if you maintained awareness, engaging in purposeful dream activities.\n\n
+        2. REHEARSE. Transport yourself back into the dream realm, immersing in the newly reshaped version infused with lucidity. Envision the awakening of awareness and the unfolding of the lucid dream. Replay this mental scenario until it crystallizes, and you can vividly witness your return to the dream with the realization that you are dreaming.\n\n
+        3. REMIND. Plant a mental marker that upon your return to sleep and the realm of dreams, you will retain the awareness of your dream state. Affirm to yourself, “I shall attain lucidity in my upcoming dream. Whether encountering familiar dreamsigns or encountering novel ones, I will recognize them. When presented with a dreamsign, the awareness of my dreaming state will awaken.” Focus intensely on this resolve just before slipping back into the embrace of sleep.\n\n\n
+        The MILD technique extends its reach beyond the nocturnal realm and can be woven into the fabric of daylight hours. Here, persist in reminding yourself of the intent to experience a lucid dream when night falls. Engage in the practice of reshaping recent non-lucid dreams, envisioning them as lucid scenarios. Alternatively, reimagine waking experiences as if navigating a lucid dream. Rehearse these reimagined scenes until the intention solidifies within you.
+    </string>
+
+    <string name="technique_WILD_title">Wake-Induced Lucid Dream (WILD)</string>
+    <string name="technique_WILD_url">https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/</string>
+    <string name="technique_WILD_description">
+        WILD stands out as one of the most potent methods for inducing lucid dreams. It involves transitioning your awareness seamlessly from the wake state to the dream state, a task that proves challenging, especially for beginners. Here, we\'ll explore some effective tricks, tips, and adjustments to enhance your WILD experience.\n\n\n
+        1: Combine WILD with WBTB for Success\n\n
+        Instead of attempting WILD when going to bed, focus your efforts after approximately 5 hours of sleep. Follow these steps:\n
+        Set an alarm for 5 hours into your sleep.\n
+        Rise without engaging electronic devices, maintaining melatonin levels.\n
+        Read a book or review your dream journal.\n
+        Return to bed after 45-60 minutes, and vivid dreams await.\n\n\n
+        2: Emphasize Relaxation\n\n
+        Achieving a state of deep relaxation is crucial for WILD success. Incorporate these relaxation techniques:\n
+        Perform stretch exercises during the day.\n
+        Envision floating in a zero-gravity vacuum while in bed.\n
+        Imagine moving at the speed of light.\n
+        Focus on specific body parts, visualizing them releasing tension.\n
+        Use relaxing music, such as classical, piano, flute, violin, or cello.\n\n\n
+        3: Navigate the Hypnagogia\n\n
+        After relaxation, concentrate on your breathing or heartbeat. Soon, you\'ll observe hypnagogic imagery—random patterns of light behind closed eyelids. If you don\'t immediately see these patterns, ensure you\'ve followed the previous tips regarding sleep cycles and relaxation.\n\n\n
+        4: Address Natural Reflexes\n\n
+        While natural spasms and reflexes typically don\'t interfere with WILD, be cautious of sudden movements that can disrupt the transition to REM. Allow reflexes, like the \"saliva swallowing reflex,\" to pass naturally rather than resisting them.\n\n\n
+        5: Remain Awake during WILD\n\n
+        If falling asleep prematurely during WILD is an issue, consider these strategies:\n
+        Keep your forearm raised perpendicular to the bed and body.\n
+        Experiment with different sleeping positions.\n
+        Try sleeping on a couch or a different bed.\n\n\n
+        6: Entering the Dream Realm\n\n
+        Execute the steps meticulously, maintaining awareness until the REM phase. As you observe more intricate hypnagogic imagery, refrain from immediate interaction. Allow the imagery to stabilize, then envision yourself within it from a first-person perspective—welcome to the dream realm!
+    </string>
+
+    <string name="technique_FILD_title">Finger Induced Lucid Dreaming (FILD)</string>
+    <string name="technique_FILD_url">https://howtolucid.com/the-finger-induced-lucid-dream-fild-technique/</string>
+    <string name="technique_FILD_description">
+        Finger-Induced Lucid Dreaming (FILD) is a unique technique that swiftly propels you into a lucid dream, typically within 5-30 seconds—a technique sometimes dubbed the \'Hagarts Technique.\'\n\n\n
+
+Here\'s a concise guide to master FILD:\n\n\n
+
+Prep for Slumber:\n\n
+Ensure you are thoroughly fatigued by either engaging in physical activities during the day or setting an alarm to wake you up in the middle of the night.\n\n\n
+
+Piano Play in the Air:\n\n
+
+Mimic playing a piano by lifting your middle and index fingers separately, akin to playing two quick notes consecutively.\n
+Practicing this motion on a keyboard can be helpful.\n
+On your computer keyboard, simulate the motion without pressing the keys too firmly.\n
+Press lightly, just enough for a slight dip without fully depressing the keys.\n\n\n
+Focused Finger Movements:\n\n
+
+Upon waking, concentrate solely on your fingers, refraining from other thoughts.\n
+Execute the finger movements for approximately 30 seconds, emphasizing the feeling of the motion.\n
+Do not count movements or entertain thoughts, let yourself naturally drift back to sleep.\n
+Conclude with a simple reality check, like attempting to push your finger through your palm.\n\n\n
+If Unsuccessful, Retry After an Hour:\n\n
+
+If the initial attempt yields no results, return to sleep and try again in an hour.\n
+Avoid persistently attempting as it may hinder success.\n
+Reset your alarm if necessary; forcing the technique may disrupt the process.\n
+Remember, FILD operates swiftly, usually within 5-30 seconds, making it a dynamic addition to your lucid dreaming toolbox.\n
+
+    </string>
+
+    <string name="technique_SSILD_title">Senses Initiated Lucid Dream (SSILD)</string>
+    <string name="technique_SSILD_url">https://www.reddit.com/r/LucidDreaming/comments/18h2bi/ssild_official_tutorial_20/</string>
+    <string name="technique_SSILD_description">
+SSILD is a modern lucid dreaming technique, easy to learn, highly effective, and consistently produces results.
+        Developed in 2011 to teach lucid dreaming on a Chinese forum, the initial version, titled "太玄功" or "A Very Mysterious Technique," garnered overwhelming positive feedback with hundreds of success stories within a few months.
+        Despite its mysterious origins, SSILD remains a potent tool for lucid dream induction.\n\n\n
+
+        The "Cycle":\n\n
+
+Focus on Sight: Close your eyes, relax, and avoid eye movement. Pay attention to the darkness behind closed eyelids.\n
+
+Focus on Hearing: Further relax and shift attention to your ears. Listen for internal noises or external sounds if the room is quiet.\n
+
+Focus on Touch: Direct attention to your body. Feel for unusual sensations like tingling, heaviness, or lightness.\n
+
+Remember, the key is subtle stimulation, avoiding the common mistake of "trying too hard."\n\n\n
+
+Steps to Follow:\n\n
+
+Go to bed early and set an alarm for 4-5 hours later.\n
+
+After waking, stay awake for 5-10 minutes, then return to bed.\n
+
+Perform quick cycles (4-6 times) as a warm-up.\n
+
+Perform slower cycles (3-4 times), taking at least 30 seconds for each step.\n
+
+Return to a comfortable position and aim to fall asleep quickly without overthinking.\n\n\n
+
+What Happens Next:\n\n
+
+Hypnagogia: SSILD induces dream-consciousness, leading to hypnagogic sensations. Be a passive observer during these experiences and avoid excitement.\n
+
+False Awakening: SSILD often results in super-realistic false awakenings. Develop the habit of reality checks after each awakening.\n
+
+DILD (Dream Initiated Lucid Dream): Falling asleep with heightened awareness increases the likelihood of spontaneous lucid dreams.\n
+
+Real Awakening: If you wake up without success, stay still, relax, and perform additional SSILD cycles for a higher chance of success.\n
+    </string>
+
+    <string name="technique_VILD_title">Visual Induction of Lucid Dreams (VILD)</string>
+    <string name="technique_VILD_url">https://www.reddit.com/r/LucidDreaming/comments/tnzmc/beginners_vild_visually_incubated_lucid_dream/</string>
+    <string name="technique_VILD_description">
+        VILD, or Visual Induction of Lucid Dreams, is an effective yet underrated technique for inducing lucid dreams. Originally introduced by Peter Harrison on a lucid dreaming forum, this method has been refined for enhanced effectiveness.\n\n\n
+
+The Five Parts:\n\n\n
+
+1. Dream Journal and Reality Checks:\n\n
+
+Maintain a detailed dream journal to strengthen dream recall.\n
+Perform at least 10 reality checks daily to habituate discernment between reality and dreams.\n
+Recommended reality checks include holding nostrils and attempting to breathe, jumping to check for gravity, and checking eyesight with one eye closed.\n\n\n
+2. Designing A Dream:\n\n
+
+Write down a simple yet vivid dream scene on paper using colorful pens.\n
+Emphasize a clear and concise description of the dream setting and any characters involved.\n
+Example Dream Scene: In a square room with white walls, a grey roof, a door, and Jacob (a friend) wearing a red T-shirt and blue jeans, discussing the importance of reality checks for lucid dreaming.\n\n\n
+3. Visualizing The Dream Scene:\n\n
+
+Place the written dream scene under your pillow to establish a subconscious connection.\n
+Before bedtime, relax, listen to calming music, and visualize the dream scene as a short movie.\n
+Repeatedly visualize the exact details as written, excluding any spontaneous additions.\n
+Disregard unrelated thoughts and persist in visualization until falling asleep.\n\n\n
+4. In The Dream:\n\n
+
+As the dream unfolds during the REM phase, the subconscious converts the visualization into a tangible dream experience.\n
+Lucidity is triggered when performing a reality check within the dream, as per the established routine.\n\n\n
+5. Stabilization:\n\n
+
+Opt for a simple dream scene to mitigate instant blackouts due to overwhelming excitement.\n
+While VILD tends to offer stable dreams, practitioners may find additional stabilization techniques beneficial.\n
+The choice of a basic dream scene aids in maintaining dream stability and controlling excitement.\n\n\n
+VILD presents a structured and meticulous approach, combining elements of visualization and subconscious influence to increase the likelihood of inducing vivid and controlled lucid dreams.
+    </string>
+
 </resources>

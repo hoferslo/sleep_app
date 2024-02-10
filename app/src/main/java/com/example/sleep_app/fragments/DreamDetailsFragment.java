@@ -1,4 +1,4 @@
-package com.example.sleep_app;
+package com.example.sleep_app.fragments;
 
 
 import android.content.DialogInterface;
@@ -16,8 +16,11 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.sleep_app.Dream;
+import com.example.sleep_app.activities.EditDreamActivity;
 import com.example.sleep_app.databinding.FragmentDreamDetailsBinding;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
+import com.example.sleep_app.sqLiteHelpers.DreamsHelper;
 
 
 public class DreamDetailsFragment extends DialogFragment {
@@ -69,6 +72,7 @@ public class DreamDetailsFragment extends DialogFragment {
             binding.TextViewLucidity.setText(String.valueOf(dream.getLucidity()));
             binding.TextViewClarity.setText(String.valueOf(dream.getClarity()));
             binding.TextViewDescription.setText(dream.getDescription());
+            binding.TextViewDateTime.setText(DreamsHelper.DateTimeToString(dream.getDateCreated()));
         }
 
         binding.buttonClose.setOnClickListener(v -> closeFragment());

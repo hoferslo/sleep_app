@@ -1,4 +1,4 @@
-package com.example.sleep_app;
+package com.example.sleep_app.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.sleep_app.R;
 
 public class DeleteDreamDialogFragment extends DialogFragment {
 

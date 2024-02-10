@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="sleepyBlueLighter">#3457ac</color>
+    <color name="sleepyBlueLighter">#447ccf</color>
     <color name="sleepyBlue">#273959</color>
     <color name="sleepyBlueAlmostBlack">#090912</color>
     <color name="sleepyBlueDarkest">#0B1222</color>

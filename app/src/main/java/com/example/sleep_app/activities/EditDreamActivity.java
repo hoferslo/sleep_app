@@ -1,4 +1,4 @@
-package com.example.sleep_app;
+package com.example.sleep_app.activities;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sleep_app.Dream;
 import com.example.sleep_app.databinding.ActivityAddDreamBinding;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
 

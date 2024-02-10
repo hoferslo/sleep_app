@@ -1,5 +1,25 @@
-<!-- res/drawable/rounded_button_background.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="4dp" />
-    <solid android:color="@color/sleepyBlueDarkest" /> <!-- Replace with your desired background color -->
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pressed state -->
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/sleepyBlueDark"/> <!-- Background color when pressed -->
+                    <corners android:radius="4dp"/> <!-- Adjust the radius as needed -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- Default state -->
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/sleepyBlueDarkest"/> <!-- Default background color -->
+                    <corners android:radius="4dp"/> <!-- Adjust the radius as needed -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

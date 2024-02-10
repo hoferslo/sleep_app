@@ -1,4 +1,4 @@
-package com.example.sleep_app;
+package com.example.sleep_app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.example.sleep_app.Dream;
 import com.example.sleep_app.databinding.ActivityAddDreamBinding;
 import com.example.sleep_app.databinding.ActivityMainBinding;
 import com.example.sleep_app.sqLiteHelpers.DatabaseHelper;
