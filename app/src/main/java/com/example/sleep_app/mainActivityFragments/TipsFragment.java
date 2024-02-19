@@ -88,7 +88,8 @@ public class TipsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("TipsFragment onResume", "no method was called");
+        infoHome();
+        Log.d("TipsFragment onResume", "infoHome() was called");
     }
 
     private void replaceFragment(ViewFlipper viewFlipper, int index, Fragment fragment) {
@@ -122,6 +123,12 @@ public class TipsFragment extends Fragment {
             startActivity(intent);
         } else {
             Toast.makeText(requireContext(), "Choose a category to open external information in the browser.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void infoHome(){
+        if (binding.viewFlipper.getDisplayedChild() == 1) {
+            binding.viewFlipper.setDisplayedChild(0);
         }
     }
 }

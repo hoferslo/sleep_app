@@ -49,8 +49,8 @@ public class InfoDetailsFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Retrieve title and description from arguments
-        String title = getArguments().getString(ARG_TITLE, "");
-        String description = getArguments().getString(ARG_DESCRIPTION, "");
+        String title = getArguments() != null ? getArguments().getString(ARG_TITLE, "") : "";
+        String description = getArguments() != null ? getArguments().getString(ARG_DESCRIPTION, "") : "";
 
         // Set title and description in the fragment's UI
         binding.titleTv.setText(title);

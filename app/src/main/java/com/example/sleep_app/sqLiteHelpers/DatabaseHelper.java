@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -28,11 +29,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Override this method in subclasses for database upgrades
     }
 
-    public static String DateTimeToString(LocalDateTime dateTime){
+    public static String DateTimeToDateTimeString(LocalDateTime dateTime){
         return(dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
+    public static String DateTimeToDateString(LocalDateTime dateTime){
+        return(dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    }
 
-    public static LocalDateTime stringToDateTime(String dateTimeStr) {
+    public static LocalDateTime dateTimeStringToDateTime(String dateTimeStr) {
         return LocalDateTime.parse(dateTimeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+    public static LocalDateTime dateStringToDateTime(String dateTimeStr) {
+        LocalDate localDate = LocalDate.parse(dateTimeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return localDate.atStartOfDay();
     }
 }

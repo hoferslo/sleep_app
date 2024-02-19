@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,13 +31,6 @@ public class DeleteDreamDialogFragment extends DialogFragment {
         // Inflate the custom layout
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.custom_delete_dream_dialog, null);
-
-        // Customize the dialog appearance using the inflated view
-        TextView titleTextView = view.findViewById(R.id.dialogTitle);
-        titleTextView.setText("Delete Dream");
-
-        TextView messageTextView = view.findViewById(R.id.dialogMessage);
-        messageTextView.setText("Are you sure you want to delete this dream?");
 
         LinearLayout positiveButton = view.findViewById(R.id.btnPositive);
         positiveButton.setOnClickListener(v -> {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/sleepyBlueDarker"
+    android:background="@color/sleepyBlueAlmostBlack"
     tools:context=".fragments.DreamDetailsFragment"
     android:orientation="vertical">
 
@@ -40,28 +40,28 @@
             android:padding="8dp"
             android:gravity="center"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background"/>
+            android:background="@drawable/rounded_background_dark"/>
         <TextView
             android:id="@+id/TextViewLucidity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background"/>
+            android:background="@drawable/rounded_background_dark"/>
         <TextView
             android:id="@+id/TextViewClarity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background"/>
+            android:background="@drawable/rounded_background_dark"/>
         <TextView
             android:id="@+id/TextViewFeeling"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background"/>
+            android:background="@drawable/rounded_background_dark"/>
 
         <TextView
             android:id="@+id/TextViewDescription"
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background"/>
+            android:background="@drawable/rounded_background_dark"/>
         </LinearLayout>
 
     </ScrollView>
@@ -89,7 +89,7 @@
 
             android:gravity="center"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_button_background">
+            android:background="@drawable/rounded_background_darkest">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
 
             android:gravity="center"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_button_background">
+            android:background="@drawable/rounded_background_darkest">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
             android:layout_marginStart="4dp"
             android:gravity="center"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_button_background">
+            android:background="@drawable/rounded_background_darkest">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -2,6 +2,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +29,7 @@
         android:hint="Title"
         android:padding="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/square_line_background"/>
+        android:background="@drawable/rounded_background_darker_with_border"/>
 
     <LinearLayout
         android:id="@+id/editTextLucidity"
@@ -38,10 +39,10 @@
         android:gravity="center"
         android:inputType="number"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/square_line_background">
+        android:background="@drawable/rounded_background_darker_with_border">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,13 +62,17 @@
 
         </LinearLayout>
 
-        <SeekBar
+        <com.google.android.material.slider.RangeSlider
             android:id="@+id/seekBarLucidity"
-            android:layout_width="match_parent"
+            android:valueFrom="0"
+            android:valueTo="100"
+            android:stepSize="1"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:max="100"
-            android:progress="0"/>
+            app:tickVisible="false"
+            app:labelBehavior="gone"
+            app:haloColor="@color/sleepyBlueSeeThrough"
+            app:trackColorInactive="@color/sleepyBlue"
+            android:layout_width="match_parent" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,10 +84,10 @@
         android:gravity="center"
         android:inputType="number"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="16dp"
+        android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/square_line_background">
+        android:background="@drawable/rounded_background_darker_with_border">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,13 +106,18 @@
                 android:text="0"/>
 
         </LinearLayout>
-        <SeekBar
+
+        <com.google.android.material.slider.RangeSlider
             android:id="@+id/seekBarClarity"
-            android:layout_width="match_parent"
+            android:valueFrom="0"
+            android:valueTo="100"
+            android:stepSize="1"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:max="100"
-            android:progress="0"/>
+            app:tickVisible="false"
+            app:labelBehavior="gone"
+            app:haloColor="@color/sleepyBlueSeeThrough"
+            app:trackColorInactive="@color/sleepyBlue"
+            android:layout_width="match_parent" />
     </LinearLayout>
 
     <EditText
@@ -116,8 +126,36 @@
         android:layout_height="wrap_content"
         android:hint="Feeling (not required, work in progress)"
         android:padding="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/square_line_background"/>
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/rounded_background_darker_with_border"/>
+    <LinearLayout
+        android:id="@+id/DateLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp"
+        android:gravity="center">
+    <TextView
+        android:id="@+id/textViewDate"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:hint="Date"
+        android:gravity="center_vertical"
+        android:layout_margin="4dp"
+        android:padding="16dp"
+        android:textSize="18sp"
+        android:background="@drawable/rounded_background_dark_with_border"/>
+
+        <ImageView
+            android:id="@+id/imageViewDate"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:src="@mipmap/baseline_edit_calendar_white_48dp"
+            android:background="@drawable/rounded_background_dark_with_border"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editTextDescription"
@@ -128,7 +166,7 @@
         android:minLines="3"
         android:padding="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/square_line_background"/>
+        android:background="@drawable/rounded_background_darker_with_border"/>
     </LinearLayout>
     </ScrollView>
 

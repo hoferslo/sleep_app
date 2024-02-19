@@ -4,7 +4,6 @@ package com.example.sleep_app.fragments;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,10 +28,12 @@ public class DreamDetailsFragment extends DialogFragment {
 
     FragmentDreamDetailsBinding binding;
 
+    private boolean isClosedByUser = false;
+
     public static DreamDetailsFragment newInstance(Dream dreamTemp) {
         DreamDetailsFragment fragment = new DreamDetailsFragment();
         Bundle args = new Bundle();
-        args.putParcelable("dream", (Parcelable) dreamTemp);
+        args.putParcelable("dream", dreamTemp);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,7 +73,7 @@ public class DreamDetailsFragment extends DialogFragment {
             binding.TextViewLucidity.setText(String.valueOf(dream.getLucidity()));
             binding.TextViewClarity.setText(String.valueOf(dream.getClarity()));
             binding.TextViewDescription.setText(dream.getDescription());
-            binding.TextViewDateTime.setText(DreamsHelper.DateTimeToString(dream.getDateCreated()));
+            binding.TextViewDateTime.setText(DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
         }
 
         binding.buttonClose.setOnClickListener(v -> closeFragment());
@@ -85,7 +86,6 @@ public class DreamDetailsFragment extends DialogFragment {
         });
 
         binding.buttonDeleteDream.setOnClickListener(v -> {
-
             DeleteDreamDialogFragment deleteDreamDialog = new DeleteDreamDialogFragment();
             deleteDreamDialog.setDeleteDreamDialogListener(new DeleteDreamDialogFragment.DeleteDreamDialogListener() {
                 @Override
@@ -113,6 +113,8 @@ public class DreamDetailsFragment extends DialogFragment {
     }
 
     private void closeFragment() {
+        isClosedByUser = true;
+
         // Get the FragmentManager
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 
@@ -137,7 +139,7 @@ public class DreamDetailsFragment extends DialogFragment {
         super.onDismiss(dialog);
 
         // Notify the callback listener that the dialog is dismissed
-        if (onDialogDismissListener != null) {
+        if (onDialogDismissListener != null && !isClosedByUser) {
             onDialogDismissListener.onDialogDismissed();
         }
     }

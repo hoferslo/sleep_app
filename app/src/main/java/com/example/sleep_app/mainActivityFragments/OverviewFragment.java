@@ -2,33 +2,40 @@ package com.example.sleep_app.mainActivityFragments;
 
 import static java.lang.Float.NaN;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.sleep_app.Dream;
+import com.example.sleep_app.MainActivity;
+import com.example.sleep_app.PrefsHelper;
 import com.example.sleep_app.R;
 import com.example.sleep_app.databinding.FragmentOverviewBinding;
+import com.example.sleep_app.fragments.DreamDetailsFragment;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
 import com.scwang.wave.MultiWaveHeader;
 
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
+import java.util.Random;
 
-public class OverviewFragment extends Fragment {
+public class OverviewFragment extends Fragment implements DreamDetailsFragment.OnDialogDismissListener {
 
     FragmentOverviewBinding binding;
     private ArrayAdapter<String> adapter;
     private List<Dream> dreams;
     private LocalDateTime now;
+    private PrefsHelper prefsHelper;
 
     public OverviewFragment() {
         // Required empty public constructor
@@ -42,6 +49,8 @@ public class OverviewFragment extends Fragment {
 
         now = LocalDateTime.now();
 
+        prefsHelper = new PrefsHelper(requireContext());
+
         return binding.getRoot();
     }
 
@@ -54,7 +63,9 @@ public class OverviewFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        createStats();
+        if (binding != null) {
+            createStats();
+        }
         Log.d("OverviewFragment onResume", "createStats() method was called");
     }
 
@@ -90,6 +101,33 @@ public class OverviewFragment extends Fragment {
             description.setText(thisMonthLucidDreamsNumber + "/" + thisMonthDreamsNumber);
             waveView.setProgress(getWaveViewProgress(thisMonthLucidDreamsNumber, thisMonthDreamsNumber));
             binding.scrollLl.addView(dreamStatsLayout);
+        }
+
+        {
+            if (prefsHelper.isRandomDreamEnabled() && !dreams.isEmpty()) {
+                Dream dream = dreams.get(new Random().nextInt(dreams.size()));
+
+                LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View RandomDreamLl = inflater.inflate(R.layout.overview_random_dream, null, false);
+
+                View parentView = inflater.inflate(R.layout.item_dream_layout, null, false);
+                View dreamView = MainActivity.makeDreamView(parentView, dream);
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                layoutParams.setMargins(0, (int) (8 * getResources().getDisplayMetrics().density + 0.5f), 0, 0);
+                dreamView.findViewById(R.id.itemDreamLl).setLayoutParams(layoutParams);
+
+                dreamView.setOnClickListener(v -> {
+                    showDreamDetailsDialog(dream);
+                });
+
+                LinearLayout Ll = RandomDreamLl.findViewById(R.id.RandomDreamLl);
+                Ll.addView(dreamView);
+                binding.scrollLl.addView(RandomDreamLl);
+            }
         }
 
         int pastMonthDreamsNumber = getMonthDreamsCount(now.minusMonths(1), false);
@@ -147,4 +185,13 @@ public class OverviewFragment extends Fragment {
         return waveViewProgress;
     }
 
+    private void showDreamDetailsDialog(Dream clickedDream) {
+        DreamDetailsFragment dialogFragment = DreamDetailsFragment.newInstance(clickedDream);
+        dialogFragment.setOnDialogDismissListener(this);
+        dialogFragment.show(requireActivity().getSupportFragmentManager(), "dream_details_dialog");
+    }
+
+    @Override
+    public void onDialogDismissed() {onResume();
+    }
 }

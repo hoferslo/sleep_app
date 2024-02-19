@@ -74,9 +74,9 @@
                     android:visibility="gone">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@android:drawable/ic_menu_sort_by_size"/>
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/outline_sort_white_48dp"/>
 
                 </LinearLayout>
 
@@ -92,9 +92,9 @@
                     android:visibility="gone">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@android:drawable/ic_menu_revert" />
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/outline_arrow_back_white_48dp" />
 
                 </LinearLayout>
 
@@ -117,12 +117,10 @@
                     android:focusable="true"
                     android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+"
-                        android:textColor="@color/white"
-                        android:textSize="32sp" />
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@mipmap/baseline_add_white_48dp" />
 
                 </LinearLayout>
 
@@ -149,7 +147,25 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@android:drawable/ic_menu_search" />
+                        android:src="@mipmap/baseline_travel_explore_white_48dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnSettings"
+                    android:layout_width="67dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/outline_settings_white_48dp"/>
 
                 </LinearLayout>
             </LinearLayout>

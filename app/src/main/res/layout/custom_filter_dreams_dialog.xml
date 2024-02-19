@@ -1,0 +1,245 @@
+<!-- res/layout/custom_delete_dream_dialog.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="@color/sleepyBlueAlmostBlack"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select filters"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="8dp"
+        android:padding="16dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/Lucidity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:background="@drawable/rounded_background_darker_with_border">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Lucidity from: "/>
+
+                <TextView
+                    android:id="@+id/seekBarLucidityStartTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text=" to: "/>
+                <TextView
+                    android:id="@+id/seekBarLucidityEndTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="0"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/seekBarLucidity"
+                android:valueFrom="0"
+                android:valueTo="100"
+                android:stepSize="1"
+                android:layout_height="wrap_content"
+                app:trackColorInactive="@color/sleepyBlue"
+                app:labelBehavior="gone"
+                app:haloColor="@color/sleepyBlueSeeThrough"
+                app:tickVisible="false"
+                android:layout_width="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Clarity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:background="@drawable/rounded_background_darker_with_border">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Clarity from: "/>
+
+                <TextView
+                    android:id="@+id/seekBarClarityStartTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text=" to: "/>
+                <TextView
+                    android:id="@+id/seekBarClarityEndTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="0"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/seekBarClarity"
+                android:valueFrom="0"
+                android:valueTo="100"
+                android:stepSize="1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:haloColor="@color/sleepyBlueSeeThrough"
+                app:tickVisible="false"
+                app:labelBehavior="gone"
+                app:trackColorInactive="@color/sleepyBlue"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/DateStartLl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:gravity="center"
+            android:background="@drawable/rounded_background_darker_with_border">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="From date: "/>
+            <TextView
+                android:id="@+id/textViewDateStart"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:id="@+id/imageViewDateStart"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="4dp"
+                android:src="@mipmap/baseline_edit_calendar_white_48dp"
+                android:background="@drawable/rounded_background_dark_with_border"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/DateEndLl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:gravity="center"
+            android:background="@drawable/rounded_background_darker_with_border">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="To date: "/>
+            <TextView
+                android:id="@+id/textViewDateEnd"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:id="@+id/imageViewDateEnd"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="4dp"
+                android:src="@mipmap/baseline_edit_calendar_white_48dp"
+                android:background="@drawable/rounded_background_dark_with_border"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:id="@+id/btnPositive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="Add Dream"
+            android:padding="16dp"
+            android:layout_marginEnd="4dp"
+
+            android:gravity="center"
+            android:background="@drawable/rounded_background_darkest">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Apply"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnNegative"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:padding="16dp"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:background="@drawable/rounded_background_darkest">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="Cancel"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

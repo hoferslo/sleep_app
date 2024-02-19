@@ -7,7 +7,6 @@ import com.example.sleep_app.sqLiteHelpers.DatabaseHelper;
 import com.example.sleep_app.sqLiteHelpers.DreamsHelper;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Dream implements Parcelable {
     private Long id;
@@ -88,6 +87,10 @@ public class Dream implements Parcelable {
         return dateCreated;
     }
 
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
     protected Dream(Parcel in) {
         id = in.readLong();
         title = in.readString();
@@ -96,7 +99,7 @@ public class Dream implements Parcelable {
         description = in.readString();
         // Read dateCreated as String and convert it back to LocalDateTime
         String dateString = in.readString();
-        dateCreated = DatabaseHelper.stringToDateTime(dateString);
+        dateCreated = DatabaseHelper.dateTimeStringToDateTime(dateString);
     }
 
     @Override
@@ -107,7 +110,7 @@ public class Dream implements Parcelable {
         dest.writeInt(clarity);
         dest.writeString(description);
         // Write dateCreated as String
-        dest.writeString(DreamsHelper.DateTimeToString(dateCreated));
+        dest.writeString(DreamsHelper.DateTimeToDateTimeString(dateCreated));
     }
 
     @Override

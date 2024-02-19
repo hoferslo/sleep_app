@@ -3,12 +3,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="sleepyBlueLighter">#447ccf</color>
+    <color name="sleepyBlueLight">#508BcB</color>
+    <color name="sleepyBlueLightest">#64a3eB</color>
     <color name="sleepyBlue">#273959</color>
     <color name="sleepyBlueAlmostBlack">#090912</color>
     <color name="sleepyBlueDarkest">#0B1222</color>
     <color name="sleepyBlueDarker">#0C1528</color>
     <color name="sleepyBlueDark">#1A2A44</color>
-    <color name="sleepyBlueSeeThrough">#2C3E65FF</color>
+    <color name="sleepyBlueSeeThrough">#374E65aF</color>
     <color name="sleepyPurple">#594768</color>
     <color name="sleepyPurpleDark">#3E3350</color>
     <color name="sleepyPurpleSeeThrough">#59476880</color>
@@ -22,3 +24,4 @@
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
 </resources>
+

@@ -31,7 +31,7 @@ public class DreamsAccess extends BaseAccess {
         values.put(Dream.Attribute.clarity.toString(), dream.getClarity());
         values.put(Dream.Attribute.feeling.toString(), dream.getFeeling());
         values.put(Dream.Attribute.description.toString(), dream.getDescription());
-        values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToString(dream.getDateCreated()));
+        values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
 
 
         long insertedRowId = db.insert(DatabaseTableEnum.DREAMS.getTableName(), null, values);
@@ -85,7 +85,7 @@ public class DreamsAccess extends BaseAccess {
                     int clarity = cursor.getInt(cursor.getColumnIndexOrThrow(Dream.Attribute.clarity.toString()));
                     String feeling = cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.feeling.toString()));
                     String description = cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.description.toString()));
-                    LocalDateTime dateCreated = DreamsHelper.stringToDateTime(cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.date_created.toString())));
+                    LocalDateTime dateCreated = DreamsHelper.dateTimeStringToDateTime(cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.date_created.toString())));
 
                     Dream dream = new Dream(dreamId, title, lucidity, clarity, feeling, description, dateCreated);
                     dreamList.add(dream);
@@ -105,7 +105,7 @@ public class DreamsAccess extends BaseAccess {
         values.put(Dream.Attribute.clarity.toString(), dream.getClarity());
         values.put(Dream.Attribute.feeling.toString(), dream.getFeeling());
         values.put(Dream.Attribute.description.toString(), dream.getDescription());
-        values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToString(dream.getDateCreated()));
+        values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
 
         String whereClause = Dream.Attribute._id + " = ?";
         String[] whereArgs = { String.valueOf(dream.getId()) };

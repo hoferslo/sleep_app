@@ -21,7 +21,7 @@
             android:scrollbars="none"
             android:paddingHorizontal="16dp"
             android:paddingTop="16dp"
-            android:paddingBottom="184dp"
+            android:paddingBottom="200dp"
             android:clipToPadding="false">
             <LinearLayout
                 android:id="@+id/scrollLl"
@@ -35,7 +35,7 @@
                     android:orientation="vertical"
                     android:padding="12dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background_darker">
+                    android:background="@drawable/rounded_background_darker_with_border">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -131,179 +131,6 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/techniques2Ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background_darker">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Techniques"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="8dp"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Techniques placeholder text \nsome more text"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/techniques3Ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background_darker">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Techniques"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="8dp"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Techniques placeholder text \nsome more text"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/techniques4Ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background_darker">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Techniques"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="8dp"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Techniques placeholder text \nsome more text"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/techniques5Ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background_darker">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Techniques"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="8dp"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Techniques placeholder text \nsome more text"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/techniques6Ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background_darker">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Techniques"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="8dp"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Techniques placeholder text \nsome more text"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/techniques7Ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_background_darker">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Techniques"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="8dp"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Techniques placeholder text \nsome more text"
-                        android:padding="8dp"
-                        android:background="@drawable/rounded_background_dark"/>
-
-                </LinearLayout>
-
-
-
-
 
             </LinearLayout>
         </ScrollView>
