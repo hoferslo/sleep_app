@@ -20,25 +20,61 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background_darker_with_border"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="16dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="16dp"
-                android:text="Display random dream"/>
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background_darker_with_border"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp">
 
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/randomDreamSwitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                app:thumbTint="@color/custom_thumb_selector"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:text="Display random dream"/>
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/randomDreamSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        app:thumbTint="@color/custom_thumb_selector"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:text="Send daily notif. (change this)"/>
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/dailyNotifRandomDreamSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        app:thumbTint="@color/custom_thumb_selector"/>
+
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
+
+
 
     </ScrollView>
 

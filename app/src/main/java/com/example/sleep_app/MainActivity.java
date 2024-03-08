@@ -14,6 +14,12 @@ import com.example.sleep_app.mainActivityFragments.DreamsFragment;
 import com.example.sleep_app.mainActivityFragments.OverviewFragment;
 import com.example.sleep_app.mainActivityFragments.TipsFragment;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
@@ -28,6 +34,7 @@ import android.widget.ViewFlipper;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,12 +43,17 @@ public class MainActivity extends AppCompatActivity {
     TipsFragment tipsFragment;
     OverviewFragment overViewFragment;
     DreamsFragment dreamsFragment;
+
+    PrefsHelper prefsHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        prefsHelper = new PrefsHelper(this);
 
         tipsFragment = new TipsFragment();
         overViewFragment = new OverviewFragment();

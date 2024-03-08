@@ -3,10 +3,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PrefsHelper {
-    private static final String PREFS_NAME = "YourAppNamePrefs";
+    private static final String PREFS_NAME = "sleepApp";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
     private static final String RANDOM_DREAM = "randomDream";
+    private static final String RANDOM_DREAM_DAILY_NOTIFICATION = "randomDreamDailyNotification";
 
     private final SharedPreferences sharedPreferences;
 
@@ -28,17 +29,26 @@ public class PrefsHelper {
         return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
     }
 
-    public void setLoggedIn(boolean isLoggedIn) {
-        sharedPreferences.edit().putBoolean(KEY_IS_LOGGED_IN, isLoggedIn).apply();
+    public void setLoggedIn(boolean b) {
+        sharedPreferences.edit().putBoolean(KEY_IS_LOGGED_IN, b).apply();
     }
 
     // Random dream setting
     public boolean isRandomDreamEnabled() {
-        return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, true);
+        return sharedPreferences.getBoolean(RANDOM_DREAM, true);
     }
 
-    public void setRandomDreamEnabled(boolean isLoggedIn) {
-        sharedPreferences.edit().putBoolean(KEY_IS_LOGGED_IN, isLoggedIn).apply();
+    public void setRandomDreamEnabled(boolean b) {
+        sharedPreferences.edit().putBoolean(RANDOM_DREAM, b).apply();
+    }
+
+    // Random dream setting
+    public boolean isRandomDreamDailyNotificationEnabled() {
+        return sharedPreferences.getBoolean(RANDOM_DREAM_DAILY_NOTIFICATION, false);
+    }
+
+    public void setRandomDreamDailyNotificationEnabled(boolean b) {
+        sharedPreferences.edit().putBoolean(RANDOM_DREAM_DAILY_NOTIFICATION, b).apply();
     }
 
     // Clear all preferences
