@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,7 +48,7 @@ public class DreamDetailsFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         int theme = android.R.style.ThemeOverlay_Material_Dialog_Alert;
-        setStyle(DialogFragment.STYLE_NORMAL,theme);
+        setStyle(DialogFragment.STYLE_NORMAL, theme);
         if (getArguments() != null) {
             dream = getArguments().getParcelable("dream");
         }
@@ -64,14 +65,31 @@ public class DreamDetailsFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Now you can use the 'dream' object to populate your views
         if (dream != null) {
-            // Update your UI components with dream details
-            // For example:
+
             binding.TextViewTitle.setText(dream.getTitle());
             binding.TextViewFeeling.setText(String.valueOf(dream.getFeeling()));
             binding.TextViewLucidity.setText(String.valueOf(dream.getLucidity()));
+
+            {
+                ViewGroup.LayoutParams layoutParams1 = binding.LlLucidityBar.getLayoutParams();
+                ViewGroup.LayoutParams layoutParams2 = binding.LlLucidityBarAnti.getLayoutParams();
+                ((LinearLayout.LayoutParams) layoutParams1).weight = dream.getLucidity() / 100f;
+                ((LinearLayout.LayoutParams) layoutParams2).weight = (100f - dream.getLucidity()) / 100f;
+                binding.LlLucidityBar.setLayoutParams(layoutParams1);
+                binding.LlLucidityBarAnti.setLayoutParams(layoutParams2);
+            }
+
             binding.TextViewClarity.setText(String.valueOf(dream.getClarity()));
+
+            {
+                ViewGroup.LayoutParams layoutParams1 = binding.LlClarityBar.getLayoutParams();
+                ViewGroup.LayoutParams layoutParams2 = binding.LlClarityBarAnti.getLayoutParams();
+                ((LinearLayout.LayoutParams) layoutParams1).weight = dream.getClarity() / 100f;
+                ((LinearLayout.LayoutParams) layoutParams2).weight = (100f - dream.getClarity()) / 100f;
+                binding.LlClarityBar.setLayoutParams(layoutParams1);
+                binding.LlClarityBarAnti.setLayoutParams(layoutParams2);
+            }
             binding.TextViewDescription.setText(dream.getDescription());
             binding.TextViewDateTime.setText(DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
         }
@@ -94,10 +112,10 @@ public class DreamDetailsFragment extends DialogFragment {
                     dreamsAccess.open();
                     boolean success = dreamsAccess.deleteDream(dream.getId());
                     dreamsAccess.close();
-                    if (success){
-                        Log.d("Delete dream","Successfully deleted a dream");
+                    if (success) {
+                        Log.d("Delete dream", "Successfully deleted a dream");
                     } else {
-                        Log.d("Delete dream error","Failed to delete a dream");
+                        Log.d("Delete dream error", "Failed to delete a dream");
                     }
                     closeFragment();
                 }

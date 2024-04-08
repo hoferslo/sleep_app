@@ -63,7 +63,7 @@
                 android:paddingBottom="16dp">
 
                 <LinearLayout
-                    android:id="@+id/btnFilter"
+                    android:id="@+id/btnSort"
                     android:layout_width="67dp"
                     android:layout_height="64dp"
                     android:layout_gravity="center"
@@ -166,6 +166,24 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@mipmap/outline_settings_white_48dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnFilter"
+                    android:layout_width="67dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/outline_filter_alt_white_48dp"/>
 
                 </LinearLayout>
             </LinearLayout>

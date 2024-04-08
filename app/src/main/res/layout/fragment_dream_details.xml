@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,54 +21,162 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/TextViewTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="true"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:padding="18dp"
-            android:layout_marginBottom="8dp"
-            />
-        <TextView
-            android:id="@+id/TextViewDateTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:gravity="center"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background_dark"/>
-        <TextView
-            android:id="@+id/TextViewLucidity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background_dark"/>
-        <TextView
-            android:id="@+id/TextViewClarity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background_dark"/>
-        <TextView
-            android:id="@+id/TextViewFeeling"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background_dark"/>
+            <TextView
+                android:id="@+id/TextViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:padding="18dp"
+                android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/TextViewDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background_dark"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_dark"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/TextViewDateTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date created: " />
+
+                <TextView
+                    android:id="@+id/TextViewDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_dark">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/LlLucidityBar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_background_a_bit_lighter"
+                        android:layout_weight="0"
+                        android:orientation="horizontal" />
+
+                    <LinearLayout
+                        android:id="@+id/LlLucidityBarAnti"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0"
+                        android:orientation="horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/TextViewLucidityTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lucidity: " />
+
+                    <TextView
+                        android:id="@+id/TextViewLucidity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="/100"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_dark">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/LlClarityBar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_background_a_bit_lighter"
+                        android:layout_weight="0"
+                        android:orientation="horizontal" />
+
+                    <LinearLayout
+                        android:id="@+id/LlClarityBarAnti"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0"
+                        android:orientation="horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/TextViewClarityTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clarity: " />
+
+                    <TextView
+                        android:id="@+id/TextViewClarity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="/100"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/TextViewFeeling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_dark" />
+
+            <TextView
+                android:id="@+id/TextViewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_dark" />
         </LinearLayout>
 
     </ScrollView>
@@ -90,12 +197,13 @@
             android:gravity="center"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_background_darkest">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="Delete"/>
+                android:text="Delete" />
         </LinearLayout>
 
         <LinearLayout
@@ -109,12 +217,13 @@
             android:gravity="center"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_background_darkest">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="Edit"/>
+                android:text="Edit" />
         </LinearLayout>
 
         <LinearLayout
@@ -127,12 +236,13 @@
             android:gravity="center"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_background_darkest">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="Close"/>
+                android:text="Close" />
         </LinearLayout>
 
     </LinearLayout>

@@ -1,0 +1,25 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pressed state -->
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/sleepyBlue"/> <!-- Background color when pressed -->
+                    <corners android:radius="6dp"/> <!-- Adjust the radius as needed -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- Default state -->
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/sleepyBlueABitLighter"/> <!-- Default background color -->
+                    <corners android:radius="6dp"/> <!-- Adjust the radius as needed -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

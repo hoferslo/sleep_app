@@ -2,36 +2,29 @@ package com.example.sleep_app.mainActivityFragments;
 
 import android.content.Context;
 import android.os.Bundle;
-
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.sleep_app.Dream;
 import com.example.sleep_app.MainActivity;
-import com.example.sleep_app.fragments.DreamDetailsFragment;
 import com.example.sleep_app.R;
 import com.example.sleep_app.databinding.FragmentDreamsBinding;
-
+import com.example.sleep_app.enums.SortOption;
+import com.example.sleep_app.fragments.DreamDetailsFragment;
 import com.example.sleep_app.fragments.FilterDreamsDialogFragment;
+import com.example.sleep_app.fragments.SortDreamsDialogFragment;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
 
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnDialogDismissListener {
@@ -40,9 +33,18 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
     public int scrollProgress;
     List<Dream> dreamList;
 
+    String query;
+    Integer lucidityStart;
+    Integer lucidityEnd;
+    Integer clarityStart;
+    Integer clarityEnd;
+    LocalDateTime dateStart;
+    LocalDateTime dateEnd;
+
+    SortOption sortOption = SortOption.DATE;
+    boolean sortOrder = false;
 
     public DreamsFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -55,21 +57,18 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Handle the query submission if needed
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Handle the query text change, filter the list, and update the adapter
-                filterDreams(newText);
+                filterDreams(newText, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
                 return true;
             }
         });
 
         binding.searchView.setOnFocusChangeListener((view, hasFocus) -> {
             if (!hasFocus) {
-                // SearchView lost focus, clear the focus
                 binding.searchView.clearFocus();
             }
         });
@@ -89,67 +88,87 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         getDreams();
     }
 
-    public boolean onBackPressed(){
+    public boolean onBackPressed() {
         if (binding.searchView.hasFocus()) {
             binding.searchView.clearFocus();
             return false;
         } else {
-            // If SearchView is not focused, proceed with default back button behavior
             return true;
         }
     }
 
 
-    private void getDreams(){
+    private void getDreams() {
 
         ArrayList<Dream> dreamArrayList = new ArrayList<>(dreamList);
-        ArrayAdapter<Dream> adapter = new CustomAdapter(requireContext(), R.layout.item_dream_layout, dreamArrayList);
-        binding.scrollLv.setAdapter(adapter);
-        binding.scrollLv.setDivider(null);
+        filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
         binding.scrollLv.setSelection(scrollProgress);
         scrollProgress = 0;
         Log.d("DreamsFragment onResume", "getDreams() method was called");
     }
 
-    private void filterDreams(String query) {
-        ArrayList<Dream> dreamArrayList = new ArrayList<>();;
-        if (dreamList != null) {
-            dreamArrayList = new ArrayList<>(dreamList);
-        }
-        ArrayList<Dream> filteredList = new ArrayList<>();
-        for (Dream dream : dreamArrayList) {
-            if (dream.getTitle().toLowerCase().contains(query.toLowerCase())) {
-                filteredList.add(dream);
-            } else if (dream.getDescription().toLowerCase().contains(query.toLowerCase())) {
-                filteredList.add(dream);
-            }
-        }
-        ArrayAdapter<Dream> adapter = new CustomAdapter(requireContext(), R.layout.item_dream_layout, filteredList);
-        binding.scrollLv.setAdapter(adapter);
-    }
+    private void filterDreams(String query, Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, LocalDateTime dateStart, LocalDateTime dateEnd, SortOption sortOption, boolean sortOrder) {
+        this.query = query;
+        this.lucidityStart = lucidityStart;
+        this.lucidityEnd = lucidityEnd;
+        this.clarityStart = clarityStart;
+        this.clarityEnd = clarityEnd;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
 
-    private void filterDreams(int lucidityStart, int lucidityEnd, int clarityStart, int clarityEnd, LocalDateTime dateStart, LocalDateTime dateEnd) {
         ArrayList<Dream> dreamArrayList = new ArrayList<>();
         if (dreamList != null) {
             dreamArrayList = new ArrayList<>(dreamList);
         }
-        ArrayList<Dream> filteredList = new ArrayList<>();
-        for (Dream dream : dreamArrayList) {
-            int dreamLucidity = dream.getLucidity();
-            int dreamClarity = dream.getClarity();
-            LocalDateTime dreamDate = dream.getDateCreated();
-
-            if (dreamLucidity >= lucidityStart && dreamLucidity <= lucidityEnd
-                    && dreamClarity >= clarityStart && dreamClarity <= clarityEnd
-                    && dreamDate.isAfter(dateStart) && dreamDate.isBefore(dateEnd)) {
-                filteredList.add(dream);
-            }
+        if (query != null && query.equals("")) {
+            query = null;
         }
+        
+        // Apply initial filtering based on text query and dream properties
+        ArrayList<Dream> filteredList = filterDreamsBasedOnCriteria(dreamArrayList, query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd);
+
+        // Sort the filtered list based on chosen option and order
+        filteredList.sort((dream1, dream2) -> {
+            int comparisonResult = 0;
+            switch (sortOption) {
+                case LUCIDITY:
+                    comparisonResult = Integer.compare(dream1.getLucidity(), dream2.getLucidity());
+                    break;
+                case CLARITY:
+                    comparisonResult = Integer.compare(dream1.getClarity(), dream2.getClarity());
+                    break;
+                case DATE:
+                    comparisonResult = dream1.getDateCreated().compareTo(dream2.getDateCreated());
+                    break;
+                case ALPHABETICALLY:
+                    comparisonResult = dream1.getTitle().compareToIgnoreCase(dream2.getTitle());
+                    break;
+            }
+            return sortOrder ? comparisonResult : -comparisonResult; // Reverse order if sortOrder is false
+        });
 
         ArrayAdapter<Dream> adapter = new CustomAdapter(requireContext(), R.layout.item_dream_layout, filteredList);
         binding.scrollLv.setAdapter(adapter);
     }
 
+    // Helper method for initial filtering
+    private ArrayList<Dream> filterDreamsBasedOnCriteria(ArrayList<Dream> dreams, String query, Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, LocalDateTime dateStart, LocalDateTime dateEnd) {
+        ArrayList<Dream> filteredList = new ArrayList<>();
+        for (Dream dream : dreams) {
+            boolean matchesQuery = query == null ||
+                    (dream.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                            dream.getDescription().toLowerCase().contains(query.toLowerCase()));
+
+            boolean matchesFilters = (lucidityStart == null || (dream.getLucidity() >= lucidityStart && dream.getLucidity() <= lucidityEnd)) &&
+                    (clarityStart == null || (dream.getClarity() >= clarityStart && dream.getClarity() <= clarityEnd)) &&
+                    (dateStart == null || (dream.getDateCreated().isAfter(dateStart) && dream.getDateCreated().isBefore(dateEnd)));
+
+            if (matchesQuery && matchesFilters) {
+                filteredList.add(dream);
+            }
+        }
+        return filteredList;
+    }
 
 
     @Override
@@ -172,7 +191,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         @NonNull
         @Override
         public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-            // Inflate your custom layout for each item
+
             if (convertView == null) {
                 convertView = inflater.inflate(resource, parent, false);
             }
@@ -182,24 +201,24 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
             convertView.setOnClickListener(v -> {
                 scrollProgress = binding.scrollLv.getFirstVisiblePosition();
                 showDreamDetailsDialog(objects.get(position));
-
             });
 
             return convertView;
         }
     }
+
     private void showDreamDetailsDialog(Dream clickedDream) {
         DreamDetailsFragment dialogFragment = DreamDetailsFragment.newInstance(clickedDream);
         dialogFragment.setOnDialogDismissListener(this);
         dialogFragment.show(requireActivity().getSupportFragmentManager(), "dream_details_dialog");
     }
 
-    public void showFilterDialog(){
-        FilterDreamsDialogFragment filterDreamsDialog = new FilterDreamsDialogFragment();
+    public void showFilterDialog() {
+        FilterDreamsDialogFragment filterDreamsDialog = FilterDreamsDialogFragment.newInstance(lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd);
         filterDreamsDialog.setFilterDreamsDialogListener(new FilterDreamsDialogFragment.FilterDreamsDialogListener() {
             @Override
             public void onDialogPositiveClick(int lucidityStart, int lucidityEnd, int clarityStart, int clarityEnd, LocalDateTime dateStart, LocalDateTime dateEnd) {
-                filterDreams(lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd);
+                filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
             }
 
             @Override
@@ -208,5 +227,24 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
             }
         });
         filterDreamsDialog.show(getParentFragmentManager(), "filterDreamsDialog");
+    }
+
+    public void showSortDialog() {
+        SortDreamsDialogFragment sortDreamsDialog = SortDreamsDialogFragment.newInstance(sortOption, sortOrder);
+        sortDreamsDialog.setSortDreamsDialogListener(new SortDreamsDialogFragment.SortDreamsDialogListener() {
+
+            @Override
+            public void onDialogPositiveClick(SortOption sortOption, boolean sortOrder) {
+                DreamsFragment.this.sortOption = sortOption;
+                DreamsFragment.this.sortOrder = sortOrder;
+                filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
+            }
+
+            @Override
+            public void onDialogNegativeClick() {
+
+            }
+        });
+        sortDreamsDialog.show(getParentFragmentManager(), "filterDreamsDialog");
     }
 }

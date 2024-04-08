@@ -1,5 +1,16 @@
 package com.example.sleep_app;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -14,27 +25,9 @@ import com.example.sleep_app.mainActivityFragments.DreamsFragment;
 import com.example.sleep_app.mainActivityFragments.OverviewFragment;
 import com.example.sleep_app.mainActivityFragments.TipsFragment;
 
-import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
-import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
-
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         binding.btnSettings.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
         binding.btnFilter.setOnClickListener(v -> dreamsFragment.showFilterDialog());
+        binding.btnSort.setOnClickListener(v -> dreamsFragment.showSortDialog());
 
         binding.btnSearch.setOnClickListener(v -> tipsFragment.openLink());
 
@@ -90,12 +84,12 @@ public class MainActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-    private void goBackWhenOnTipsAndInfo(){
+    private void goBackWhenOnTipsAndInfo() {
         boolean quit = true;
-        if (binding.viewFlipper.getDisplayedChild() == 2){ //handler for back press in tipsFragment
+        if (binding.viewFlipper.getDisplayedChild() == 2) { //handler for back press in tipsFragment
             quit = tipsFragment.onBackPressed();
         }
-        if (binding.viewFlipper.getDisplayedChild() == 0){ //handler for back press in tipsFragment
+        if (binding.viewFlipper.getDisplayedChild() == 0) { //handler for back press in tipsFragment
             quit = dreamsFragment.onBackPressed();
         }
         if (binding.viewFlipper.getDisplayedChild() == 1) {
@@ -126,38 +120,38 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void showDreams() {
-        binding.viewFlipper.setDisplayedChild(0); // 0 corresponds to the index of FragmentA
+        binding.viewFlipper.setDisplayedChild(0);
         setViewHeight(binding.btnFragmentA, 80);
         setViewHeight(binding.btnFragmentB, 64);
         setViewHeight(binding.btnFragmentC, 64);
         roundUpperEdges(binding.btnFragmentA, new float[]{20, 20, 20, 20, 0, 0, 0, 0}); // todo turn this into a drawable (maybe not)
         roundUpperEdges(binding.btnFragmentB, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
-        showHideButtons(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE);
+        showHideButtons(View.VISIBLE, View.VISIBLE, View.GONE, View.GONE, View.GONE, View.VISIBLE);
         notifyFragmentVisible(0);
     }
 
     public void showOverview() {
-        binding.viewFlipper.setDisplayedChild(1); // 1 corresponds to the index of FragmentB
+        binding.viewFlipper.setDisplayedChild(1);
         setViewHeight(binding.btnFragmentA, 64);
         setViewHeight(binding.btnFragmentB, 80);
         setViewHeight(binding.btnFragmentC, 64);
         roundUpperEdges(binding.btnFragmentA, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentB, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
-        showHideButtons(View.GONE, View.VISIBLE, View.GONE, View.GONE, View.VISIBLE);
+        showHideButtons(View.GONE, View.VISIBLE, View.GONE, View.GONE, View.VISIBLE, View.GONE);
         notifyFragmentVisible(1);
     }
 
     public void showTips() {
-        binding.viewFlipper.setDisplayedChild(2); // 2 corresponds to the index of FragmentC
+        binding.viewFlipper.setDisplayedChild(2);
         setViewHeight(binding.btnFragmentA, 64);
         setViewHeight(binding.btnFragmentB, 64);
         setViewHeight(binding.btnFragmentC, 80);
         roundUpperEdges(binding.btnFragmentA, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentB, new float[]{0, 0, 0, 0, 0, 0, 0, 0});
         roundUpperEdges(binding.btnFragmentC, new float[]{20, 20, 20, 20, 0, 0, 0, 0});
-        showHideButtons(View.GONE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.GONE);
+        showHideButtons(View.GONE, View.VISIBLE, View.VISIBLE, View.VISIBLE, View.GONE, View.GONE);
         notifyFragmentVisible(2);
     }
 
@@ -198,52 +192,82 @@ public class MainActivity extends AppCompatActivity {
         view.setBackground(gradientDrawable);
     }
 
-    private void showHideButtons(int button1, int button2, int button3, int button4, int button5){
-        binding.btnFilter.setVisibility(button1);
+    private void showHideButtons(int button1, int button2, int button3, int button4, int button5, int button6) {
+        binding.btnSort.setVisibility(button1);
         binding.btnAddDream.setVisibility(button2);
         binding.btnSearch.setVisibility(button3);
         binding.btnBack.setVisibility(button4);
         binding.btnSettings.setVisibility(button5);
+        binding.btnFilter.setVisibility(button6);
 
     }
 
-    public static View makeDreamView(View view, Dream dream){
-        // Customize the view based on the data (if needed)
-        TextView titleTextView = view.findViewById(R.id.dreamTitleTv);
-        titleTextView.setText(dream.getTitle());
+    public static View makeDreamView(View view, Dream dream) {
+        // Set dream title
+        setTextViewValue(view, R.id.dreamTitleTv, dream.getTitle());
 
-        TextView lucidityTextView = view.findViewById(R.id.dreamLucidityTv);
-        lucidityTextView.setText(String.valueOf(dream.getLucidity()));
+        // Set dream properties (lucidity, clarity)
+        setTextViewValue(view, R.id.dreamLucidityTv, String.valueOf(dream.getLucidity()));
 
-        TextView clarityTextView = view.findViewById(R.id.dreamClarityTv);
-        clarityTextView.setText(String.valueOf(dream.getClarity()));
+        {
+            ViewGroup.LayoutParams layoutParams1 = view.findViewById(R.id.dreamLucidityBarLl).getLayoutParams();
+            ViewGroup.LayoutParams layoutParams2 = view.findViewById(R.id.dreamLucidityBarAntiLl).getLayoutParams();
+            ((LinearLayout.LayoutParams) layoutParams1).weight = dream.getLucidity() / 100f;
+            ((LinearLayout.LayoutParams) layoutParams2).weight = (100f - dream.getLucidity()) / 100f;
+            view.findViewById(R.id.dreamLucidityBarLl).setLayoutParams(layoutParams1);
+            view.findViewById(R.id.dreamLucidityBarAntiLl).setLayoutParams(layoutParams2);
+        }
 
-        TextView descriptionTextView = view.findViewById(R.id.dreamDescriptionTv);
-        descriptionTextView.setText(dream.getDescription());
+        setTextViewValue(view, R.id.dreamClarityTv, String.valueOf(dream.getClarity()));
 
-        // Calculate the period between the given date and time and the current date and time
-        Period period = Period.between(dream.getDateCreated().toLocalDate(), LocalDateTime.now().toLocalDate());
+        {
+            ViewGroup.LayoutParams layoutParams1 = view.findViewById(R.id.dreamClarityBarLl).getLayoutParams();
+            ViewGroup.LayoutParams layoutParams2 = view.findViewById(R.id.dreamClarityBarAntiLl).getLayoutParams();
+            ((LinearLayout.LayoutParams) layoutParams1).weight = dream.getClarity() / 100f;
+            ((LinearLayout.LayoutParams) layoutParams2).weight = (100f - dream.getClarity()) / 100f;
+            view.findViewById(R.id.dreamClarityBarLl).setLayoutParams(layoutParams1);
+            view.findViewById(R.id.dreamClarityBarAntiLl).setLayoutParams(layoutParams2);
+        }
 
-        // Get the number of days and months from the period
+        // Set dream description
+        setTextViewValue(view, R.id.dreamDescriptionTv, dream.getDescription());
+
+        // Set formatted date based on relative time period
+        setTextViewValue(view, R.id.dreamDateYearTv, formatRelativeDate(dream.getDateCreated()));
+
+        // Set full date with custom format
+        setTextViewValue(view, R.id.dreamDateDayTv, dream.getDateCreated().format(DateTimeFormatter.ofPattern("EEEE, d MMMM, yyyy", Locale.ENGLISH)));
+
+        return view;
+    }
+
+    private static void setTextViewValue(View view, int viewId, String value) {
+        TextView textView = view.findViewById(viewId);
+        if (textView != null) {
+            textView.setText(value);
+        }
+    }
+
+    private static String formatRelativeDate(LocalDateTime dateCreated) {
+        Period period = Period.between(dateCreated.toLocalDate(), LocalDateTime.now().toLocalDate());
         int daysAgo = period.getDays();
         int monthsAgo = period.getMonths();
         int yearsAgo = period.getYears();
-        TextView yearTextView = view.findViewById(R.id.dreamDateYearTv);
-        if (yearsAgo>2) {
-            yearTextView.setText(yearsAgo + " years ago");
-        } else if (yearsAgo>0) {
-            yearTextView.setText(monthsAgo + " months, " + yearsAgo + " years ago");
-        } else if (monthsAgo>6) {
-            yearTextView.setText(monthsAgo + " months ago");
-        } else if (monthsAgo>0){
-            yearTextView.setText(daysAgo + " days, " + monthsAgo + " months ago");
-        } else {
-            yearTextView.setText(daysAgo + " days ago");
-        }
 
-        DateTimeFormatter customDateFormatter = DateTimeFormatter.ofPattern("EEEE, d MMMM, yyyy", Locale.ENGLISH);
-        TextView dayTextView = view.findViewById(R.id.dreamDateDayTv);
-        dayTextView.setText(dream.getDateCreated().format(customDateFormatter));
-        return view;
+        String formattedDate;
+        if (yearsAgo > 1) {
+            formattedDate = yearsAgo + " years ago";
+        } else if (yearsAgo > 0) {
+            formattedDate = yearsAgo + " year ago";
+        } else if (monthsAgo > 1) {
+            formattedDate = monthsAgo + " months ago";
+        } else if (monthsAgo > 0) {
+            formattedDate = monthsAgo + " month ago";
+        } else if (daysAgo > 1) {
+            formattedDate = daysAgo + " days ago";
+        } else {
+            formattedDate = daysAgo + " day ago";
+        }
+        return formattedDate;
     }
 }
