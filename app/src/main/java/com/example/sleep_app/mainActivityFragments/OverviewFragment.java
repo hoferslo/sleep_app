@@ -1,10 +1,7 @@
 package com.example.sleep_app.mainActivityFragments;
 
-import static java.lang.Float.NaN;
-
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,10 +63,9 @@ public class OverviewFragment extends Fragment implements DreamDetailsFragment.O
         if (binding != null) {
             createStats();
         }
-        Log.d("OverviewFragment onResume", "createStats() method was called");
     }
 
-    private void createStats(){
+    private void createStats() {
         binding.scrollLl.removeAllViews();
         DreamsAccess dreamsAccess = new DreamsAccess(requireContext());
         dreamsAccess.open();
@@ -158,12 +154,12 @@ public class OverviewFragment extends Fragment implements DreamDetailsFragment.O
 
     }
 
-    public int getMonthDreamsCount(LocalDateTime dateTime, boolean lucid){
+    public int getMonthDreamsCount(LocalDateTime dateTime, boolean lucid) {
         int dreamsThisMonth = 0;
-        for (Dream dream:dreams) {
+        for (Dream dream : dreams) {
             if (dateTime.getMonth() == dream.getDateCreated().getMonth()) {
-                if (lucid){
-                    if (dream.getLucidity()>0){
+                if (lucid) {
+                    if (dream.getLucidity() > 0) {
                         dreamsThisMonth++;
                     }
                 } else {
@@ -174,13 +170,13 @@ public class OverviewFragment extends Fragment implements DreamDetailsFragment.O
         return dreamsThisMonth;
     }
 
-    public float getWaveViewProgress(float first, float second){
+    public float getWaveViewProgress(float first, float second) {
         float waveViewProgress = first / second;
-        if (waveViewProgress>1){
-            waveViewProgress=1;
+        if (waveViewProgress > 1) {
+            waveViewProgress = 1;
         }
-        if (Float.isNaN(waveViewProgress)){
-            waveViewProgress=0;
+        if (Float.isNaN(waveViewProgress)) {
+            waveViewProgress = 0;
         }
         return waveViewProgress;
     }
@@ -192,6 +188,7 @@ public class OverviewFragment extends Fragment implements DreamDetailsFragment.O
     }
 
     @Override
-    public void onDialogDismissed() {onResume();
+    public void onDialogDismissed() {
+        onResume();
     }
 }

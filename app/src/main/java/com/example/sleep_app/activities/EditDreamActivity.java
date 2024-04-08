@@ -66,8 +66,10 @@ public class EditDreamActivity extends AppCompatActivity {
             dreamsAccess.open();
             boolean success = dreamsAccess.editDream(new Dream(dream.getId(), dream.getTitle(), dream.getLucidity(), dream.getClarity(), dream.getFeeling(), dream.getDescription(), dream.getDateCreated()));
             dreamsAccess.close();
-            if (success){
-                Log.d("Edit dream","Successfully edited a dream");
+            if (success) {
+                Log.d("Edit dream", "Successfully edited a dream");
+            } else {
+                Log.d("Edit dream", "Failed to edited a dream");
             }
             finish();
 

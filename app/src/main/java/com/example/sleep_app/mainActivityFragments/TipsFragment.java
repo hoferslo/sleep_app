@@ -3,22 +3,20 @@ package com.example.sleep_app.mainActivityFragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.example.sleep_app.fragments.InfoDetailsFragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.sleep_app.R;
 import com.example.sleep_app.databinding.FragmentTipsBinding;
+import com.example.sleep_app.fragments.InfoDetailsFragment;
 
 import java.time.LocalDateTime;
 
@@ -89,7 +87,6 @@ public class TipsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         infoHome();
-        Log.d("TipsFragment onResume", "infoHome() was called");
     }
 
     private void replaceFragment(ViewFlipper viewFlipper, int index, Fragment fragment) {
@@ -102,7 +99,7 @@ public class TipsFragment extends Fragment {
         transaction.commit();
     }
 
-    public boolean onBackPressed(){
+    public boolean onBackPressed() {
         url = "";
         if (binding.viewFlipper.getDisplayedChild() == 1) {
             binding.viewFlipper.setDisplayedChild(0);
@@ -117,8 +114,8 @@ public class TipsFragment extends Fragment {
         binding.viewFlipper.setDisplayedChild(1);
     }
 
-    public void openLink(){
-        if (!url.isEmpty()){
+    public void openLink() {
+        if (!url.isEmpty()) {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
         } else {
@@ -126,7 +123,7 @@ public class TipsFragment extends Fragment {
         }
     }
 
-    public void infoHome(){
+    public void infoHome() {
         if (binding.viewFlipper.getDisplayedChild() == 1) {
             binding.viewFlipper.setDisplayedChild(0);
         }

@@ -2,7 +2,6 @@ package com.example.sleep_app.mainActivityFragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,7 +103,6 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
         binding.scrollLv.setSelection(scrollProgress);
         scrollProgress = 0;
-        Log.d("DreamsFragment onResume", "getDreams() method was called");
     }
 
     private void filterDreams(String query, Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, LocalDateTime dateStart, LocalDateTime dateEnd, SortOption sortOption, boolean sortOrder) {
@@ -123,7 +121,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         if (query != null && query.equals("")) {
             query = null;
         }
-        
+
         // Apply initial filtering based on text query and dream properties
         ArrayList<Dream> filteredList = filterDreamsBasedOnCriteria(dreamArrayList, query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd);
 
