@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/itemDreamLl"
@@ -185,6 +186,45 @@
                         android:textColor="@color/white" />
                 </LinearLayout>
             </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/iconsLl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:gravity="center">
+
+            <com.example.sleep_app.CustomImageView
+                android:id="@+id/recurringDreamIv"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/outline_repeat_white_48dp"
+                app:popupText="This dream is recurring"
+                android:visibility="gone" />
+
+            <com.example.sleep_app.CustomImageView
+                android:id="@+id/nightmareIv"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/ghost"
+                android:tint="@color/white"
+                app:popupText="This dream is a nightmare"
+                android:visibility="gone" />
+
+            <com.example.sleep_app.CustomImageView
+                android:id="@+id/happinessIv"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+
+                android:src="@mipmap/outline_sentiment_neutral_white_48dp"
+                android:tint="@color/white"
+                app:popupText="Happiness of this dream" />
+
 
         </LinearLayout>
 

@@ -178,12 +178,14 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         private final LayoutInflater inflater;
         private final int resource;
         private final ArrayList<Dream> objects;
+        Context context;
 
         public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Dream> objects) {
             super(context, resource, objects);
             this.inflater = LayoutInflater.from(context);
             this.resource = resource;
             this.objects = objects;
+            this.context = context;
         }
 
         @NonNull
@@ -194,7 +196,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
                 convertView = inflater.inflate(resource, parent, false);
             }
 
-            MainActivity.makeDreamView(convertView, objects.get(position));
+            convertView = MainActivity.makeDreamView(convertView, objects.get(position), context);
 
             convertView.setOnClickListener(v -> {
                 scrollProgress = binding.scrollLv.getFirstVisiblePosition();
@@ -204,6 +206,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
             return convertView;
         }
     }
+
 
     private void showDreamDetailsDialog(Dream clickedDream) {
         DreamDetailsFragment dialogFragment = DreamDetailsFragment.newInstance(clickedDream);

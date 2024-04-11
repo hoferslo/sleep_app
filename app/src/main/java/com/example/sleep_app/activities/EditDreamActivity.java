@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sleep_app.Dream;
+import com.example.sleep_app.MainActivity;
 import com.example.sleep_app.databinding.ActivityAddDreamBinding;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
 import com.example.sleep_app.sqLiteHelpers.DreamsHelper;
@@ -32,10 +33,13 @@ public class EditDreamActivity extends AppCompatActivity {
         binding.editTextTitle.setText(dream.getTitle());
         binding.seekBarLucidity.setValues((float) dream.getLucidity());
         binding.seekBarClarity.setValues((float) dream.getClarity());
-        binding.editTextFeeling.setText(dream.getFeeling());
+        binding.seekBarHappiness.setValues((float) dream.getHappiness());
         binding.editTextDescription.setText(dream.getDescription());
         binding.seekBarClarityTv.setText(String.valueOf(dream.getClarity()));
         binding.seekBarLucidityTv.setText(String.valueOf(dream.getLucidity()));
+        binding.seekBarHappinessTv.setText(String.valueOf(dream.getHappiness()));
+        binding.recurringDreamSwitch.setChecked(dream.isRecurringDream());
+        binding.nightmareSwitch.setChecked(dream.isNightmare());
         binding.textViewDate.setText(DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
 
         binding.seekBarClarity.addOnChangeListener((slider, value, fromUser) -> {
@@ -48,6 +52,12 @@ public class EditDreamActivity extends AppCompatActivity {
             binding.seekBarLucidityTv.setText(String.valueOf((int) value));
         });
 
+        binding.seekBarHappiness.addOnChangeListener((slider, value, fromUser) -> {
+            int progress = (int) value;
+            binding.seekBarHappinessTv.setText(String.valueOf(progress));
+            binding.happinessIv.setImageResource(MainActivity.getHappinessImage(progress));
+        });
+
 
         binding.buttonClose.setOnClickListener(v -> finish());
 
@@ -56,15 +66,24 @@ public class EditDreamActivity extends AppCompatActivity {
             dream.setTitle(binding.editTextTitle.getText().toString());
             dream.setLucidity(Integer.parseInt(binding.seekBarLucidityTv.getText().toString()));
             dream.setClarity(Integer.parseInt(binding.seekBarClarityTv.getText().toString()));
-            dream.setFeeling(binding.editTextFeeling.getText().toString());
+            dream.setHappiness(Integer.parseInt(binding.seekBarHappinessTv.getText().toString()));
+            int recurringDream;
+            if (binding.recurringDreamSwitch.isChecked()) recurringDream = 1;
+            else recurringDream = 0;
+            int nightmare;
+            if (binding.nightmareSwitch.isChecked()) nightmare = 1;
+            else nightmare = 0;
+            dream.setRecurringDream(recurringDream);
+            dream.setNightmare(nightmare);
+            //dream.setFeeling(binding.editTextFeeling.getText().toString());
             dream.setDescription(binding.editTextDescription.getText().toString());
             dream.setDateCreated(DreamsHelper.dateTimeStringToDateTime(binding.textViewDate.getText().toString()));
 
 
             // Save the dream
             DreamsAccess dreamsAccess = new DreamsAccess(getApplicationContext());
-            dreamsAccess.open();
-            boolean success = dreamsAccess.editDream(new Dream(dream.getId(), dream.getTitle(), dream.getLucidity(), dream.getClarity(), dream.getFeeling(), dream.getDescription(), dream.getDateCreated()));
+            dreamsAccess.open(); // todo fix this activity with extra columns
+            boolean success = dreamsAccess.editDream(new Dream(dream.getId(), dream.getTitle(), dream.getLucidity(), dream.getClarity(), dream.getHappiness(), dream.getRecurringDream(), dream.getNightmare(), dream.getDescription(), dream.getDateCreated()));
             dreamsAccess.close();
             if (success) {
                 Log.d("Edit dream", "Successfully edited a dream");

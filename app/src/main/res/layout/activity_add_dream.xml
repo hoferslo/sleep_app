@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,171 +9,303 @@
     android:background="@color/sleepyBlueAlmostBlack"
     tools:context=".activities.AddDreamActivity"
     android:padding="16dp">
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginBottom="16dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:paddingBottom="200dp"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-    <EditText
-        android:id="@+id/editTextTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Title"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_background_darker_with_border"/>
 
-    <LinearLayout
-        android:id="@+id/editTextLucidity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:inputType="number"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_background_darker_with_border">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Lucidity: "/>
-
-        <TextView
-            android:id="@+id/seekBarLucidityTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="0"/>
-
-        </LinearLayout>
-
-        <com.google.android.material.slider.RangeSlider
-            android:id="@+id/seekBarLucidity"
-            android:valueFrom="0"
-            android:valueTo="100"
-            android:stepSize="1"
-            android:layout_height="wrap_content"
-            app:tickVisible="false"
-            app:labelBehavior="gone"
-            app:haloColor="@color/sleepyBlueSeeThrough"
-            app:trackColorInactive="@color/sleepyBlue"
-            android:layout_width="match_parent" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/editTextClarity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Clarity"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:inputType="number"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_background_darker_with_border">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/editTextTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="Clarity: "/>
+                android:hint="Title"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_darker_with_border" />
 
-            <TextView
-                android:id="@+id/seekBarClarityTv"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/editTextLucidity"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="0"/>
+                android:orientation="vertical"
+                android:gravity="center"
+                android:inputType="number"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_darker_with_border">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Lucidity: " />
+
+                    <TextView
+                        android:id="@+id/seekBarLucidityTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                </LinearLayout>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/seekBarLucidity"
+                    android:valueFrom="0"
+                    android:valueTo="100"
+                    android:stepSize="1"
+                    android:layout_height="wrap_content"
+                    app:tickVisible="false"
+                    app:labelBehavior="gone"
+                    app:haloColor="@color/sleepyBlueSeeThrough"
+                    app:trackColorInactive="@color/sleepyBlue"
+                    android:layout_width="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editTextClarity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Clarity"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:inputType="number"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_darker_with_border">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Clarity: " />
+
+                    <TextView
+                        android:id="@+id/seekBarClarityTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                </LinearLayout>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/seekBarClarity"
+                    android:valueFrom="0"
+                    android:valueTo="100"
+                    android:stepSize="1"
+                    android:layout_height="wrap_content"
+                    app:tickVisible="false"
+                    app:labelBehavior="gone"
+                    app:haloColor="@color/sleepyBlueSeeThrough"
+                    app:trackColorInactive="@color/sleepyBlue"
+                    android:layout_width="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Clarity"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:inputType="number"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_darker_with_border">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Happiness: " />
+
+                    <TextView
+                        android:id="@+id/seekBarHappinessTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                    <com.example.sleep_app.CustomImageView
+                        android:id="@+id/happinessIv"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@mipmap/outline_sentiment_neutral_white_48dp"
+                        android:tint="@color/white"
+                        android:layout_marginLeft="16dp"
+                        app:popupText="Happiness of this dream" />
+
+                </LinearLayout>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/seekBarHappiness"
+                    android:valueFrom="0"
+                    android:valueTo="100"
+                    android:stepSize="1"
+                    android:layout_height="wrap_content"
+                    app:tickVisible="false"
+                    app:labelBehavior="gone"
+                    app:haloColor="@color/sleepyBlueSeeThrough"
+                    app:trackColorInactive="@color/sleepyBlue"
+                    android:layout_width="match_parent" />
+            </LinearLayout>
+
+            <!--<EditText
+                android:id="@+id/editTextFeeling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Feeling (not required, work in progress)"
+                android:padding="16dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/rounded_background_darker_with_border"/> -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/rounded_background_darker_with_border"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Recurring dream" />
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/recurringDreamSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            app:thumbTint="@color/custom_thumb_selector" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="4dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rounded_background">
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Nightmare" />
+
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/nightmareSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            app:thumbTint="@color/custom_thumb_selector" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/DateLl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewDate"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:hint="Date"
+                    android:gravity="center_vertical"
+                    android:layout_margin="4dp"
+                    android:padding="16dp"
+                    android:textSize="18sp"
+                    android:background="@drawable/rounded_background_dark_with_border" />
+
+                <ImageView
+                    android:id="@+id/imageViewDate"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="4dp"
+                    android:padding="4dp"
+                    android:src="@mipmap/baseline_edit_calendar_white_48dp"
+                    android:background="@drawable/rounded_background_dark_with_border" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background_darker_with_border" />
         </LinearLayout>
-
-        <com.google.android.material.slider.RangeSlider
-            android:id="@+id/seekBarClarity"
-            android:valueFrom="0"
-            android:valueTo="100"
-            android:stepSize="1"
-            android:layout_height="wrap_content"
-            app:tickVisible="false"
-            app:labelBehavior="gone"
-            app:haloColor="@color/sleepyBlueSeeThrough"
-            app:trackColorInactive="@color/sleepyBlue"
-            android:layout_width="match_parent" />
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/editTextFeeling"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Feeling (not required, work in progress)"
-        android:padding="16dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/rounded_background_darker_with_border"/>
-    <LinearLayout
-        android:id="@+id/DateLl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="4dp"
-        android:gravity="center">
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:hint="Date"
-        android:gravity="center_vertical"
-        android:layout_margin="4dp"
-        android:padding="16dp"
-        android:textSize="18sp"
-        android:background="@drawable/rounded_background_dark_with_border"/>
-
-        <ImageView
-            android:id="@+id/imageViewDate"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="4dp"
-            android:padding="4dp"
-            android:src="@mipmap/baseline_edit_calendar_white_48dp"
-            android:background="@drawable/rounded_background_dark_with_border"/>
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/editTextDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Description"
-        android:inputType="textMultiLine"
-        android:minLines="3"
-        android:padding="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_background_darker_with_border"/>
-    </LinearLayout>
     </ScrollView>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:id="@+id/buttonAddDream"
@@ -188,13 +319,14 @@
             android:gravity="center"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_background_darkest">
+
             <TextView
                 android:id="@+id/buttonAddDreamTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="Add dream"/>
+                android:text="Add dream" />
         </LinearLayout>
 
         <LinearLayout
@@ -207,12 +339,13 @@
             android:gravity="center"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_background_darkest">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="Cancel"/>
+                android:text="Cancel" />
         </LinearLayout>
 
     </LinearLayout>

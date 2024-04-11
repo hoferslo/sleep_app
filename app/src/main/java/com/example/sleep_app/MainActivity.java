@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import androidx.activity.OnBackPressedCallback;
@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.sleep_app.activities.AddDreamActivity;
 import com.example.sleep_app.activities.SettingsActivity;
 import com.example.sleep_app.databinding.ActivityMainBinding;
+import com.example.sleep_app.databinding.ItemDreamLayoutBinding;
 import com.example.sleep_app.mainActivityFragments.DreamsFragment;
 import com.example.sleep_app.mainActivityFragments.OverviewFragment;
 import com.example.sleep_app.mainActivityFragments.TipsFragment;
@@ -203,49 +204,70 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static View makeDreamView(View view, Dream dream) {
+    public static View makeDreamView(View view, Dream dream, Context context) {
+
         // Set dream title
-        setTextViewValue(view, R.id.dreamTitleTv, dream.getTitle());
+        ItemDreamLayoutBinding binding = ItemDreamLayoutBinding.inflate(LayoutInflater.from(context), null, false);
+
+        binding.dreamTitleTv.setText(dream.getTitle());
 
         // Set dream properties (lucidity, clarity)
-        setTextViewValue(view, R.id.dreamLucidityTv, String.valueOf(dream.getLucidity()));
+        binding.dreamLucidityTv.setText(String.valueOf(dream.getLucidity()));
 
         {
-            ViewGroup.LayoutParams layoutParams1 = view.findViewById(R.id.dreamLucidityBarLl).getLayoutParams();
-            ViewGroup.LayoutParams layoutParams2 = view.findViewById(R.id.dreamLucidityBarAntiLl).getLayoutParams();
+            ViewGroup.LayoutParams layoutParams1 = binding.dreamLucidityBarLl.getLayoutParams();
+            ViewGroup.LayoutParams layoutParams2 = binding.dreamLucidityBarAntiLl.getLayoutParams();
             ((LinearLayout.LayoutParams) layoutParams1).weight = dream.getLucidity() / 100f;
             ((LinearLayout.LayoutParams) layoutParams2).weight = (100f - dream.getLucidity()) / 100f;
             view.findViewById(R.id.dreamLucidityBarLl).setLayoutParams(layoutParams1);
             view.findViewById(R.id.dreamLucidityBarAntiLl).setLayoutParams(layoutParams2);
         }
 
-        setTextViewValue(view, R.id.dreamClarityTv, String.valueOf(dream.getClarity()));
+        binding.dreamClarityTv.setText(String.valueOf(dream.getClarity()));
 
         {
-            ViewGroup.LayoutParams layoutParams1 = view.findViewById(R.id.dreamClarityBarLl).getLayoutParams();
-            ViewGroup.LayoutParams layoutParams2 = view.findViewById(R.id.dreamClarityBarAntiLl).getLayoutParams();
+            ViewGroup.LayoutParams layoutParams1 = binding.dreamClarityBarLl.getLayoutParams();
+            ViewGroup.LayoutParams layoutParams2 = binding.dreamClarityBarAntiLl.getLayoutParams();
             ((LinearLayout.LayoutParams) layoutParams1).weight = dream.getClarity() / 100f;
             ((LinearLayout.LayoutParams) layoutParams2).weight = (100f - dream.getClarity()) / 100f;
-            view.findViewById(R.id.dreamClarityBarLl).setLayoutParams(layoutParams1);
-            view.findViewById(R.id.dreamClarityBarAntiLl).setLayoutParams(layoutParams2);
+            binding.dreamClarityBarLl.setLayoutParams(layoutParams1);
+            binding.dreamClarityBarAntiLl.setLayoutParams(layoutParams2);
         }
 
         // Set dream description
-        setTextViewValue(view, R.id.dreamDescriptionTv, dream.getDescription());
+        binding.dreamDescriptionTv.setText(dream.getDescription());
 
         // Set formatted date based on relative time period
-        setTextViewValue(view, R.id.dreamDateYearTv, formatRelativeDate(dream.getDateCreated()));
+        binding.dreamDateYearTv.setText(formatRelativeDate(dream.getDateCreated()));
 
         // Set full date with custom format
-        setTextViewValue(view, R.id.dreamDateDayTv, dream.getDateCreated().format(DateTimeFormatter.ofPattern("EEEE, d MMMM, yyyy", Locale.ENGLISH)));
+        binding.dreamDateDayTv.setText(dream.getDateCreated().format(DateTimeFormatter.ofPattern("EEEE, d MMMM, yyyy", Locale.ENGLISH)));
 
-        return view;
+        if (dream.isRecurringDream()) {
+            binding.happinessIv.setVisibility(View.VISIBLE);
+        }
+        if (dream.isNightmare()) {
+            binding.nightmareIv.setVisibility(View.VISIBLE);
+        }
+
+        binding.happinessIv.setImageResource(getHappinessImage(dream.getHappiness()));
+
+        return binding.getRoot();
     }
 
-    private static void setTextViewValue(View view, int viewId, String value) {
-        TextView textView = view.findViewById(viewId);
-        if (textView != null) {
-            textView.setText(value);
+    public static int getHappinessImage(int happiness) {
+        if (happiness >= 80) {
+            return R.mipmap.outline_sentiment_very_satisfied_white_48dp;
+        } else if (happiness >= 60) {
+            return R.mipmap.outline_sentiment_satisfied_white_48dp;
+        } else if (happiness >= 40) {
+            return R.mipmap.outline_sentiment_neutral_white_48dp;
+        } else if (happiness >= 20) {
+            return R.mipmap.outline_sentiment_dissatisfied_white_48dp;
+        } else if (happiness >= 0) {
+            return R.mipmap.outline_sentiment_very_dissatisfied_white_48dp;
+        } else {
+            return R.mipmap.ghost; // why not
         }
     }
 

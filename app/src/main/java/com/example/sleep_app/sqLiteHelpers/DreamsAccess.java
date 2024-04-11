@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.sleep_app.Dream;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +30,11 @@ public class DreamsAccess extends BaseAccess {
         values.put(Dream.Attribute.title.toString(), dream.getTitle());
         values.put(Dream.Attribute.lucidity.toString(), dream.getLucidity());
         values.put(Dream.Attribute.clarity.toString(), dream.getClarity());
-        values.put(Dream.Attribute.feeling.toString(), dream.getFeeling());
+        values.put(Dream.Attribute.happiness.toString(), dream.getHappiness());
+        values.put(Dream.Attribute.recurringDream.toString(), dream.getRecurringDream());
+        values.put(Dream.Attribute.nightmare.toString(), dream.getNightmare());
         values.put(Dream.Attribute.description.toString(), dream.getDescription());
-        values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
+        values.put(Dream.Attribute.dateCreated.toString(), DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
 
 
         long insertedRowId = db.insert(DatabaseTableEnum.DREAMS.getTableName(), null, values);
@@ -49,7 +52,7 @@ public class DreamsAccess extends BaseAccess {
 
     public boolean deleteDream(long dreamId) {
         String whereClause = "_id = ?";
-        String[] whereArgs = { String.valueOf(dreamId) };
+        String[] whereArgs = {String.valueOf(dreamId)};
 
         int rowsDeleted = getDatabase().delete(DatabaseTableEnum.DREAMS.getTableName(), whereClause, whereArgs);
 
@@ -73,7 +76,7 @@ public class DreamsAccess extends BaseAccess {
                 null,
                 null,
                 null,
-                Dream.Attribute.date_created + " DESC" // Order by date_created in descending order
+                Dream.Attribute.dateCreated + " DESC" // Order by date_created in descending order
         );
 
         if (cursor != null) {
@@ -83,11 +86,13 @@ public class DreamsAccess extends BaseAccess {
                     String title = cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.title.toString()));
                     int lucidity = cursor.getInt(cursor.getColumnIndexOrThrow(Dream.Attribute.lucidity.toString()));
                     int clarity = cursor.getInt(cursor.getColumnIndexOrThrow(Dream.Attribute.clarity.toString()));
-                    String feeling = cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.feeling.toString()));
+                    int happiness = cursor.getInt(cursor.getColumnIndexOrThrow(Dream.Attribute.happiness.toString()));
+                    int recurringDream = cursor.getInt(cursor.getColumnIndexOrThrow(Dream.Attribute.recurringDream.toString()));
+                    int nightmare = cursor.getInt(cursor.getColumnIndexOrThrow(Dream.Attribute.nightmare.toString()));
                     String description = cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.description.toString()));
-                    LocalDateTime dateCreated = DreamsHelper.dateTimeStringToDateTime(cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.date_created.toString())));
+                    LocalDateTime dateCreated = DreamsHelper.dateTimeStringToDateTime(cursor.getString(cursor.getColumnIndexOrThrow(Dream.Attribute.dateCreated.toString())));
 
-                    Dream dream = new Dream(dreamId, title, lucidity, clarity, feeling, description, dateCreated);
+                    Dream dream = new Dream(dreamId, title, lucidity, clarity, happiness, recurringDream, nightmare, description, dateCreated);
                     dreamList.add(dream);
                 }
             } finally {
@@ -103,12 +108,14 @@ public class DreamsAccess extends BaseAccess {
         values.put(Dream.Attribute.title.toString(), dream.getTitle());
         values.put(Dream.Attribute.lucidity.toString(), dream.getLucidity());
         values.put(Dream.Attribute.clarity.toString(), dream.getClarity());
-        values.put(Dream.Attribute.feeling.toString(), dream.getFeeling());
+        values.put(Dream.Attribute.happiness.toString(), dream.getHappiness());
+        values.put(Dream.Attribute.recurringDream.toString(), dream.getRecurringDream());
+        values.put(Dream.Attribute.nightmare.toString(), dream.getNightmare());
         values.put(Dream.Attribute.description.toString(), dream.getDescription());
-        values.put(Dream.Attribute.date_created.toString(), DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
+        values.put(Dream.Attribute.dateCreated.toString(), DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
 
         String whereClause = Dream.Attribute._id + " = ?";
-        String[] whereArgs = { String.valueOf(dream.getId()) };
+        String[] whereArgs = {String.valueOf(dream.getId())};
 
         int rowsUpdated = getDatabase().update(DatabaseTableEnum.DREAMS.getTableName(), values, whereClause, whereArgs);
 

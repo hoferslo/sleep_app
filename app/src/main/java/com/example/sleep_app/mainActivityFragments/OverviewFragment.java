@@ -107,7 +107,7 @@ public class OverviewFragment extends Fragment implements DreamDetailsFragment.O
                 View RandomDreamLl = inflater.inflate(R.layout.item_random_dream, null, false);
 
                 View parentView = inflater.inflate(R.layout.item_dream_layout, null, false);
-                View dreamView = MainActivity.makeDreamView(parentView, dream);
+                View dreamView = MainActivity.makeDreamView(parentView, dream, requireContext());
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,

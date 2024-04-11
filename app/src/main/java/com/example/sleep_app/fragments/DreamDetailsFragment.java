@@ -68,7 +68,7 @@ public class DreamDetailsFragment extends DialogFragment {
         if (dream != null) {
 
             binding.TextViewTitle.setText(dream.getTitle());
-            binding.TextViewFeeling.setText(String.valueOf(dream.getFeeling()));
+            
             binding.TextViewLucidity.setText(String.valueOf(dream.getLucidity()));
 
             {

@@ -13,16 +13,20 @@ public class Dream implements Parcelable {
     private String title;
     private int lucidity;
     private int clarity;
-    private String feeling;
+    private int happiness;
+    private int recurringDream;
+    private int nightmare;
     private String description;
     private LocalDateTime dateCreated;
 
-    public Dream(Long id, String title, int lucidity, int clarity, String feeling, String description, LocalDateTime dateCreated) {
+    public Dream(Long id, String title, int lucidity, int clarity, int happiness, int recurringDream, int nightmare, String description, LocalDateTime dateCreated) {
         this.id = id;
         this.title = title;
         this.lucidity = lucidity;
         this.clarity = clarity;
-        this.feeling = feeling;
+        this.happiness = happiness;
+        this.recurringDream = recurringDream;
+        this.nightmare = nightmare;
         this.description = description;
         this.dateCreated = dateCreated;
     }
@@ -31,8 +35,40 @@ public class Dream implements Parcelable {
 
     }
 
+    public int getHappiness() {
+        return happiness;
+    }
+
+    public void setHappiness(int happiness) {
+        this.happiness = happiness;
+    }
+
+    public int getRecurringDream() {
+        return recurringDream;
+    }
+
+    public boolean isRecurringDream() {
+        return recurringDream == 1;
+    }
+
+    public boolean isNightmare() {
+        return nightmare == 1;
+    }
+
+    public void setRecurringDream(int recurringDream) {
+        this.recurringDream = recurringDream;
+    }
+
+    public int getNightmare() {
+        return nightmare;
+    }
+
+    public void setNightmare(int nightmare) {
+        this.nightmare = nightmare;
+    }
+
     public enum Attribute {
-        _id, title, lucidity, clarity, feeling, description, date_created
+        _id, title, lucidity, clarity, happiness, recurringDream, nightmare, description, dateCreated
     }
 
     public Long getId() {
@@ -49,10 +85,6 @@ public class Dream implements Parcelable {
 
     public int getClarity() {
         return clarity;
-    }
-
-    public String getFeeling() {
-        return feeling;
     }
 
     public String getDescription() {
@@ -75,10 +107,6 @@ public class Dream implements Parcelable {
         this.clarity = clarity;
     }
 
-    public void setFeeling(String feeling) {
-        this.feeling = feeling;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -96,6 +124,9 @@ public class Dream implements Parcelable {
         title = in.readString();
         lucidity = in.readInt();
         clarity = in.readInt();
+        happiness = in.readInt();
+        recurringDream = in.readInt();
+        nightmare = in.readInt();
         description = in.readString();
         // Read dateCreated as String and convert it back to LocalDateTime
         String dateString = in.readString();
@@ -108,6 +139,9 @@ public class Dream implements Parcelable {
         dest.writeString(title);
         dest.writeInt(lucidity);
         dest.writeInt(clarity);
+        dest.writeInt(happiness);
+        dest.writeInt(recurringDream);
+        dest.writeInt(nightmare);
         dest.writeString(description);
         // Write dateCreated as String
         dest.writeString(DreamsHelper.DateTimeToDateTimeString(dateCreated));
