@@ -1,10 +1,11 @@
-package com.example.sleep_app;
+package com.example.sleep_app.tools;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PrefsHelper {
     private static final String PREFS_NAME = "sleepApp";
-    private static final String KEY_USERNAME = "username";
+    private static final String KEY_EMAIL = "email";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
     private static final String RANDOM_DREAM = "randomDream";
     private static final String RANDOM_DREAM_DAILY_NOTIFICATION = "randomDreamDailyNotification";
@@ -15,22 +16,13 @@ public class PrefsHelper {
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
-    // Username
-    public String getUsername() {
-        return sharedPreferences.getString(KEY_USERNAME, "");
+
+    public String getEmail() {
+        return sharedPreferences.getString(KEY_EMAIL, null);
     }
 
-    public void setUsername(String username) {
-        sharedPreferences.edit().putString(KEY_USERNAME, username).apply();
-    }
-
-    // Login status
-    public boolean isLoggedIn() {
-        return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
-    }
-
-    public void setLoggedIn(boolean b) {
-        sharedPreferences.edit().putBoolean(KEY_IS_LOGGED_IN, b).apply();
+    public void setEmail(String email) {
+        sharedPreferences.edit().putString(KEY_EMAIL, email).apply();
     }
 
     // Random dream setting

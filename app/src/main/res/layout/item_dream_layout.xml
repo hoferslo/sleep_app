@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:padding="8dp"
-        android:background="@drawable/rounded_background_darker_with_border"
+        android:background="@drawable/rounded_background_darker_with_light_border"
         android:orientation="vertical">
 
         <LinearLayout
@@ -27,8 +27,7 @@
                 android:textSize="14sp"
                 android:paddingHorizontal="6dp"
                 android:text="Title!"
-                android:textColor="@color/white"
-                android:background="@drawable/rounded_background" />
+                android:textColor="@color/white" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -43,8 +42,7 @@
                 android:layout_gravity="end"
                 android:paddingHorizontal="8dp"
                 android:text="Title!"
-                android:textColor="@color/white"
-                android:background="@drawable/rounded_background" />
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,8 +51,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="4dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_background">
+            android:layout_marginBottom="8dp">
 
             <TextView
                 android:id="@+id/dreamTitleTv"
@@ -196,7 +193,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="@drawable/rounded_background"
             android:padding="4dp">
 
             <TextView

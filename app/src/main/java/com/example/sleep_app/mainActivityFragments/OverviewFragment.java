@@ -14,11 +14,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sleep_app.Dream;
 import com.example.sleep_app.MainActivity;
-import com.example.sleep_app.PrefsHelper;
 import com.example.sleep_app.R;
 import com.example.sleep_app.databinding.FragmentOverviewBinding;
 import com.example.sleep_app.fragments.DreamDetailsFragment;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
+import com.example.sleep_app.tools.PrefsHelper;
 import com.scwang.wave.MultiWaveHeader;
 
 import java.time.LocalDateTime;
@@ -104,7 +104,7 @@ public class OverviewFragment extends Fragment implements DreamDetailsFragment.O
                 Dream dream = dreams.get(new Random().nextInt(dreams.size()));
 
                 LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View RandomDreamLl = inflater.inflate(R.layout.overview_random_dream, null, false);
+                View RandomDreamLl = inflater.inflate(R.layout.item_random_dream, null, false);
 
                 View parentView = inflater.inflate(R.layout.item_dream_layout, null, false);
                 View dreamView = MainActivity.makeDreamView(parentView, dream);

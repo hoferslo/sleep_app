@@ -27,6 +27,57 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_background_darker_with_border"
+
+                android:padding="16dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:text="User: " />
+
+                        <TextView
+                            android:id="@+id/userTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/userBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="12dp"
+                        android:paddingHorizontal="24dp"
+                        android:text="Sign in / up"
+                        android:background="@drawable/rounded_background_a_bit_lighter"
+                        android:orientation="vertical" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background_darker_with_border"
                 android:paddingVertical="8dp"
                 android:paddingHorizontal="16dp">
 
@@ -39,17 +90,18 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16dp"
-                        android:text="Display random dream"/>
+                        android:textSize="16sp"
+                        android:text="Display random dream" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/randomDreamSwitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        app:thumbTint="@color/custom_thumb_selector"/>
+                        app:thumbTint="@color/custom_thumb_selector" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,15 +111,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16dp"
-                        android:text="Send daily notif. (change this)"/>
+                        android:textSize="16sp"
+                        android:text="Send daily notif. (change this)" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/dailyNotifRandomDreamSwitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        app:thumbTint="@color/custom_thumb_selector"/>
+                        app:thumbTint="@color/custom_thumb_selector" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -75,9 +127,7 @@
         </LinearLayout>
 
 
-
     </ScrollView>
-
 
 
     <LinearLayout
@@ -94,12 +144,13 @@
             android:gravity="center"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_background_darkest">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:text="Close"/>
+                android:text="Close" />
         </LinearLayout>
 
     </LinearLayout>

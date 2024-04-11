@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "540018706414",
+    "project_id": "sleep-app-6be0b",
+    "storage_bucket": "sleep-app-6be0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540018706414:android:12f509ea06f83f942af0ff",
+        "android_client_info": {
+          "package_name": "com.example.sleep_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqpSleBWs__Carv_kCJngH8pfmPKu7e8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

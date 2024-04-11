@@ -3,4 +3,7 @@
         <attr name="fullscreenBackgroundColor" format="color" />
         <attr name="fullscreenTextColor" format="color" />
     </declare-styleable>
+    <declare-styleable name="GradientBackground">
+        <attr name="endColor" format="color" />
+    </declare-styleable>
 </resources>

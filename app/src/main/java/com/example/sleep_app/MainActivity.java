@@ -24,6 +24,7 @@ import com.example.sleep_app.databinding.ActivityMainBinding;
 import com.example.sleep_app.mainActivityFragments.DreamsFragment;
 import com.example.sleep_app.mainActivityFragments.OverviewFragment;
 import com.example.sleep_app.mainActivityFragments.TipsFragment;
+import com.example.sleep_app.tools.PrefsHelper;
 
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -265,6 +266,8 @@ public class MainActivity extends AppCompatActivity {
             formattedDate = monthsAgo + " month ago";
         } else if (daysAgo > 1) {
             formattedDate = daysAgo + " days ago";
+        } else if (daysAgo == 0) {
+            formattedDate = "Today";
         } else {
             formattedDate = daysAgo + " day ago";
         }

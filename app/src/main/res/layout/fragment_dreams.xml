@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/sleepyBlueAlmostBlack">
+    android:background="@color/sleepyBlueAlmostBlack"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.widget.SearchView
         android:id="@+id/searchView"
@@ -15,20 +16,33 @@
         android:iconifiedByDefault="false"
         android:background="@drawable/rounded_background_darker"
         android:queryBackground="@drawable/rounded_background_darker"
-        android:queryHint="Search Dreams"/>
+        android:queryHint="Search Dreams" />
 
-    <ListView
-        android:id="@+id/scrollLv"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:scrollbars="none"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="200dp"
-        android:clipToPadding="false">
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/scrollLv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="none"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="200dp"
+            android:clipToPadding="false" />
 
 
-    </ListView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="@drawable/gradient_background"
+            app:endColor="@color/sleepyBlueAlmostBlack" />
+
+
+    </FrameLayout>
 
 
 </LinearLayout>

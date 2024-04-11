@@ -6,24 +6,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/sleepyBlueAlmostBlack"
-    tools:context=".mainActivityFragments.OverviewFragment">
+    tools:context=".mainActivityFragments.OverviewFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="200dp"
-        android:clipToPadding="false">
-        <LinearLayout
-            android:id="@+id/scrollLl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        </LinearLayout>
-    </ScrollView>
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="200dp"
+            android:clipToPadding="false">
+
+            <LinearLayout
+                android:id="@+id/scrollLl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="@drawable/gradient_background"
+            app:endColor="@color/sleepyBlueAlmostBlack" />
+
+    </FrameLayout>
 
 
 </LinearLayout>

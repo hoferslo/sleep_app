@@ -2,52 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:wave="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
 
-        android:background="@drawable/rounded_background_darker_with_border"
+        android:background="@drawable/rounded_background_darker_with_light_border"
         android:padding="8dp"
         android:orientation="vertical">
-    <LinearLayout
-        android:id="@+id/titleLl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_background">
-        <TextView
-            android:id="@+id/titleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Title!"
-            android:textColor="@color/white" />
-    </LinearLayout>
-    <FrameLayout
-        android:id="@+id/DescriptionFl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:padding="6dp">
 
-
-        <com.scwang.wave.MultiWaveHeader
-            android:id="@+id/waveHeader"
+        <LinearLayout
+            android:id="@+id/titleLl"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:scaleY="-1"
-            app:mwhVelocity="1"
-            app:mwhProgress="0"
-            app:mwhWaveHeight="10dp"
-            app:mwhGradientAngle="0"
-            app:mwhColorAlpha="0.45"
-            app:mwhStartColor="@color/sleepyBlueLighter"
-            app:mwhCloseColor="@color/sleepyBlueLighter"
-            app:mwhWaves="PairWave"/>
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Title!"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/DescriptionFl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:padding="6dp">
+
+
+            <com.scwang.wave.MultiWaveHeader
+                android:id="@+id/waveHeader"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:scaleY="-1"
+                app:mwhVelocity="1"
+                app:mwhProgress="0"
+                app:mwhWaveHeight="10dp"
+                app:mwhGradientAngle="0"
+                app:mwhColorAlpha="0.45"
+                app:mwhStartColor="@color/sleepyBlueLighter"
+                app:mwhCloseColor="@color/sleepyBlueLighter"
+                app:mwhWaves="PairWave" />
 
             <TextView
                 android:id="@+id/DescriptionTv"
