@@ -152,14 +152,13 @@
                         android:textSize="18sp"
                         android:text="0" />
 
-                    <com.example.sleep_app.CustomImageView
+                    <com.example.sleep_app.PopupTextImageView
                         android:id="@+id/happinessIv"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@mipmap/outline_sentiment_neutral_white_48dp"
                         android:tint="@color/white"
-                        android:layout_marginLeft="16dp"
-                        app:popupText="Happiness of this dream" />
+                        android:layout_marginLeft="16dp" />
 
                 </LinearLayout>
 
@@ -187,7 +186,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="16dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/rounded_background_darker_with_border"
                 android:orientation="vertical">
@@ -198,9 +198,11 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/recurringDreamLl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:gravity="center">
 
                         <TextView
                             android:layout_width="0dp"
@@ -210,12 +212,13 @@
                             android:layout_marginEnd="8dp"
                             android:text="Recurring dream" />
 
-                        <com.google.android.material.materialswitch.MaterialSwitch
+                        <com.example.sleep_app.SelectableLinearLayout
                             android:id="@+id/recurringDreamSwitch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="false"
-                            app:thumbTint="@color/custom_thumb_selector" />
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@mipmap/outline_repeat_black_48dp"
+                            android:clickable="true"
+                            app:selected="false" />
 
                     </LinearLayout>
 
@@ -235,9 +238,11 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/nightmareLl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:gravity="center">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -246,12 +251,13 @@
                             android:layout_marginEnd="8dp"
                             android:text="Nightmare" />
 
-                        <com.google.android.material.materialswitch.MaterialSwitch
+                        <com.example.sleep_app.SelectableLinearLayout
                             android:id="@+id/nightmareSwitch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="false"
-                            app:thumbTint="@color/custom_thumb_selector" />
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@mipmap/ghost"
+                            android:clickable="true"
+                            app:selected="false" />
 
                     </LinearLayout>
                 </LinearLayout>

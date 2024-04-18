@@ -16,209 +16,347 @@
         android:textSize="24sp"
         android:textColor="@color/white"
         android:layout_marginBottom="8dp"
-        android:padding="16dp" />
+        android:paddingVertical="8dp"
+        android:paddingStart="16dp" />
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/Lucidity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="8dp"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:background="@drawable/rounded_background_darker_with_border">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Lucidity from: " />
-
-                <TextView
-                    android:id="@+id/seekBarLucidityStartTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="0" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text=" to: " />
-
-                <TextView
-                    android:id="@+id/seekBarLucidityEndTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="0" />
-
-            </LinearLayout>
-
-            <com.google.android.material.slider.RangeSlider
-                android:id="@+id/seekBarLucidity"
-                android:valueFrom="0"
-                android:valueTo="100"
-                android:stepSize="1"
-                android:layout_height="wrap_content"
-                app:trackColorInactive="@color/sleepyBlue"
-                app:labelBehavior="gone"
-                app:haloColor="@color/sleepyBlueSeeThrough"
-                app:tickVisible="false"
-                android:layout_width="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Clarity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="8dp"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:background="@drawable/rounded_background_darker_with_border">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Clarity from: " />
-
-                <TextView
-                    android:id="@+id/seekBarClarityStartTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="0" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text=" to: " />
-
-                <TextView
-                    android:id="@+id/seekBarClarityEndTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="0" />
-
-            </LinearLayout>
-
-            <com.google.android.material.slider.RangeSlider
-                android:id="@+id/seekBarClarity"
-                android:valueFrom="0"
-                android:valueTo="100"
-                android:stepSize="1"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                app:haloColor="@color/sleepyBlueSeeThrough"
-                app:tickVisible="false"
-                app:labelBehavior="gone"
-                app:trackColorInactive="@color/sleepyBlue" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/DateStartLl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:gravity="center"
-            android:background="@drawable/rounded_background_darker_with_border">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="From date: " />
-
-            <TextView
-                android:id="@+id/textViewDateStart"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/imageViewDateStart"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="4dp"
-                android:src="@mipmap/baseline_edit_calendar_white_48dp"
-                android:background="@drawable/rounded_background_dark_with_border" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/DateEndLl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:gravity="center"
-            android:background="@drawable/rounded_background_darker_with_border">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="To date: " />
-
-            <TextView
-                android:id="@+id/textViewDateEnd"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/imageViewDateEnd"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="4dp"
-                android:src="@mipmap/baseline_edit_calendar_white_48dp"
-                android:background="@drawable/rounded_background_dark_with_border" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/Lucidity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:background="@drawable/rounded_background_darker_with_border">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Lucidity from: " />
+
+                    <TextView
+                        android:id="@+id/seekBarLucidityStartTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text=" to: " />
+
+                    <TextView
+                        android:id="@+id/seekBarLucidityEndTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                </LinearLayout>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/seekBarLucidity"
+                    android:valueFrom="0"
+                    android:valueTo="100"
+                    android:stepSize="1"
+                    android:layout_height="wrap_content"
+                    app:trackColorInactive="@color/sleepyBlue"
+                    app:labelBehavior="gone"
+                    app:haloColor="@color/sleepyBlueSeeThrough"
+                    app:tickVisible="false"
+                    android:layout_width="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Clarity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:background="@drawable/rounded_background_darker_with_border">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Clarity from: " />
+
+                    <TextView
+                        android:id="@+id/seekBarClarityStartTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text=" to: " />
+
+                    <TextView
+                        android:id="@+id/seekBarClarityEndTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                </LinearLayout>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/seekBarClarity"
+                    android:valueFrom="0"
+                    android:valueTo="100"
+                    android:stepSize="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:haloColor="@color/sleepyBlueSeeThrough"
+                    app:tickVisible="false"
+                    app:labelBehavior="gone"
+                    app:trackColorInactive="@color/sleepyBlue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Happiness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:background="@drawable/rounded_background_darker_with_border">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Happiness from: " />
+
+                    <TextView
+                        android:id="@+id/seekBarHappinessStartTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text=" to: " />
+
+
+                    <TextView
+                        android:id="@+id/seekBarHappinessEndTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="0" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <com.example.sleep_app.PopupTextImageView
+                        android:id="@+id/happinessStartIv"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@mipmap/outline_sentiment_neutral_white_48dp"
+                        android:tint="@color/white"
+                        app:popupText="Happiness of this dream" />
+
+                    <com.google.android.material.slider.RangeSlider
+                        android:id="@+id/seekBarHappiness"
+                        android:valueFrom="0"
+                        android:valueTo="100"
+                        android:stepSize="1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        app:haloColor="@color/sleepyBlueSeeThrough"
+                        app:tickVisible="false"
+                        app:labelBehavior="gone"
+                        app:trackColorInactive="@color/sleepyBlue" />
+
+                    <com.example.sleep_app.PopupTextImageView
+                        android:id="@+id/happinessEndIv"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@mipmap/outline_sentiment_neutral_white_48dp"
+                        android:tint="@color/white"
+                        app:popupText="Happiness of this dream" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:background="@drawable/rounded_background_darker_with_border">
+
+                <LinearLayout
+                    android:id="@+id/iconsLl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/rounded_background_darker_with_border">
+
+                    <com.example.sleep_app.SelectableLinearLayout
+                        android:id="@+id/recurringDreamIv"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@mipmap/outline_repeat_black_48dp"
+                        android:clickable="false"
+                        app:selected="false" />
+
+                    <com.example.sleep_app.SelectableLinearLayout
+                        android:id="@+id/nightmareIv"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@mipmap/ghost"
+                        android:clickable="false"
+                        app:selected="false" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/iconFilterEnableTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_background_darker_with_border" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DateStartLl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:gravity="center"
+                android:background="@drawable/rounded_background_darker_with_border">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="From date: " />
+
+                <TextView
+                    android:id="@+id/textViewDateStart"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/imageViewDateStart"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:src="@mipmap/baseline_edit_calendar_white_48dp"
+                    android:background="@drawable/rounded_background_dark_with_border" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DateEndLl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:gravity="center"
+                android:background="@drawable/rounded_background_darker_with_border">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="To date: " />
+
+                <TextView
+                    android:id="@+id/textViewDateEnd"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/imageViewDateEnd"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:src="@mipmap/baseline_edit_calendar_white_48dp"
+                    android:background="@drawable/rounded_background_dark_with_border" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/btnPositive"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:padding="16dp"
             android:layout_marginEnd="4dp"
@@ -237,7 +375,7 @@
         <LinearLayout
             android:id="@+id/btnReset"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:padding="16dp"
             android:layout_marginHorizontal="4dp"
@@ -256,7 +394,7 @@
         <LinearLayout
             android:id="@+id/btnNegative"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:padding="16dp"
             android:layout_marginStart="4dp"

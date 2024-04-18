@@ -1,11 +1,12 @@
 package com.example.sleep_app.fragments;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.sleep_app.Dream;
+import com.example.sleep_app.MainActivity;
 import com.example.sleep_app.activities.EditDreamActivity;
 import com.example.sleep_app.databinding.FragmentDreamDetailsBinding;
 import com.example.sleep_app.sqLiteHelpers.DreamsAccess;
@@ -33,42 +35,37 @@ public class DreamDetailsFragment extends DialogFragment {
 
     public static DreamDetailsFragment newInstance(Dream dreamTemp) {
         DreamDetailsFragment fragment = new DreamDetailsFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("dream", dreamTemp);
-        fragment.setArguments(args);
+        fragment.setDream(dreamTemp);
         return fragment;
     }
 
     public DreamDetailsFragment() {
-        // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        int theme = android.R.style.ThemeOverlay_Material_Dialog_Alert;
-        setStyle(DialogFragment.STYLE_NORMAL, theme);
-        if (getArguments() != null) {
-            dream = getArguments().getParcelable("dream");
-        }
+    public void setDream(Dream dream) {
+        this.dream = dream;
     }
 
-    @Nullable
+    @NonNull
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentDreamDetailsBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+
+        binding = FragmentDreamDetailsBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        setView();
+
+        builder.setView(view);
+
+        return builder.create();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void setView() {
         if (dream != null) {
 
             binding.TextViewTitle.setText(dream.getTitle());
-            
+
             binding.TextViewLucidity.setText(String.valueOf(dream.getLucidity()));
 
             {
@@ -90,6 +87,27 @@ public class DreamDetailsFragment extends DialogFragment {
                 binding.LlClarityBar.setLayoutParams(layoutParams1);
                 binding.LlClarityBarAnti.setLayoutParams(layoutParams2);
             }
+
+            binding.TextViewHappiness.setText(String.valueOf(dream.getHappiness()));
+
+            {
+                ViewGroup.LayoutParams layoutParams1 = binding.LlHappinessBar.getLayoutParams();
+                ViewGroup.LayoutParams layoutParams2 = binding.LlHappinessBarAnti.getLayoutParams();
+                ((LinearLayout.LayoutParams) layoutParams1).weight = dream.getHappiness() / 100f;
+                ((LinearLayout.LayoutParams) layoutParams2).weight = (100f - dream.getHappiness()) / 100f;
+                binding.LlHappinessBar.setLayoutParams(layoutParams1);
+                binding.LlHappinessBarAnti.setLayoutParams(layoutParams2);
+            }
+
+            if (dream.isRecurringDream()) {
+                binding.recurringDreamIv.setVisibility(View.VISIBLE);
+            }
+            if (dream.isNightmare()) {
+                binding.nightmareIv.setVisibility(View.VISIBLE);
+            }
+
+            binding.happinessIv.setImageResource(MainActivity.getHappinessImage(dream.getHappiness()));
+
             binding.TextViewDescription.setText(dream.getDescription());
             binding.TextViewDateTime.setText(DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
         }

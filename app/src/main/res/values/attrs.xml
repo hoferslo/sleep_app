@@ -7,7 +7,13 @@
         <attr name="endColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="CustomImageView">
+    <declare-styleable name="PopupTextImageView">
         <attr name="popupText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="SelectableLinearLayout">
+        <attr name="selected" format="boolean" />
+        <attr name="colorSelected" format="color" />
+        <attr name="colorUnselected" format="color" />
     </declare-styleable>
 </resources>

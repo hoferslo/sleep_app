@@ -244,13 +244,14 @@ public class MainActivity extends AppCompatActivity {
         binding.dreamDateDayTv.setText(dream.getDateCreated().format(DateTimeFormatter.ofPattern("EEEE, d MMMM, yyyy", Locale.ENGLISH)));
 
         if (dream.isRecurringDream()) {
-            binding.happinessIv.setVisibility(View.VISIBLE);
+            binding.recurringDreamIv.setVisibility(View.VISIBLE);
         }
         if (dream.isNightmare()) {
             binding.nightmareIv.setVisibility(View.VISIBLE);
         }
 
         binding.happinessIv.setImageResource(getHappinessImage(dream.getHappiness()));
+        binding.happinessIv.setPopupText("Happiness of this dream: " + dream.getHappiness() + "/100");
 
         return binding.getRoot();
     }

@@ -50,19 +50,23 @@ public class SortDreamsDialogFragment extends DialogFragment {
         setButtonsState(sortOption);
         setSortOrderIv(sortOrder);
 
-        binding.clarity.setOnClickListener((View.OnClickListener) v -> {
+        binding.clarity.setOnClickListener(v -> {
             sortOption = SortOption.CLARITY;
             setButtonsState(sortOption);
         });
-        binding.lucidity.setOnClickListener((View.OnClickListener) v -> {
+        binding.lucidity.setOnClickListener(v -> {
             sortOption = SortOption.LUCIDITY;
             setButtonsState(sortOption);
         });
-        binding.date.setOnClickListener((View.OnClickListener) v -> {
+        binding.date.setOnClickListener(v -> {
             sortOption = SortOption.DATE;
             setButtonsState(sortOption);
         });
-        binding.alphabetically.setOnClickListener((View.OnClickListener) v -> {
+        binding.happiness.setOnClickListener(v -> {
+            sortOption = SortOption.HAPPINESS;
+            setButtonsState(sortOption);
+        });
+        binding.alphabetically.setOnClickListener(v -> {
             sortOption = SortOption.ALPHABETICALLY;
             setButtonsState(sortOption);
         });
@@ -126,6 +130,9 @@ public class SortDreamsDialogFragment extends DialogFragment {
         binding.dateTv.setTextColor(notSelectedColor);
         binding.date.setPressed(true);
 
+        binding.happinessTv.setTextColor(notSelectedColor);
+        binding.happiness.setPressed(true);
+
         binding.alphabeticallyTv.setTextColor(notSelectedColor);
         binding.alphabetically.setPressed(true);
 
@@ -138,6 +145,9 @@ public class SortDreamsDialogFragment extends DialogFragment {
         } else if (sortOption.equals(SortOption.DATE)) {
             binding.dateTv.setTextColor(selectedColor);
             binding.date.setPressed(false);
+        } else if (sortOption.equals(SortOption.HAPPINESS)) {
+            binding.happinessTv.setTextColor(selectedColor);
+            binding.happiness.setPressed(false);
         } else if (sortOption.equals(SortOption.ALPHABETICALLY)) {
             binding.alphabeticallyTv.setTextColor(selectedColor);
             binding.alphabetically.setPressed(false);

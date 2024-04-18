@@ -50,8 +50,9 @@ dependencies {
     implementation 'com.github.john990:WaveView:v0.9'
     implementation 'com.scwang.wave:MultiWaveHeader:1.0.0-andx'
     implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
-    implementation platform('com.google.firebase:firebase-bom:32.8.0')
+    implementation platform('com.google.firebase:firebase-bom:32.8.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
+    
 
 }

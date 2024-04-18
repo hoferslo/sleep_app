@@ -45,6 +45,9 @@ public class AddDreamActivity extends AppCompatActivity {
 
         binding.seekBarHappiness.setValues(50f);
 
+        binding.recurringDreamLl.setOnClickListener(v -> binding.recurringDreamSwitch.callOnClick());
+
+        binding.nightmareLl.setOnClickListener(v -> binding.nightmareSwitch.callOnClick());
 
         binding.buttonClose.setOnClickListener(v -> finish());
 
@@ -57,10 +60,10 @@ public class AddDreamActivity extends AppCompatActivity {
             int happiness = Integer.parseInt(binding.seekBarHappinessTv.getText().toString());
             String description = binding.editTextDescription.getText().toString();
             int recurringDream;
-            if (binding.recurringDreamSwitch.isChecked()) recurringDream = 1;
+            if (binding.recurringDreamSwitch.isSelected()) recurringDream = 1;
             else recurringDream = 0;
             int nightmare;
-            if (binding.nightmareSwitch.isChecked()) nightmare = 1;
+            if (binding.nightmareSwitch.isSelected()) nightmare = 1;
             else nightmare = 0;
             LocalDateTime dateTime = DreamsHelper.dateTimeStringToDateTime(binding.textViewDate.getText().toString());
             // Save the dream

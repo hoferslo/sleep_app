@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:background="@color/sleepyBlueAlmostBlack"
-    tools:context=".fragments.DreamDetailsFragment"
     android:orientation="vertical">
 
     <ScrollView
@@ -29,8 +27,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textColor="@color/white"
-                android:padding="18dp"
-                android:layout_marginBottom="8dp" />
+                android:paddingBottom="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -162,21 +159,101 @@
                 </LinearLayout>
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/TextViewFeeling"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/rounded_background_dark" />
+                android:background="@drawable/rounded_background_dark">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/LlHappinessBar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rounded_background_a_bit_lighter"
+                        android:layout_weight="0"
+                        android:orientation="horizontal" />
+
+                    <LinearLayout
+                        android:id="@+id/LlHappinessBarAnti"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0"
+                        android:orientation="horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/TextViewHappinessTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Happiness: " />
+
+                    <TextView
+                        android:id="@+id/TextViewHappiness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="/100"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+
+                android:gravity="center"
+                android:padding="8dp">
+
+                <com.example.sleep_app.PopupTextImageView
+                    android:id="@+id/recurringDreamIv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@mipmap/outline_repeat_white_48dp"
+                    app:popupText="This dream is recurring"
+                    android:visibility="gone" />
+
+                <com.example.sleep_app.PopupTextImageView
+                    android:id="@+id/nightmareIv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@mipmap/ghost"
+                    android:tint="@color/white"
+                    app:popupText="This dream is a nightmare"
+                    android:visibility="gone" />
+
+                <com.example.sleep_app.PopupTextImageView
+                    android:id="@+id/happinessIv"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@mipmap/outline_sentiment_neutral_white_48dp"
+                    android:tint="@color/white" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/TextViewDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/rounded_background_dark" />
+                android:layout_marginBottom="8dp" />
         </LinearLayout>
 
     </ScrollView>

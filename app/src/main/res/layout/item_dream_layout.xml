@@ -197,7 +197,7 @@
             android:layout_marginBottom="8dp"
             android:gravity="center">
 
-            <com.example.sleep_app.CustomImageView
+            <com.example.sleep_app.PopupTextImageView
                 android:id="@+id/recurringDreamIv"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -206,7 +206,7 @@
                 app:popupText="This dream is recurring"
                 android:visibility="gone" />
 
-            <com.example.sleep_app.CustomImageView
+            <com.example.sleep_app.PopupTextImageView
                 android:id="@+id/nightmareIv"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -216,14 +216,13 @@
                 app:popupText="This dream is a nightmare"
                 android:visibility="gone" />
 
-            <com.example.sleep_app.CustomImageView
+            <com.example.sleep_app.PopupTextImageView
                 android:id="@+id/happinessIv"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
 
                 android:src="@mipmap/outline_sentiment_neutral_white_48dp"
-                android:tint="@color/white"
-                app:popupText="Happiness of this dream" />
+                android:tint="@color/white" />
 
 
         </LinearLayout>

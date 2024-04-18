@@ -124,6 +124,7 @@ public class OverviewFragment extends Fragment implements DreamDetailsFragment.O
                 Ll.addView(dreamView);
                 binding.scrollLl.addView(RandomDreamLl);
             }
+            
         }
 
         int pastMonthDreamsNumber = getMonthDreamsCount(now.minusMonths(1), false);

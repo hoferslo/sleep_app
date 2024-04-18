@@ -38,8 +38,8 @@ public class EditDreamActivity extends AppCompatActivity {
         binding.seekBarClarityTv.setText(String.valueOf(dream.getClarity()));
         binding.seekBarLucidityTv.setText(String.valueOf(dream.getLucidity()));
         binding.seekBarHappinessTv.setText(String.valueOf(dream.getHappiness()));
-        binding.recurringDreamSwitch.setChecked(dream.isRecurringDream());
-        binding.nightmareSwitch.setChecked(dream.isNightmare());
+        binding.recurringDreamSwitch.setSelected(dream.isRecurringDream());
+        binding.nightmareSwitch.setSelected(dream.isNightmare());
         binding.textViewDate.setText(DreamsHelper.DateTimeToDateTimeString(dream.getDateCreated()));
 
         binding.seekBarClarity.addOnChangeListener((slider, value, fromUser) -> {
@@ -61,6 +61,10 @@ public class EditDreamActivity extends AppCompatActivity {
 
         binding.buttonClose.setOnClickListener(v -> finish());
 
+        binding.recurringDreamLl.setOnClickListener(v -> binding.recurringDreamSwitch.callOnClick());
+
+        binding.nightmareLl.setOnClickListener(v -> binding.nightmareSwitch.callOnClick());
+
         binding.buttonAddDream.setOnClickListener(v -> {
             // Retrieve user input
             dream.setTitle(binding.editTextTitle.getText().toString());
@@ -68,10 +72,10 @@ public class EditDreamActivity extends AppCompatActivity {
             dream.setClarity(Integer.parseInt(binding.seekBarClarityTv.getText().toString()));
             dream.setHappiness(Integer.parseInt(binding.seekBarHappinessTv.getText().toString()));
             int recurringDream;
-            if (binding.recurringDreamSwitch.isChecked()) recurringDream = 1;
+            if (binding.recurringDreamSwitch.isSelected()) recurringDream = 1;
             else recurringDream = 0;
             int nightmare;
-            if (binding.nightmareSwitch.isChecked()) nightmare = 1;
+            if (binding.nightmareSwitch.isSelected()) nightmare = 1;
             else nightmare = 0;
             dream.setRecurringDream(recurringDream);
             dream.setNightmare(nightmare);

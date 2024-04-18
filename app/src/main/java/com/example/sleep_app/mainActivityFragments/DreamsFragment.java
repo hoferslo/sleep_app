@@ -37,11 +37,17 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
     Integer lucidityEnd;
     Integer clarityStart;
     Integer clarityEnd;
+    Integer happinessStart;
+    Integer happinessEnd;
+    Integer recurringDream;
+    Integer nightmare;
     LocalDateTime dateStart;
     LocalDateTime dateEnd;
 
     SortOption sortOption = SortOption.DATE;
     boolean sortOrder = false;
+
+    boolean booleanFiltersEnabled = false;
 
     public DreamsFragment() {
     }
@@ -61,7 +67,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterDreams(newText, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
+                filterDreams(newText, lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, sortOption, sortOrder);
                 return true;
             }
         });
@@ -98,19 +104,20 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
 
 
     private void getDreams() {
-
-        ArrayList<Dream> dreamArrayList = new ArrayList<>(dreamList);
-        filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
+        
+        filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, sortOption, sortOrder);
         binding.scrollLv.setSelection(scrollProgress);
         scrollProgress = 0;
     }
 
-    private void filterDreams(String query, Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, LocalDateTime dateStart, LocalDateTime dateEnd, SortOption sortOption, boolean sortOrder) {
+    private void filterDreams(String query, Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd, SortOption sortOption, boolean sortOrder) {
         this.query = query;
         this.lucidityStart = lucidityStart;
         this.lucidityEnd = lucidityEnd;
         this.clarityStart = clarityStart;
         this.clarityEnd = clarityEnd;
+        this.happinessStart = happinessStart;
+        this.happinessEnd = happinessEnd;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
 
@@ -123,7 +130,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         }
 
         // Apply initial filtering based on text query and dream properties
-        ArrayList<Dream> filteredList = filterDreamsBasedOnCriteria(dreamArrayList, query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd);
+        ArrayList<Dream> filteredList = filterDreamsBasedOnCriteria(dreamArrayList, query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd);
 
         // Sort the filtered list based on chosen option and order
         filteredList.sort((dream1, dream2) -> {
@@ -134,6 +141,9 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
                     break;
                 case CLARITY:
                     comparisonResult = Integer.compare(dream1.getClarity(), dream2.getClarity());
+                    break;
+                case HAPPINESS:
+                    comparisonResult = Integer.compare(dream1.getHappiness(), dream2.getHappiness());
                     break;
                 case DATE:
                     comparisonResult = dream1.getDateCreated().compareTo(dream2.getDateCreated());
@@ -150,7 +160,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
     }
 
     // Helper method for initial filtering
-    private ArrayList<Dream> filterDreamsBasedOnCriteria(ArrayList<Dream> dreams, String query, Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, LocalDateTime dateStart, LocalDateTime dateEnd) {
+    private ArrayList<Dream> filterDreamsBasedOnCriteria(ArrayList<Dream> dreams, String query, Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd) {
         ArrayList<Dream> filteredList = new ArrayList<>();
         for (Dream dream : dreams) {
             boolean matchesQuery = query == null ||
@@ -159,6 +169,9 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
 
             boolean matchesFilters = (lucidityStart == null || (dream.getLucidity() >= lucidityStart && dream.getLucidity() <= lucidityEnd)) &&
                     (clarityStart == null || (dream.getClarity() >= clarityStart && dream.getClarity() <= clarityEnd)) &&
+                    (happinessStart == null || (dream.getHappiness() >= happinessStart && dream.getHappiness() <= happinessEnd)) &&
+                    (recurringDream == null || (dream.getRecurringDream() == recurringDream)) &&
+                    (nightmare == null || (dream.getNightmare() == nightmare)) &&
                     (dateStart == null || (dream.getDateCreated().isAfter(dateStart) && dream.getDateCreated().isBefore(dateEnd)));
 
             if (matchesQuery && matchesFilters) {
@@ -207,7 +220,6 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         }
     }
 
-
     private void showDreamDetailsDialog(Dream clickedDream) {
         DreamDetailsFragment dialogFragment = DreamDetailsFragment.newInstance(clickedDream);
         dialogFragment.setOnDialogDismissListener(this);
@@ -215,11 +227,12 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
     }
 
     public void showFilterDialog() {
-        FilterDreamsDialogFragment filterDreamsDialog = FilterDreamsDialogFragment.newInstance(lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd);
+        FilterDreamsDialogFragment filterDreamsDialog = FilterDreamsDialogFragment.newInstance(lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, booleanFiltersEnabled);
         filterDreamsDialog.setFilterDreamsDialogListener(new FilterDreamsDialogFragment.FilterDreamsDialogListener() {
             @Override
-            public void onDialogPositiveClick(int lucidityStart, int lucidityEnd, int clarityStart, int clarityEnd, LocalDateTime dateStart, LocalDateTime dateEnd) {
-                filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
+            public void onDialogPositiveClick(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd, boolean booleanFiltersEnabled) {
+                DreamsFragment.this.booleanFiltersEnabled = booleanFiltersEnabled;
+                filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, sortOption, sortOrder);
             }
 
             @Override
@@ -238,7 +251,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
             public void onDialogPositiveClick(SortOption sortOption, boolean sortOrder) {
                 DreamsFragment.this.sortOption = sortOption;
                 DreamsFragment.this.sortOrder = sortOrder;
-                filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, dateStart, dateEnd, sortOption, sortOrder);
+                filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, sortOption, sortOrder);
             }
 
             @Override

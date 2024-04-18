@@ -103,6 +103,33 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/happiness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:background="@drawable/rounded_background_darker_with_border">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/happinessTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Happiness" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/alphabetically"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
