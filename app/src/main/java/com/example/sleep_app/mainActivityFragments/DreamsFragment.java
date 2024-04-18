@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sleep_app.Dream;
 import com.example.sleep_app.MainActivity;
@@ -78,6 +79,9 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
             }
         });
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        binding.scrollLv.setLayoutManager(layoutManager);
+
         return binding.getRoot();
     }
 
@@ -104,9 +108,9 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
 
 
     private void getDreams() {
-        
+
         filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, sortOption, sortOrder);
-        binding.scrollLv.setSelection(scrollProgress);
+        binding.scrollLv.scrollToPosition(scrollProgress);
         scrollProgress = 0;
     }
 
@@ -155,7 +159,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
             return sortOrder ? comparisonResult : -comparisonResult; // Reverse order if sortOrder is false
         });
 
-        ArrayAdapter<Dream> adapter = new CustomAdapter(requireContext(), R.layout.item_dream_layout, filteredList);
+        CustomAdapter adapter = new CustomAdapter(requireContext(), filteredList);
         binding.scrollLv.setAdapter(adapter);
     }
 
@@ -187,38 +191,47 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         onResume();
     }
 
-    private class CustomAdapter extends ArrayAdapter<Dream> {
-        private final LayoutInflater inflater;
-        private final int resource;
-        private final ArrayList<Dream> objects;
-        Context context;
+    public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
-        public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Dream> objects) {
-            super(context, resource, objects);
+        private final LayoutInflater inflater;
+        private final ArrayList<Dream> objects;
+        private final Context context;
+
+        public CustomAdapter(@NonNull Context context, @NonNull ArrayList<Dream> objects) {
             this.inflater = LayoutInflater.from(context);
-            this.resource = resource;
             this.objects = objects;
             this.context = context;
         }
 
         @NonNull
         @Override
-        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = inflater.inflate(R.layout.item_dream_layout, parent, false);
+            return new ViewHolder(view);
+        }
 
-            if (convertView == null) {
-                convertView = inflater.inflate(resource, parent, false);
-            }
-
-            convertView = MainActivity.makeDreamView(convertView, objects.get(position), context);
-
-            convertView.setOnClickListener(v -> {
-                scrollProgress = binding.scrollLv.getFirstVisiblePosition();
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            Dream dream = objects.get(position);
+            MainActivity.makeDreamView(holder.itemView, dream, context);
+            holder.itemView.setOnClickListener(v -> {
+                scrollProgress = binding.scrollLv.getChildLayoutPosition(holder.itemView);
                 showDreamDetailsDialog(objects.get(position));
             });
+        }
 
-            return convertView;
+        @Override
+        public int getItemCount() {
+            return objects.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+            }
         }
     }
+
 
     private void showDreamDetailsDialog(Dream clickedDream) {
         DreamDetailsFragment dialogFragment = DreamDetailsFragment.newInstance(clickedDream);

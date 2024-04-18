@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -207,7 +206,8 @@ public class MainActivity extends AppCompatActivity {
     public static View makeDreamView(View view, Dream dream, Context context) {
 
         // Set dream title
-        ItemDreamLayoutBinding binding = ItemDreamLayoutBinding.inflate(LayoutInflater.from(context), null, false);
+        //ItemDreamLayoutBinding binding = ItemDreamLayoutBinding.inflate(LayoutInflater.from(context), null, false);
+        ItemDreamLayoutBinding binding = ItemDreamLayoutBinding.bind(view);
 
         binding.dreamTitleTv.setText(dream.getTitle());
 
