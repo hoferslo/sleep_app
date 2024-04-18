@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -110,8 +111,8 @@ public class FilterDreamsDialogFragment extends DialogFragment {
                         binding.seekBarClarity.getValues().get(1).intValue(),
                         binding.seekBarHappiness.getValues().get(0).intValue(),
                         binding.seekBarHappiness.getValues().get(1).intValue(),
-                        recurringDream == null ? null : binding.recurringDreamIv.isSelected() ? 1 : 0,
-                        nightmare == null ? null : binding.nightmareIv.isSelected() ? 1 : 0,
+                        binding.recurringDreamIv.isSelected() ? 1 : 0,
+                        binding.nightmareIv.isSelected() ? 1 : 0,
                         DreamsHelper.dateStringToDateTime(binding.textViewDateStart.getText().toString()),
                         selectedDateTime,
                         booleanFiltersEnabled);
@@ -134,9 +135,6 @@ public class FilterDreamsDialogFragment extends DialogFragment {
         binding.DateStartLl.setOnClickListener(v -> showDatePickerDialogStart());
         binding.DateEndLl.setOnClickListener(v -> showDatePickerDialogEnd());
 
-
-        handleBooleanFilterLogic(booleanFiltersEnabled);
-
         if (lucidityStart == null && lucidityEnd == null) {
             binding.seekBarLucidity.setValues(0.0f, 100.0f);
         } else {
@@ -154,7 +152,7 @@ public class FilterDreamsDialogFragment extends DialogFragment {
         } else {
             binding.seekBarHappiness.setValues(Float.valueOf(happinessStart), Float.valueOf(happinessEnd));
         }
-
+        Log.d("mhm", recurringDream + " hmhm");
         if (recurringDream != null) {
             binding.recurringDreamIv.setSelected(recurringDream == 1);
         }
@@ -162,6 +160,8 @@ public class FilterDreamsDialogFragment extends DialogFragment {
         if (nightmare != null) {
             binding.nightmareIv.setSelected(nightmare == 1);
         }
+
+        handleBooleanFilterLogic(booleanFiltersEnabled);
 
         if (dateStart == null) {
             binding.textViewDateStart.setText(DreamsHelper.DateTimeToDateString(LocalDateTime.of(1900, 1, 1, 1, 1)));
@@ -190,6 +190,12 @@ public class FilterDreamsDialogFragment extends DialogFragment {
             binding.nightmareIv.handleSelection();
             binding.iconFilterEnableTv.setText("Stop using this filter");
         } else {
+            if (recurringDream == null) {
+                binding.recurringDreamIv.setSelected(false);
+            }
+            if (nightmare == null) {
+                binding.nightmareIv.setSelected(false);
+            }
             binding.recurringDreamIv.setClickable(false);
             binding.nightmareIv.setClickable(false);
             binding.recurringDreamIv.setColor(R.color.sleepyBlueSeeThrough);

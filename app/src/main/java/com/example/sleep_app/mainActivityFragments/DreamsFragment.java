@@ -122,6 +122,8 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
         this.clarityEnd = clarityEnd;
         this.happinessStart = happinessStart;
         this.happinessEnd = happinessEnd;
+        this.recurringDream = recurringDream;
+        this.nightmare = nightmare;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
 
