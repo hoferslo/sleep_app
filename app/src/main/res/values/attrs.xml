@@ -1,4 +1,7 @@
 <resources>
+    <attr name="colorSelected" format="color" />
+    <attr name="colorUnselected" format="color" />
+    <attr name="colorDisabled" format="color" />
     <declare-styleable name="FullscreenAttrs">
         <attr name="fullscreenBackgroundColor" format="color" />
         <attr name="fullscreenTextColor" format="color" />
@@ -12,8 +15,14 @@
     </declare-styleable>
 
     <declare-styleable name="SelectableLinearLayout">
-        <attr name="selected" format="boolean" />
-        <attr name="colorSelected" format="color" />
-        <attr name="colorUnselected" format="color" />
+        <attr name="selectableSelected" format="integer" />
+        <attr name="colorSelected" />
+        <attr name="colorUnselected" />
+        <attr name="colorDisabled" />
+    </declare-styleable>
+    <declare-styleable name="ToggleableLinearLayout">
+        <attr name="toggleableSelected" format="boolean" />
+        <attr name="colorSelected" />
+        <attr name="colorUnselected" />
     </declare-styleable>
 </resources>

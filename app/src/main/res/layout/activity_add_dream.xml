@@ -152,7 +152,7 @@
                         android:textSize="18sp"
                         android:text="0" />
 
-                    <com.example.sleep_app.PopupTextImageView
+                    <com.example.sleep_app.tools.PopupTextImageView
                         android:id="@+id/happinessIv"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
@@ -212,13 +212,13 @@
                             android:layout_marginEnd="8dp"
                             android:text="Recurring dream" />
 
-                        <com.example.sleep_app.SelectableLinearLayout
+                        <com.example.sleep_app.tools.ToggleableLinearLayout
                             android:id="@+id/recurringDreamSwitch"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:background="@mipmap/outline_repeat_black_48dp"
                             android:clickable="true"
-                            app:selected="false" />
+                            app:toggleableSelected="false" />
 
                     </LinearLayout>
 
@@ -251,13 +251,13 @@
                             android:layout_marginEnd="8dp"
                             android:text="Nightmare" />
 
-                        <com.example.sleep_app.SelectableLinearLayout
+                        <com.example.sleep_app.tools.ToggleableLinearLayout
                             android:id="@+id/nightmareSwitch"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:background="@mipmap/ghost"
                             android:clickable="true"
-                            app:selected="false" />
+                            app:toggleableSelected="false" />
 
                     </LinearLayout>
                 </LinearLayout>

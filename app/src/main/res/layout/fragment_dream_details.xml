@@ -220,7 +220,7 @@
                 android:gravity="center"
                 android:padding="8dp">
 
-                <com.example.sleep_app.PopupTextImageView
+                <com.example.sleep_app.tools.PopupTextImageView
                     android:id="@+id/recurringDreamIv"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
@@ -229,7 +229,7 @@
                     app:popupText="This dream is recurring"
                     android:visibility="gone" />
 
-                <com.example.sleep_app.PopupTextImageView
+                <com.example.sleep_app.tools.PopupTextImageView
                     android:id="@+id/nightmareIv"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
@@ -239,7 +239,7 @@
                     app:popupText="This dream is a nightmare"
                     android:visibility="gone" />
 
-                <com.example.sleep_app.PopupTextImageView
+                <com.example.sleep_app.tools.PopupTextImageView
                     android:id="@+id/happinessIv"
                     android:layout_width="32dp"
                     android:layout_height="32dp"

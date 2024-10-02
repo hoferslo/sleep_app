@@ -48,8 +48,6 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
     SortOption sortOption = SortOption.DATE;
     boolean sortOrder = false;
 
-    boolean booleanFiltersEnabled = false;
-
     public DreamsFragment() {
     }
 
@@ -176,8 +174,8 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
             boolean matchesFilters = (lucidityStart == null || (dream.getLucidity() >= lucidityStart && dream.getLucidity() <= lucidityEnd)) &&
                     (clarityStart == null || (dream.getClarity() >= clarityStart && dream.getClarity() <= clarityEnd)) &&
                     (happinessStart == null || (dream.getHappiness() >= happinessStart && dream.getHappiness() <= happinessEnd)) &&
-                    (recurringDream == null || (dream.getRecurringDream() == recurringDream)) &&
-                    (nightmare == null || (dream.getNightmare() == nightmare)) &&
+                    (recurringDream == null || recurringDream == 2 || (dream.getRecurringDream() == recurringDream)) &&
+                    (nightmare == null || nightmare == 2 || (dream.getNightmare() == nightmare)) &&
                     (dateStart == null || (dream.getDateCreated().isAfter(dateStart) && dream.getDateCreated().isBefore(dateEnd)));
 
             if (matchesQuery && matchesFilters) {
@@ -242,11 +240,10 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
     }
 
     public void showFilterDialog() {
-        FilterDreamsDialogFragment filterDreamsDialog = FilterDreamsDialogFragment.newInstance(lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, booleanFiltersEnabled);
+        FilterDreamsDialogFragment filterDreamsDialog = FilterDreamsDialogFragment.newInstance(lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd);
         filterDreamsDialog.setFilterDreamsDialogListener(new FilterDreamsDialogFragment.FilterDreamsDialogListener() {
             @Override
-            public void onDialogPositiveClick(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd, boolean booleanFiltersEnabled) {
-                DreamsFragment.this.booleanFiltersEnabled = booleanFiltersEnabled;
+            public void onDialogPositiveClick(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd) {
                 filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, sortOption, sortOrder);
             }
 

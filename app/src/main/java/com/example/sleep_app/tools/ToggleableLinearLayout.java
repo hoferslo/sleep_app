@@ -1,32 +1,34 @@
-package com.example.sleep_app;
+package com.example.sleep_app.tools;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class SelectableLinearLayout extends androidx.appcompat.widget.AppCompatImageView implements View.OnClickListener {
+import com.example.sleep_app.R;
+
+public class ToggleableLinearLayout extends androidx.appcompat.widget.AppCompatImageView implements View.OnClickListener {
 
     private boolean selected;
     private int colorSelected;
     private int colorUnselected;
 
-    public SelectableLinearLayout(Context context) {
+    public ToggleableLinearLayout(Context context) {
         super(context);
         init();
     }
 
-    public SelectableLinearLayout(Context context, AttributeSet attrs) {
+    public ToggleableLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SelectableLinearLayout);
-        selected = a.getBoolean(R.styleable.SelectableLinearLayout_selected, false);
+        selected = a.getBoolean(R.styleable.ToggleableLinearLayout_toggleableSelected, false);
         colorSelected = a.getColor(R.styleable.SelectableLinearLayout_colorSelected, getResources().getColor(R.color.white));
         colorUnselected = a.getColor(R.styleable.SelectableLinearLayout_colorUnselected, getResources().getColor(R.color.sleepyBlue));
         a.recycle();
         init();
     }
 
-    public SelectableLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ToggleableLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

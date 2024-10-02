@@ -1,10 +1,12 @@
-package com.example.sleep_app;
+package com.example.sleep_app.tools;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.sleep_app.R;
 
 public class PopupTextImageView extends androidx.appcompat.widget.AppCompatImageView implements View.OnClickListener {
 

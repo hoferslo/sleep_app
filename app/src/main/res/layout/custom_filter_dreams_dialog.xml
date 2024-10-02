@@ -196,7 +196,7 @@
                     android:orientation="horizontal"
                     android:gravity="center">
 
-                    <com.example.sleep_app.PopupTextImageView
+                    <com.example.sleep_app.tools.PopupTextImageView
                         android:id="@+id/happinessStartIv"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
@@ -217,7 +217,7 @@
                         app:labelBehavior="gone"
                         app:trackColorInactive="@color/sleepyBlue" />
 
-                    <com.example.sleep_app.PopupTextImageView
+                    <com.example.sleep_app.tools.PopupTextImageView
                         android:id="@+id/happinessEndIv"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
@@ -246,34 +246,22 @@
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/rounded_background_darker_with_border">
 
-                    <com.example.sleep_app.SelectableLinearLayout
+                    <com.example.sleep_app.tools.SelectableLinearLayout
                         android:id="@+id/recurringDreamIv"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@mipmap/outline_repeat_black_48dp"
-                        android:clickable="false"
-                        app:selected="false" />
+                        android:clickable="false" />
 
-                    <com.example.sleep_app.SelectableLinearLayout
+                    <com.example.sleep_app.tools.SelectableLinearLayout
                         android:id="@+id/nightmareIv"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@mipmap/ghost"
-                        android:clickable="false"
-                        app:selected="false" />
+                        android:clickable="false" />
 
 
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/iconFilterEnableTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingVertical="8dp"
-                    android:paddingHorizontal="16dp"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:background="@drawable/rounded_background_darker_with_border" />
 
 
             </LinearLayout>

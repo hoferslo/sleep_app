@@ -33,22 +33,21 @@ public class FilterDreamsDialogFragment extends DialogFragment {
     Integer nightmare;
     LocalDateTime dateStart;
     LocalDateTime dateEnd;
-    boolean booleanFiltersEnabled;
 
     // Interface for the callback
     public interface FilterDreamsDialogListener {
-        void onDialogPositiveClick(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd, boolean booleanFiltersEnabled);
+        void onDialogPositiveClick(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd);
 
         void onDialogNegativeClick();
     }
 
-    public static FilterDreamsDialogFragment newInstance(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd, boolean booleanFiltersEnabled) {
+    public static FilterDreamsDialogFragment newInstance(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd) {
         FilterDreamsDialogFragment filterDreamsDialog = new FilterDreamsDialogFragment();
-        filterDreamsDialog.setStartingValues(lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, booleanFiltersEnabled);
+        filterDreamsDialog.setStartingValues(lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd);
         return filterDreamsDialog;
     }
 
-    public void setStartingValues(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd, boolean booleanFiltersEnabled) {
+    public void setStartingValues(Integer lucidityStart, Integer lucidityEnd, Integer clarityStart, Integer clarityEnd, Integer happinessStart, Integer happinessEnd, Integer recurringDream, Integer nightmare, LocalDateTime dateStart, LocalDateTime dateEnd) {
         this.lucidityStart = lucidityStart;
         this.lucidityEnd = lucidityEnd;
         this.clarityStart = clarityStart;
@@ -59,7 +58,6 @@ public class FilterDreamsDialogFragment extends DialogFragment {
         this.nightmare = nightmare;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
-        this.booleanFiltersEnabled = booleanFiltersEnabled;
     }
 
     private FilterDreamsDialogListener listener;
@@ -97,11 +95,6 @@ public class FilterDreamsDialogFragment extends DialogFragment {
             binding.happinessEndIv.setImageResource(MainActivity.getHappinessImage(slider.getValues().get(1).intValue()));
         });
 
-        binding.iconFilterEnableTv.setOnClickListener(v -> {
-            booleanFiltersEnabled = !booleanFiltersEnabled;
-            handleBooleanFilterLogic(booleanFiltersEnabled);
-        });
-
         binding.btnPositive.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onDialogPositiveClick(
@@ -111,11 +104,10 @@ public class FilterDreamsDialogFragment extends DialogFragment {
                         binding.seekBarClarity.getValues().get(1).intValue(),
                         binding.seekBarHappiness.getValues().get(0).intValue(),
                         binding.seekBarHappiness.getValues().get(1).intValue(),
-                        binding.recurringDreamIv.isSelected() ? 1 : 0,
-                        binding.nightmareIv.isSelected() ? 1 : 0,
+                        binding.recurringDreamIv.getSelected(),
+                        binding.nightmareIv.getSelected(),
                         DreamsHelper.dateStringToDateTime(binding.textViewDateStart.getText().toString()),
-                        selectedDateTime,
-                        booleanFiltersEnabled);
+                        selectedDateTime);
                 dismiss();
             }
         });
@@ -128,7 +120,7 @@ public class FilterDreamsDialogFragment extends DialogFragment {
         });
 
         binding.btnReset.setOnClickListener(v -> {
-            setStartingValues(null, null, null, null, null, null, null, null, null, null, false);
+            setStartingValues(null, null, null, null, null, null, null, null, null, null);
             setView();
         });
 
@@ -154,14 +146,12 @@ public class FilterDreamsDialogFragment extends DialogFragment {
         }
         Log.d("mhm", recurringDream + " hmhm");
         if (recurringDream != null) {
-            binding.recurringDreamIv.setSelected(recurringDream == 1);
+            binding.recurringDreamIv.setSelected(recurringDream);
         }
 
         if (nightmare != null) {
-            binding.nightmareIv.setSelected(nightmare == 1);
+            binding.nightmareIv.setSelected(nightmare);
         }
-
-        handleBooleanFilterLogic(booleanFiltersEnabled);
 
         if (dateStart == null) {
             binding.textViewDateStart.setText(DreamsHelper.DateTimeToDateString(LocalDateTime.of(1900, 1, 1, 1, 1)));
@@ -176,34 +166,6 @@ public class FilterDreamsDialogFragment extends DialogFragment {
         } else {
             binding.textViewDateEnd.setText(DreamsHelper.DateTimeToDateString(dateEnd));
             this.selectedDateTime = dateEnd;
-        }
-    }
-
-    public void handleBooleanFilterLogic(boolean booleanFiltersEnabled) {
-        if (booleanFiltersEnabled) {
-            recurringDream = binding.recurringDreamIv.isSelected() ? 1 : 0;
-            nightmare = binding.nightmareIv.isSelected() ? 1 : 0;
-            binding.recurringDreamIv.setClickable(true);
-            binding.nightmareIv.setClickable(true);
-            binding.iconsLl.setBackgroundResource(R.drawable.rounded_background_darker_with_border);
-            binding.recurringDreamIv.handleSelection();
-            binding.nightmareIv.handleSelection();
-            binding.iconFilterEnableTv.setText("Stop using this filter");
-        } else {
-            if (recurringDream == null) {
-                binding.recurringDreamIv.setSelected(false);
-            }
-            if (nightmare == null) {
-                binding.nightmareIv.setSelected(false);
-            }
-            binding.recurringDreamIv.setClickable(false);
-            binding.nightmareIv.setClickable(false);
-            binding.recurringDreamIv.setColor(R.color.sleepyBlueSeeThrough);
-            binding.nightmareIv.setColor(R.color.sleepyBlueSeeThrough);
-            binding.iconsLl.setBackgroundResource(R.drawable.rounded_background_darkest_with_border);
-            recurringDream = null;
-            nightmare = null;
-            binding.iconFilterEnableTv.setText("Start using this filter");
         }
     }
 
