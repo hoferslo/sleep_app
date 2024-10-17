@@ -154,8 +154,6 @@ public class SettingsActivity extends AppCompatActivity {
         // Save the scheduled notification using PrefsHelper
         ScheduledNotification notification = new ScheduledNotification(title, description, hourOfDay, minute);
         prefsHelper.saveScheduledNotification(notification);
-
-        loadScheduledNotifications();
     }
 
 
@@ -171,7 +169,6 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private void loadScheduledNotifications() {
-        binding.notificationsLl.removeAllViews();
         List<ScheduledNotification> notifications = prefsHelper.getScheduledNotifications();
 
         for (ScheduledNotification notification : notifications) {
