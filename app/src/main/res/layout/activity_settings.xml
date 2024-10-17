@@ -68,7 +68,7 @@
                         android:text="Sign in / up"
                         android:background="@drawable/rounded_background_a_bit_lighter"
                         android:orientation="vertical" />
-                    
+
 
                 </LinearLayout>
 
@@ -80,7 +80,8 @@
                 android:orientation="vertical"
                 android:background="@drawable/rounded_background_darker_with_border"
                 android:paddingVertical="8dp"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -102,28 +103,46 @@
                         app:thumbTint="@color/custom_thumb_selector" />
 
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background_darker_with_border"
+                android:padding="16dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/addNotification"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_background_darkest">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:text="Send daily notif. (change this)" />
-
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/dailyNotifRandomDreamSwitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        app:thumbTint="@color/custom_thumb_selector" />
+                        android:textSize="16sp"
+                        android:padding="16dp"
+                        android:text="Add a notification" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/baseline_add_white_48dp" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/notificationsLl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
+
 
         </LinearLayout>
 
@@ -141,9 +160,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:padding="16dp"
-            android:layout_marginStart="4dp"
             android:gravity="center"
-            android:layout_marginBottom="8dp"
+
             android:background="@drawable/rounded_background_darkest">
 
             <TextView

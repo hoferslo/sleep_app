@@ -30,9 +30,9 @@ public class MyNotification {
     public void sendNotification() {
 
 
-        createNotificationChannel(context);
+        createNotificationChannel(context, title);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "my_channel")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, title)
                 .setContentTitle(getTitle())
                 .setContentText(getBody())
                 .setSmallIcon(R.drawable.circle_background)
@@ -46,11 +46,11 @@ public class MyNotification {
         notificationManager.notify(new Random().nextInt(), builder.build());
     }
 
-    public static void createNotificationChannel(Context context) {
+    public static void createNotificationChannel(Context context, String title) {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("my_channel", "MyApp notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(title, title, NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("They will wake you up in the night");
             channel.enableVibration(true);
 
