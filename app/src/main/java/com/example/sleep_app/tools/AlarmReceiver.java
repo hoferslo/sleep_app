@@ -7,8 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import com.example.sleep_app.R;
 import com.example.sleep_app.activities.SettingsActivity;
+
+import java.util.Random;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -27,13 +31,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent intent = new Intent(context, SettingsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(
-                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                context, 0, intent, PendingIntent.FLAG_MUTABLE);
 
         // Create a NotificationManager to show the notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // Build the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, title) // Use title as channel ID
+                .setSmallIcon(R.drawable.circle_background)
                 .setContentTitle(title)
                 .setContentText(description)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -41,6 +46,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent);  // Open the activity when tapped
 
         // Show the notification
-        notificationManager.notify((int) System.currentTimeMillis(), builder.build()); // Use a unique ID
+        notificationManager.notify(title.hashCode(), builder.build()); // Use a unique ID
+
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+//        notificationManager.notify(new Random().nextInt(), builder.build());
     }
 }

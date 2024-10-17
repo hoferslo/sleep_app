@@ -1,0 +1,48 @@
+<!-- res/layout/dialog_schedule_notification.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/sleepyBlueAlmostBlack"
+    >
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Notification Title"
+        android:background="@drawable/rounded_background_darker_with_border"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Notification Description"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_background_darker_with_border"/>
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        android:numbersInnerTextColor="@color/white"
+        android:numbersSelectorColor="@color/white"
+        android:numbersBackgroundColor="@color/white"
+        android:numbersTextColor="@color/white"
+        android:background="@drawable/rounded_background_darkest_with_border"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/buttonSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Notification"
+        android:gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/rounded_background_darkest"/>
+</LinearLayout>

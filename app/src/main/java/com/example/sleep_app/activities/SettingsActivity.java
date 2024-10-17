@@ -15,7 +15,11 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -77,7 +81,46 @@ public class SettingsActivity extends AppCompatActivity {
 
         binding.userBtn.setOnClickListener(v -> userBtnLogic());
 
-        binding.addNotification.setOnClickListener(v -> scheduleNotification("test new" + prefsHelper.getScheduledNotifications().size(), "new des", 20, 0));
+        binding.addNotification.setOnClickListener(v -> {
+            // Inflate the custom layout
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.dialog_schedule_notification, null);
+
+            // Create the dialog
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setView(dialogView)
+                    .create();
+
+            // Get references to the EditTexts and TimePicker
+            EditText editTextTitle = dialogView.findViewById(R.id.editTextTitle);
+            EditText editTextDescription = dialogView.findViewById(R.id.editTextDescription);
+            TimePicker timePicker = dialogView.findViewById(R.id.timePicker);
+            timePicker.setIs24HourView(true);
+            TextView buttonSchedule = dialogView.findViewById(R.id.buttonSchedule);
+
+            // Set the button's click listener
+            buttonSchedule.setOnClickListener(v1 -> {
+                // Get the input values
+                String notificationTitle = editTextTitle.getText().toString();
+                String notificationDescription = editTextDescription.getText().toString();
+                int hourOfDay = timePicker.getHour(); // For API 23 and above
+                int minute = timePicker.getMinute(); // For API 23 and above
+
+                // Schedule the notification
+
+                if (!notificationTitle.isEmpty()) {
+                    scheduleNotification(notificationTitle, notificationDescription, hourOfDay, minute);
+
+                    // Dismiss the dialog
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(this, "Error, check title, it might empty or the same as another notification!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            // Show the dialog
+            dialog.show();
+        });
 
         ActivityResultLauncher<Intent> openFileLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -277,6 +320,8 @@ public class SettingsActivity extends AppCompatActivity {
         int notificationId = title.hashCode();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.putExtra("title", title);
+        intent.putExtra("description", "");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, notificationId, intent, PendingIntent.FLAG_MUTABLE);
 
         // Cancel the alarm using the unique notification ID
