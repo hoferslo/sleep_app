@@ -2,17 +2,24 @@ package com.example.sleep_app.activities;
 
 import android.Manifest;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -25,6 +32,12 @@ import com.example.sleep_app.databinding.ItemNotificationBinding;
 import com.example.sleep_app.tools.AlarmReceiver;
 import com.example.sleep_app.tools.PrefsHelper;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
 
@@ -66,7 +79,88 @@ public class SettingsActivity extends AppCompatActivity {
 
         binding.addNotification.setOnClickListener(v -> scheduleNotification("test new" + prefsHelper.getScheduledNotifications().size(), "new des", 20, 0));
 
+        ActivityResultLauncher<Intent> openFileLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri uri = result.getData().getData();
+                        loadBackupScoped(uri);
+                    }
+                });
 
+        ActivityResultLauncher<Intent> createFileLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri uri = result.getData().getData();
+                        createBackupScoped(uri);
+                    }
+                });
+
+        binding.createBackupBtn.setOnClickListener(v -> {
+            // Open the file picker to create a backup
+            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("application/octet-stream");
+            intent.putExtra(Intent.EXTRA_TITLE, "dreams_backup.db");
+            createFileLauncher.launch(intent);
+        });
+
+        binding.loadBackupBtn.setOnClickListener(v -> {
+            // Open the file picker to select a backup
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("application/octet-stream");
+            openFileLauncher.launch(intent);
+        });
+    }
+
+    private void loadBackupScoped(Uri uri) {
+        File dbFile = new File(getDatabasePath("dreams.db").getAbsolutePath());
+
+        try (InputStream inStream = getContentResolver().openInputStream(uri);
+             FileOutputStream outStream = new FileOutputStream(dbFile)) {
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inStream.read(buffer)) > 0) {
+                outStream.write(buffer, 0, length);
+            }
+            Toast.makeText(this, "Backup restored", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to restore backup", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void createBackupScoped(Uri uri) {
+        File dbFile = new File(getDatabasePath("dreams.db").getAbsolutePath());
+
+        try (FileInputStream inStream = new FileInputStream(dbFile);
+             OutputStream outStream = getContentResolver().openOutputStream(uri)) {
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inStream.read(buffer)) > 0) {
+                outStream.write(buffer, 0, length);
+            }
+            Toast.makeText(this, "Backup created", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to create backup", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void copyFile(File src, File dst) throws IOException {
+        try (FileInputStream inStream = new FileInputStream(src);
+             FileOutputStream outStream = new FileOutputStream(dst)) {
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inStream.read(buffer)) > 0) {
+                outStream.write(buffer, 0, length);
+            }
+        }
     }
 
     @Override
@@ -154,6 +248,8 @@ public class SettingsActivity extends AppCompatActivity {
         // Save the scheduled notification using PrefsHelper
         ScheduledNotification notification = new ScheduledNotification(title, description, hourOfDay, minute);
         prefsHelper.saveScheduledNotification(notification);
+
+        loadScheduledNotifications();
     }
 
 
@@ -170,9 +266,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void loadScheduledNotifications() {
         List<ScheduledNotification> notifications = prefsHelper.getScheduledNotifications();
-
+        binding.notificationsLl.removeAllViews();
         for (ScheduledNotification notification : notifications) {
-            // Add the notification to the UI
             addNotificationLayout(notification.getTitle(), notification.getDescription(), notification.getHourOfDay(), notification.getMinute());
         }
     }
@@ -188,9 +283,6 @@ public class SettingsActivity extends AppCompatActivity {
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
         }
-
-        // Also remove the notification from SharedPreferences
-        prefsHelper.removeScheduledNotification(title);
     }
 
 
@@ -280,22 +372,62 @@ public class SettingsActivity extends AppCompatActivity {
         itemBinding.title.setText(title);
         itemBinding.description.setText(description);
 
+        // Retrieve the scheduled notification from preferences
+        List<ScheduledNotification> notifications = prefsHelper.getScheduledNotifications();
+        ScheduledNotification scheduledNotification = notifications.stream()
+                .filter(n -> n.getTitle().equals(title))
+                .findFirst()
+                .orElse(null);
+
+        if (scheduledNotification != null) {
+            // Set the switch to the current active state
+            itemBinding.dailyNotifRandomDreamSwitch.setChecked(scheduledNotification.isActive());
+        }
+
         // Set up switch to toggle the notification
         itemBinding.dailyNotifRandomDreamSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // Schedule notification and save it in shared preferences
-                scheduleNotification(title, description, hourOfDay, minute);
-                prefsHelper.saveScheduledNotification(new ScheduledNotification(title, description, hourOfDay, minute));
-            } else {
-                // Cancel notification and remove it from shared preferences
-                cancelNotification(title);
-                prefsHelper.removeScheduledNotification(title);
+            if (scheduledNotification != null) {
+                scheduledNotification.setActive(isChecked); // Update the active state
+                prefsHelper.saveScheduledNotification(scheduledNotification);
+
+                if (isChecked) {
+                    // If active, schedule the notification
+                    scheduleNotification(title, description, hourOfDay, minute);
+                } else {
+                    // If not active, just unregister it without removing it from preferences
+                    cancelNotification(title);
+                }
             }
+        });
+
+        // Set up long-press listener to ask for notification removal
+        notificationItemView.setOnLongClickListener(v -> {
+            // Show an AlertDialog to confirm the deletion
+            new AlertDialog.Builder(this)
+                    .setTitle("Remove Notification")
+                    .setMessage("Do you want to remove this notification?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // Remove notification from the parent layout
+                        parentLl.removeView(notificationItemView);
+
+                        // Cancel the notification and remove it from preferences
+                        cancelNotification(title);
+                        prefsHelper.removeScheduledNotification(title);
+
+                        // Show a confirmation message
+                        Toast.makeText(this, "Notification removed", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("No", null) // Dismiss dialog on 'No'
+                    .show();
+
+            return true; // Return true to indicate that the long press was handled
         });
 
         // Add the inflated view to the parent LinearLayout
         parentLl.addView(notificationItemView);
     }
+
+
 
 
 }

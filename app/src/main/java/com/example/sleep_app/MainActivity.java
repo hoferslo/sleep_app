@@ -2,6 +2,7 @@ package com.example.sleep_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -9,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
+import android.Manifest;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     TipsFragment tipsFragment;
     OverviewFragment overViewFragment;
     DreamsFragment dreamsFragment;
-
+    private static final int PERMISSION_REQUEST_CODE = 100;
     PrefsHelper prefsHelper;
 
     @Override
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(binding.viewFlipper, 2, tipsFragment);
 
         showOverview();
+
+        checkPermissions();
 
         binding.btnFragmentA.setOnClickListener(v -> showDreams());
 
@@ -83,6 +88,17 @@ public class MainActivity extends AppCompatActivity {
         };
 
         getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
+
+    private void checkPermissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                    PERMISSION_REQUEST_CODE);
+        }
     }
 
     private void goBackWhenOnTipsAndInfo() {

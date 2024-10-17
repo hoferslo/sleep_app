@@ -54,11 +54,23 @@ public class PrefsHelper {
     }
 
     // Save scheduled notification
+    // Save scheduled notification
     public void saveScheduledNotification(ScheduledNotification notification) {
         List<ScheduledNotification> notifications = getScheduledNotifications();
-        notifications.add(notification);
+
+        // Find if the notification already exists and update it
+        for (int i = 0; i < notifications.size(); i++) {
+            if (notifications.get(i).getTitle().equals(notification.getTitle())) {
+                notifications.set(i, notification); // Update existing notification
+                saveScheduledNotifications(notifications);
+                return;
+            }
+        }
+
+        notifications.add(notification); // Add new notification if it doesn't exist
         saveScheduledNotifications(notifications);
     }
+
 
     // Retrieve all scheduled notifications
     public List<ScheduledNotification> getScheduledNotifications() {
@@ -86,4 +98,5 @@ public class PrefsHelper {
         notifications.removeIf(notification -> notification.getTitle().equals(title));
         saveScheduledNotifications(notifications);
     }
+
 }

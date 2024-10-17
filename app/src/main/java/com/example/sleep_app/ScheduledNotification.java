@@ -5,12 +5,14 @@ public class ScheduledNotification {
     private String description;
     private int hourOfDay;
     private int minute;
+    private boolean active; // New field
 
     public ScheduledNotification(String title, String description, int hourOfDay, int minute) {
         this.title = title;
         this.description = description;
         this.hourOfDay = hourOfDay;
         this.minute = minute;
+        this.active = true; // Default to active
     }
 
     // Getters
@@ -30,6 +32,10 @@ public class ScheduledNotification {
         return minute;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
     // Setters
     public void setTitle(String title) {
         this.title = title;
@@ -45,5 +51,9 @@ public class ScheduledNotification {
 
     public void setMinute(int minute) {
         this.minute = minute;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
