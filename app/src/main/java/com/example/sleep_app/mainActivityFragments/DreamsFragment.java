@@ -262,7 +262,7 @@ public class DreamsFragment extends Fragment implements DreamDetailsFragment.OnD
             @Override
             public void onDialogPositiveClick(SortOption sortOption, boolean sortOrder) {
                 DreamsFragment.this.sortOption = sortOption;
-                DreamsFragment.this.sortOrder = sortOrder;
+                DreamsFragment.this     .sortOrder = sortOrder;
                 filterDreams(query, lucidityStart, lucidityEnd, clarityStart, clarityEnd, happinessStart, happinessEnd, recurringDream, nightmare, dateStart, dateEnd, sortOption, sortOrder);
             }
 
