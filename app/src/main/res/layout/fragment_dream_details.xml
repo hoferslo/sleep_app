@@ -27,13 +27,14 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textColor="@color/white"
+                android:layout_marginBottom="16dp"
                 android:paddingBottom="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_background_dark"
                 android:orientation="horizontal"
                 android:gravity="center">
@@ -54,7 +55,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_background_dark">
 
                 <LinearLayout
@@ -109,7 +110,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_background_dark">
 
                 <LinearLayout
@@ -162,7 +163,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_background_dark">
 
                 <LinearLayout
@@ -215,7 +216,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
 
                 android:gravity="center"
                 android:padding="8dp">
@@ -253,7 +254,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="16dp" />
         </LinearLayout>
 
     </ScrollView>
@@ -272,7 +273,7 @@
             android:layout_marginEnd="4dp"
 
             android:gravity="center"
-            android:layout_marginBottom="8dp"
+
             android:background="@drawable/rounded_background_darkest">
 
             <TextView
@@ -292,7 +293,7 @@
             android:layout_marginHorizontal="4dp"
 
             android:gravity="center"
-            android:layout_marginBottom="8dp"
+
             android:background="@drawable/rounded_background_darkest">
 
             <TextView
@@ -311,7 +312,7 @@
             android:padding="16dp"
             android:layout_marginStart="4dp"
             android:gravity="center"
-            android:layout_marginBottom="8dp"
+
             android:background="@drawable/rounded_background_darkest">
 
             <TextView
