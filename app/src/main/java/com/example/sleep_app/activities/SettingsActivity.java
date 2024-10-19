@@ -1,6 +1,7 @@
 package com.example.sleep_app.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -11,11 +12,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -262,6 +260,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("ScheduleExactAlarm")
     public void scheduleNotification(String title, String description, int hourOfDay, int minute) {
         String channelName = title; // Using title as the channel name
 
@@ -278,14 +277,15 @@ public class SettingsActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
         intent.putExtra("title", title);
         intent.putExtra("description", description);
+        intent.putExtra("hourOfDay", hourOfDay);
+        intent.putExtra("minute", minute);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                getApplicationContext(), title.hashCode(), intent, PendingIntent.FLAG_MUTABLE);
+                getApplicationContext(), title.hashCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setInexactRepeating(
+        alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY,
                 pendingIntent);
 
         // Save the scheduled notification using PrefsHelper
@@ -316,18 +316,20 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-    private void cancelNotification(String title) {
-        int notificationId = title.hashCode();
+    private void cancelNotification(String title, String description, int hourOfDay, int minute) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("title", title);
-        intent.putExtra("description", "");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, notificationId, intent, PendingIntent.FLAG_MUTABLE);
+        intent.putExtra("description", description);
+        intent.putExtra("hourOfDay", hourOfDay);
+        intent.putExtra("minute", minute);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, title.hashCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
         // Cancel the alarm using the unique notification ID
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
         }
+
     }
 
 
@@ -440,7 +442,7 @@ public class SettingsActivity extends AppCompatActivity {
                     scheduleNotification(title, description, hourOfDay, minute);
                 } else {
                     // If not active, just unregister it without removing it from preferences
-                    cancelNotification(title);
+                    cancelNotification(title, description, hourOfDay, minute);
                 }
             }
         });
@@ -456,7 +458,7 @@ public class SettingsActivity extends AppCompatActivity {
                         parentLl.removeView(notificationItemView);
 
                         // Cancel the notification and remove it from preferences
-                        cancelNotification(title);
+                        cancelNotification(title, description, hourOfDay, minute);
                         prefsHelper.removeScheduledNotification(title);
 
                         // Show a confirmation message
@@ -471,8 +473,6 @@ public class SettingsActivity extends AppCompatActivity {
         // Add the inflated view to the parent LinearLayout
         parentLl.addView(notificationItemView);
     }
-
-
 
 
 }
