@@ -42,6 +42,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -80,43 +81,7 @@ public class SettingsActivity extends AppCompatActivity {
         binding.userBtn.setOnClickListener(v -> userBtnLogic());
 
         binding.addNotification.setOnClickListener(v -> {
-            // Inflate the custom layout
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.dialog_schedule_notification, null);
-
-            // Create the dialog
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setView(dialogView)
-                    .create();
-
-            // Get references to the EditTexts and TimePicker
-            EditText editTextTitle = dialogView.findViewById(R.id.editTextTitle);
-            EditText editTextDescription = dialogView.findViewById(R.id.editTextDescription);
-            TimePicker timePicker = dialogView.findViewById(R.id.timePicker);
-            timePicker.setIs24HourView(true);
-            TextView buttonSchedule = dialogView.findViewById(R.id.buttonSchedule);
-
-            // Set the button's click listener
-            buttonSchedule.setOnClickListener(v1 -> {
-                // Get the input values
-                String notificationTitle = editTextTitle.getText().toString();
-                String notificationDescription = editTextDescription.getText().toString();
-                int hourOfDay = timePicker.getHour(); // For API 23 and above
-                int minute = timePicker.getMinute(); // For API 23 and above
-
-                // Schedule the notification
-
-                if (!notificationTitle.isEmpty()) {
-                    scheduleNotification(notificationTitle, notificationDescription, hourOfDay, minute);
-
-                    // Dismiss the dialog
-                    dialog.dismiss();
-                } else {
-                    Toast.makeText(this, "Error, check title, it might empty or the same as another notification!", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            // Show the dialog
+            AlertDialog dialog = createNotifAddDialog();
             dialog.show();
         });
 
@@ -154,6 +119,94 @@ public class SettingsActivity extends AppCompatActivity {
             intent.setType("application/octet-stream");
             openFileLauncher.launch(intent);
         });
+    }
+
+    private AlertDialog createNotifAddDialog() {
+        // Inflate the custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_schedule_notification, null);
+
+        // Create the dialog
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create();
+
+        // Get references to the EditTexts and TimePicker
+        EditText editTextTitle = dialogView.findViewById(R.id.editTextTitle);
+        EditText editTextDescription = dialogView.findViewById(R.id.editTextDescription);
+        TimePicker timePicker = dialogView.findViewById(R.id.timePicker);
+        timePicker.setIs24HourView(true);
+        TextView buttonSchedule = dialogView.findViewById(R.id.buttonSchedule);
+        // Set the button's click listener
+        buttonSchedule.setOnClickListener(v1 -> {
+            // Get the input values
+            String notificationTitle = editTextTitle.getText().toString();
+            String notificationDescription = editTextDescription.getText().toString();
+            int hourOfDay = timePicker.getHour(); // For API 23 and above
+            int minute = timePicker.getMinute(); // For API 23 and above
+
+            // Schedule the notification
+
+            if (!notificationTitle.isEmpty() && !prefsHelper.isNotificationTitleAdded(notificationTitle)) {
+                ScheduledNotification notif = new ScheduledNotification(notificationTitle, notificationDescription, hourOfDay, minute);
+                scheduleNotification(notif);
+                prefsHelper.saveScheduledNotification(notif);
+                // Dismiss the dialog
+                dialog.dismiss();
+            } else {
+                Toast.makeText(this, "Error, check title, it might empty or the same as another notification!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Show the dialog
+        return dialog;
+    }
+
+    private AlertDialog createNotifUpdateDialog(ScheduledNotification notif) {
+        // Inflate the custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_schedule_notification, null);
+
+        // Create the dialog
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create();
+
+        // Get references to the EditTexts and TimePicker
+        EditText editTextTitle = dialogView.findViewById(R.id.editTextTitle);
+        editTextTitle.setText(notif.getTitle());
+        EditText editTextDescription = dialogView.findViewById(R.id.editTextDescription);
+        editTextDescription.setText(notif.getDescription());
+        TimePicker timePicker = dialogView.findViewById(R.id.timePicker);
+        timePicker.setHour(notif.getHourOfDay());
+        timePicker.setMinute(notif.getMinute());
+        timePicker.setIs24HourView(true);
+        TextView buttonSchedule = dialogView.findViewById(R.id.buttonSchedule);
+        buttonSchedule.setText("Save");
+        // Set the button's click listener
+        buttonSchedule.setOnClickListener(v1 -> {
+            // Get the input values
+            String notificationTitle = editTextTitle.getText().toString();
+            String notificationDescription = editTextDescription.getText().toString();
+            int hourOfDay = timePicker.getHour(); // For API 23 and above
+            int minute = timePicker.getMinute(); // For API 23 and above
+
+            // Schedule the notification
+
+            if (!notificationTitle.isEmpty() && (!prefsHelper.isNotificationTitleAdded(notificationTitle) || Objects.equals(notif.getTitle(), notificationTitle))) {
+                cancelNotification(notif);
+                ScheduledNotification newNotif = new ScheduledNotification(notificationTitle, notificationDescription, hourOfDay, minute);
+                prefsHelper.updateNotification(newNotif);
+                scheduleNotification(newNotif);
+                // Dismiss the dialog
+                dialog.dismiss();
+            } else {
+                Toast.makeText(this, "Error, check title, it might empty or the same as another notification!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Show the dialog
+        return dialog;
     }
 
     private void loadBackupScoped(Uri uri) {
@@ -261,36 +314,32 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     @SuppressLint("ScheduleExactAlarm")
-    public void scheduleNotification(String title, String description, int hourOfDay, int minute) {
-        String channelName = title; // Using title as the channel name
+    public void scheduleNotification(ScheduledNotification notif) {
+        String channelName = notif.getTitle(); // Using title as the channel name
 
         // Create the notification channel if it doesn't exist
-        createNotificationChannel(title, channelName, "Notifications for " + description);
+        createNotificationChannel(notif.getTitle(), channelName, "Notifications for " + notif.getDescription());
 
         // Set up the notification time
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.HOUR_OF_DAY, notif.getHourOfDay());
+        calendar.set(Calendar.MINUTE, notif.getMinute());
         calendar.set(Calendar.SECOND, 0);
 
         // Set up the intent and pending intent
         Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        intent.putExtra("title", title);
-        intent.putExtra("description", description);
-        intent.putExtra("hourOfDay", hourOfDay);
-        intent.putExtra("minute", minute);
+        intent.putExtra("title", notif.getTitle());
+        intent.putExtra("description", notif.getDescription());
+        intent.putExtra("hourOfDay", notif.getHourOfDay());
+        intent.putExtra("minute", notif.getMinute());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                getApplicationContext(), title.hashCode(), intent, PendingIntent.FLAG_IMMUTABLE);
+                getApplicationContext(), notif.getTitle().hashCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(),
                 pendingIntent);
-
-        // Save the scheduled notification using PrefsHelper
-        ScheduledNotification notification = new ScheduledNotification(title, description, hourOfDay, minute);
-        prefsHelper.saveScheduledNotification(notification);
 
         loadScheduledNotifications();
     }
@@ -311,19 +360,19 @@ public class SettingsActivity extends AppCompatActivity {
         List<ScheduledNotification> notifications = prefsHelper.getScheduledNotifications();
         binding.notificationsLl.removeAllViews();
         for (ScheduledNotification notification : notifications) {
-            addNotificationLayout(notification.getTitle(), notification.getDescription(), notification.getHourOfDay(), notification.getMinute());
+            addNotificationLayout(notification);
         }
     }
 
 
-    private void cancelNotification(String title, String description, int hourOfDay, int minute) {
+    private void cancelNotification(ScheduledNotification notif) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
-        intent.putExtra("title", title);
-        intent.putExtra("description", description);
-        intent.putExtra("hourOfDay", hourOfDay);
-        intent.putExtra("minute", minute);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, title.hashCode(), intent, PendingIntent.FLAG_IMMUTABLE);
+        intent.putExtra("title", notif.getTitle());
+        intent.putExtra("description", notif.getDescription());
+        intent.putExtra("hourOfDay", notif.getHourOfDay());
+        intent.putExtra("minute", notif.getMinute());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, notif.getTitle().hashCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
         // Cancel the alarm using the unique notification ID
         if (alarmManager != null) {
@@ -408,7 +457,7 @@ public class SettingsActivity extends AppCompatActivity {
 //        }*/
 //    }
 
-    private void addNotificationLayout(String title, String description, int hourOfDay, int minute) {
+    private void addNotificationLayout(ScheduledNotification notif) {
         LinearLayout parentLl = binding.notificationsLl;
 
         // Inflate the item_notification.xml layout
@@ -416,13 +465,13 @@ public class SettingsActivity extends AppCompatActivity {
         View notificationItemView = inflater.inflate(R.layout.item_notification, parentLl, false);
         ItemNotificationBinding itemBinding = ItemNotificationBinding.bind(notificationItemView);
 
-        itemBinding.title.setText(title);
-        itemBinding.description.setText(description);
+        itemBinding.title.setText(notif.getTitle());
+        itemBinding.description.setText(notif.getDescription());
 
         // Retrieve the scheduled notification from preferences
         List<ScheduledNotification> notifications = prefsHelper.getScheduledNotifications();
         ScheduledNotification scheduledNotification = notifications.stream()
-                .filter(n -> n.getTitle().equals(title))
+                .filter(n -> n.getTitle().equals(notif.getTitle()))
                 .findFirst()
                 .orElse(null);
 
@@ -439,10 +488,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                 if (isChecked) {
                     // If active, schedule the notification
-                    scheduleNotification(title, description, hourOfDay, minute);
+                    scheduleNotification(notif);
                 } else {
                     // If not active, just unregister it without removing it from preferences
-                    cancelNotification(title, description, hourOfDay, minute);
+                    cancelNotification(notif);
                 }
             }
         });
@@ -458,8 +507,8 @@ public class SettingsActivity extends AppCompatActivity {
                         parentLl.removeView(notificationItemView);
 
                         // Cancel the notification and remove it from preferences
-                        cancelNotification(title, description, hourOfDay, minute);
-                        prefsHelper.removeScheduledNotification(title);
+                        cancelNotification(notif);
+                        prefsHelper.removeScheduledNotification(notif.getTitle());
 
                         // Show a confirmation message
                         Toast.makeText(this, "Notification removed", Toast.LENGTH_SHORT).show();
@@ -468,6 +517,11 @@ public class SettingsActivity extends AppCompatActivity {
                     .show();
 
             return true; // Return true to indicate that the long press was handled
+        });
+
+        notificationItemView.setOnClickListener(v -> {
+            AlertDialog dialog = createNotifUpdateDialog(notif);
+            dialog.show();
         });
 
         // Add the inflated view to the parent LinearLayout

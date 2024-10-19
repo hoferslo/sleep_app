@@ -99,4 +99,34 @@ public class PrefsHelper {
         saveScheduledNotifications(notifications);
     }
 
+    // Check if a notification with a specific title is already added
+    public boolean isNotificationTitleAdded(String title) {
+        List<ScheduledNotification> notifications = getScheduledNotifications();
+
+        // Loop through the notifications to check for matching title
+        for (ScheduledNotification notification : notifications) {
+            if (notification.getTitle().equals(title)) {
+                return true; // Notification with the given title exists
+            }
+        }
+
+        return false; // No notification with the given title
+    }
+
+    // Update an existing notification by title
+    public boolean updateNotification(ScheduledNotification updatedNotification) {
+        List<ScheduledNotification> notifications = getScheduledNotifications();
+
+        // Loop through notifications to find a match by title
+        for (int i = 0; i < notifications.size(); i++) {
+            if (notifications.get(i).getTitle().equals(updatedNotification.getTitle())) {
+                // Update the notification and save
+                notifications.set(i, updatedNotification);
+                saveScheduledNotifications(notifications);
+                return true; // Successfully updated
+            }
+        }
+
+        return false; // Notification with the given title was not found
+    }
 }
