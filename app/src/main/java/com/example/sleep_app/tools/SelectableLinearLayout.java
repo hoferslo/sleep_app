@@ -25,7 +25,7 @@ public class SelectableLinearLayout extends androidx.appcompat.widget.AppCompatI
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SelectableLinearLayout);
         selected = a.getInt(R.styleable.SelectableLinearLayout_selectableSelected, 2);
         colorSelected = a.getColor(R.styleable.SelectableLinearLayout_colorSelected, getResources().getColor(R.color.white));
-        colorUnselected = a.getColor(R.styleable.SelectableLinearLayout_colorUnselected, getResources().getColor(R.color.sleepyPurple));
+        colorUnselected = a.getColor(R.styleable.SelectableLinearLayout_colorUnselected, getResources().getColor(R.color.gray_600));
         colorDisabled = a.getColor(R.styleable.SelectableLinearLayout_colorUnselected, getResources().getColor(R.color.sleepyBlue));
         a.recycle();
         init();
@@ -39,10 +39,16 @@ public class SelectableLinearLayout extends androidx.appcompat.widget.AppCompatI
     public void handleSelection() {
         if (selected == 1) {
             setColor(colorSelected);
+            setImageDrawable(null);
+            clearColorFilter();
         } else if (selected == 0) {
-            setColor(colorUnselected);
+            setColor(colorSelected);
+            setImageResource(R.drawable.block_24px);
+            setColorFilter(getResources().getColor(R.color.light_blue_900));
         } else {
             setColor(colorDisabled);
+            setImageDrawable(null);
+            clearColorFilter();
         }
     }
 
